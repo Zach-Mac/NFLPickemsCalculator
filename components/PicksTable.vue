@@ -165,33 +165,6 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 			</tr>
 		</template>
 	</v-data-table>
-
-	<!-- <v-data-table class="text-center border" density="compact" hover hide-default-footer>
-		<thead>
-			<SelectGameWinnersHeaders />
-			<GameDataHeaders />
-		</thead>
-
-		<tbody>
-			<tr
-				v-for="(playerPicks, index) in playerPicksInput"
-				:class="playerPicks.name == playerName ? 'bg-accent' : ''"
-			>
-				<td class="font-weight-bold text-left border-e">{{ index + 1 }}.</td>
-				<td class="font-weight-bold text-left px-1">{{ playerPicks.name }}</td>
-				<td v-for="(p, gameNumber) in playerPicks.picks" :class="getTdStyle(p, gameNumber)">
-					{{ p }}
-				</td>
-				<td>
-					{{ playerTotals[playerPicks.name].weekTotal }}
-				</td>
-				<td>
-					{{ playerTotals[playerPicks.name].seasonTotal }}
-				</td>
-				<td>{{ playerPicks.tieBreaker }}</td>
-			</tr>
-		</tbody>
-	</v-data-table> -->
 </template>
 
 <style scoped>

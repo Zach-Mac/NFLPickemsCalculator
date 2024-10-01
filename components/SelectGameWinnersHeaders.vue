@@ -1,5 +1,3 @@
-<!-- SelectGameWinnersHeaders.vue -->
-
 <script setup lang="ts">
 const { loadHtmlData, playerName } = useUserInput()
 

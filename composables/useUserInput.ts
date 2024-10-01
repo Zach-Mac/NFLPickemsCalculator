@@ -1,5 +1,3 @@
-// usePicksTable.ts
-
 import * as cheerio from 'cheerio'
 import { useStorage } from '@vueuse/core'
 

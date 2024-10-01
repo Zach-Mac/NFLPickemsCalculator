@@ -1,5 +1,3 @@
-<!-- index.vue -->
-
 <script setup lang="ts">
 const { picksTablePasteInput, playerName } = useUserInput()
 </script>
@@ -40,10 +38,6 @@ const { picksTablePasteInput, playerName } = useUserInput()
 </template>
 
 <style>
-.border-e {
-	/* border-right: 0px !important; */
-}
-
 .dimmed {
 	position: relative;
 }
