@@ -1,0 +1,201 @@
+<!-- PicksTable.vue -->
+
+<script setup lang="ts">
+const { playerName } = useUserInput()
+
+const gameWonClasses = 'bg-success-lighten-2 text-success-darken-2 font-weight-bold'
+const gameLostClasses = 'bg-error-lighten-2 text-error line-through font-weight-bold'
+const gameTiedClasses = 'bg-accent text-accent-darken-4 font-weight-bold'
+
+function getTdStyle(pick: string, gameNumber: number) {
+	const game = gameData.value[gameNumber]
+
+	if (!game.winner || game.winner == 'none') return ''
+	if (game.winner == 'tie') return gameTiedClasses
+	if (pick == game.winner) return gameWonClasses
+	return gameLostClasses
+}
+
+const items = computed(() => {
+	return playerPicksInput.value.map(playerPicks => {
+		return {
+			name: playerPicks.name,
+			picks: playerPicks.picks,
+			weekTotal: playerTotals.value[playerPicks.name].weekTotal,
+			seasonTotal: playerTotals.value[playerPicks.name].seasonTotal,
+			tieBreaker: playerPicks.tieBreaker
+		}
+	})
+})
+const headers = ref([
+	{ key: 'name', title: 'Name', value: 'name', sortable: true },
+	{ key: 'picks', title: 'Picks', value: 'picks', sortable: true },
+	{ key: 'weekTotal', title: 'WeekTotal', value: 'weekTotal', sortable: true },
+	{ key: 'seasonTotal', title: 'SeasonTotal', value: 'seasonTotal', sortable: true },
+	{ key: 'tieBreaker', title: 'TieBreaker', value: 'tieBreaker', sortable: true }
+])
+
+const sortByOptions: Record<string, SortBy[]> = {
+	weekTotal: [
+		{ key: 'weekTotal', order: 'desc' },
+		{ key: 'tieBreaker', order: 'asc' }
+	],
+	seasonTotal: [
+		{ key: 'seasonTotal', order: 'desc' },
+		{ key: 'tieBreaker', order: 'asc' }
+	]
+}
+
+const sortBy = ref(sortByOptions.weekTotal)
+
+const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border'
+</script>
+
+<template>
+	<v-data-table
+		:items="items"
+		:headers="headers"
+		:items-per-page="50"
+		density="compact"
+		hover
+		class="border"
+		multi-sort
+		:sort-by="sortBy"
+	>
+		<template v-slot:headers="{ columns, isSorted, getSortIcon, toggleSort }">
+			<SelectGameWinnersHeaders />
+			<tr>
+				<th class="text-center font-weight-bold w-0 border-e">
+					<br /><br /><br /><br /><br />
+					Rank
+				</th>
+				<th class="text-right font-weight-bold w-0 border-e">
+					Score:
+					<br />
+					Home:
+					<br />
+					Away:
+					<br />
+					Score:
+					<br />
+					Status:
+					<br />
+					<div class="text-center">Player Name</div>
+				</th>
+				<th
+					v-for="game in gameData"
+					class="text-center font-weight-bold border-e"
+					:class="[game.state == 'finished' ? 'dimmed' : '']"
+				>
+					{{ game.state != 'upcoming' ? game.scoreHome : '' }}
+					<br />
+					<span
+						:class="game.teamWithPossession == game.home ? ballPossessionClasses : ''"
+					>
+						{{ game.home }}
+					</span>
+					<br />
+					<span
+						:class="game.teamWithPossession == game.away ? ballPossessionClasses : ''"
+					>
+						{{ game.away }}
+					</span>
+					<br />
+					{{ game.state != 'upcoming' ? game.scoreAway : '' }}
+					<br />
+					{{ game.state == 'finished' ? 'Final' : game.timeLeft }}
+					<br />
+					{{ game.quarter }}
+					<br />
+				</th>
+				<th
+					class="cursor-pointer text-center font-weight-bold pr-1 border-e"
+					@click="sortBy = sortByOptions.weekTotal"
+				>
+					<br /><br /><br /><br /><br />
+					<div class="pl-lg-3 d-flex justify-center">
+						Week
+						<v-icon
+							class="v-data-table-header__sort-icon"
+							:class="isSorted(columns.at(-3)!) ? 'opacity-100' : ''"
+							icon="mdi-arrow-down"
+						/>
+					</div>
+				</th>
+				<th
+					class="cursor-pointer text-center font-weight-bold pr-1 border-e"
+					@click="sortBy = sortByOptions.seasonTotal"
+				>
+					<br /><br /><br /><br /><br />
+					<div class="pl-lg-3 d-flex justify-center">
+						Season
+						<v-icon
+							class="v-data-table-header__sort-icon"
+							:class="isSorted(columns.at(-2)!) ? 'opacity-100' : ''"
+							icon="mdi-arrow-down"
+						/>
+					</div>
+				</th>
+				<th class="cursor-pointer text-center font-weight-bold">
+					<br /><br /><br /><br /><br />
+					<div class="pl-lg-3 d-flex justify-center">Tie&nbsp;Breaker</div>
+				</th>
+			</tr>
+		</template>
+		<template v-slot:item="{ item: playerPicks, index }">
+			<tr class="text-center" :class="playerPicks.name == playerName ? 'bg-accent' : ''">
+				<td class="font-weight-bold text-left border-e">{{ index + 1 }}.</td>
+				<td class="font-weight-bold text-left px-1 text-no-wrap border-e">
+					{{ playerPicks.name }}
+				</td>
+				<td
+					class="border-e"
+					v-for="(p, gameNumber) in playerPicks.picks"
+					:class="getTdStyle(p, gameNumber)"
+				>
+					{{ p }}
+				</td>
+				<td class="border-e">
+					{{ playerPicks.weekTotal }}
+				</td>
+				<td class="border-e">
+					{{ playerPicks.seasonTotal }}
+				</td>
+				<td class="border-e">{{ playerPicks.tieBreaker }}</td>
+			</tr>
+		</template>
+	</v-data-table>
+
+	<!-- <v-data-table class="text-center border" density="compact" hover hide-default-footer>
+		<thead>
+			<SelectGameWinnersHeaders />
+			<GameDataHeaders />
+		</thead>
+
+		<tbody>
+			<tr
+				v-for="(playerPicks, index) in playerPicksInput"
+				:class="playerPicks.name == playerName ? 'bg-accent' : ''"
+			>
+				<td class="font-weight-bold text-left border-e">{{ index + 1 }}.</td>
+				<td class="font-weight-bold text-left px-1">{{ playerPicks.name }}</td>
+				<td v-for="(p, gameNumber) in playerPicks.picks" :class="getTdStyle(p, gameNumber)">
+					{{ p }}
+				</td>
+				<td>
+					{{ playerTotals[playerPicks.name].weekTotal }}
+				</td>
+				<td>
+					{{ playerTotals[playerPicks.name].seasonTotal }}
+				</td>
+				<td>{{ playerPicks.tieBreaker }}</td>
+			</tr>
+		</tbody>
+	</v-data-table> -->
+</template>
+
+<style scoped>
+.line-through {
+	text-decoration: line-through;
+}
+</style>
