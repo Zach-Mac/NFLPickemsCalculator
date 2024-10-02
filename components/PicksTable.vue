@@ -1,5 +1,11 @@
 <script setup lang="ts">
 const { playerName } = useUserInput()
+const { smAndDown } = useDisplay()
+
+const rankText = computed(() => (smAndDown.value ? 'R' : 'Rank'))
+const weekText = computed(() => (smAndDown.value ? 'W' : 'Week'))
+const seasonText = computed(() => (smAndDown.value ? 'S' : 'Season'))
+const tieBreakerText = computed(() => (smAndDown.value ? 'TB' : 'Tie Breaker'))
 
 const gameWonClasses = 'bg-success-lighten-2 text-success-darken-2 font-weight-bold'
 const gameLostClasses = 'bg-error-lighten-2 text-error line-through font-weight-bold'
@@ -65,7 +71,7 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 			<tr>
 				<th class="text-center font-weight-bold w-0 border-e">
 					<br /><br /><br /><br /><br />
-					Rank
+					{{ rankText }}
 				</th>
 				<th class="text-right font-weight-bold w-0 border-e">
 					Score:
@@ -107,12 +113,12 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 					<br />
 				</th>
 				<th
-					class="cursor-pointer text-center font-weight-bold pr-1 border-e"
+					class="cursor-pointer text-center font-weight-bold pr-md-1 border-e"
 					@click="sortBy = sortByOptions.weekTotal"
 				>
 					<br /><br /><br /><br /><br />
 					<div class="pl-lg-3 d-flex justify-center">
-						Week
+						{{ weekText }}
 						<v-icon
 							class="v-data-table-header__sort-icon"
 							:class="isSorted(columns.at(-3)!) ? 'opacity-100' : ''"
@@ -121,12 +127,12 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 					</div>
 				</th>
 				<th
-					class="cursor-pointer text-center font-weight-bold pr-1 border-e"
+					class="cursor-pointer text-center font-weight-bold pr-md-1 border-e"
 					@click="sortBy = sortByOptions.seasonTotal"
 				>
 					<br /><br /><br /><br /><br />
 					<div class="pl-lg-3 d-flex justify-center">
-						Season
+						{{ seasonText }}
 						<v-icon
 							class="v-data-table-header__sort-icon"
 							:class="isSorted(columns.at(-2)!) ? 'opacity-100' : ''"
@@ -136,7 +142,7 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 				</th>
 				<th class="text-center font-weight-bold">
 					<br /><br /><br /><br /><br />
-					<div class="d-flex justify-center">Tie&nbsp;Breaker</div>
+					<div class="d-flex justify-center">{{ tieBreakerText }}</div>
 				</th>
 			</tr>
 		</template>
