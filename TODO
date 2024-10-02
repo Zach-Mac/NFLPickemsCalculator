@@ -1,8 +1,3 @@
-TODO: 0 0 no tie color
-TODO: paste button
-TODO: lock finished button
-TODO: select mine for all remaining games ("Goal", hearteyes or target emoji)
-
 TODO: if sort by week, alternate group highlight same scores. same with season
 
 TODO: hydration mismatch
@@ -16,3 +11,6 @@ TODO: compare players button
 TODO: highlight same/similar picks
 
 TODO: sort by tie breaker
+
+BUG: 0 0 no tie color
+BUG: onload input fields empty until clicked

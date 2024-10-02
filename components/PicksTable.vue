@@ -1,5 +1,3 @@
-<!-- PicksTable.vue -->
-
 <script setup lang="ts">
 const { playerName } = useUserInput()
 
@@ -38,11 +36,11 @@ const headers = ref([
 const sortByOptions: Record<string, SortBy[]> = {
 	weekTotal: [
 		{ key: 'weekTotal', order: 'desc' },
-		{ key: 'tieBreaker', order: 'asc' }
+		{ key: 'tieBreaker', order: 'desc' }
 	],
 	seasonTotal: [
 		{ key: 'seasonTotal', order: 'desc' },
-		{ key: 'tieBreaker', order: 'asc' }
+		{ key: 'tieBreaker', order: 'desc' }
 	]
 }
 
@@ -136,9 +134,9 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 						/>
 					</div>
 				</th>
-				<th class="cursor-pointer text-center font-weight-bold">
+				<th class="text-center font-weight-bold">
 					<br /><br /><br /><br /><br />
-					<div class="pl-lg-3 d-flex justify-center">Tie&nbsp;Breaker</div>
+					<div class="d-flex justify-center">Tie&nbsp;Breaker</div>
 				</th>
 			</tr>
 		</template>
@@ -161,7 +159,7 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 				<td class="border-e">
 					{{ playerPicks.seasonTotal }}
 				</td>
-				<td class="border-e">{{ playerPicks.tieBreaker }}</td>
+				<td>{{ playerPicks.tieBreaker }}</td>
 			</tr>
 		</template>
 	</v-data-table>

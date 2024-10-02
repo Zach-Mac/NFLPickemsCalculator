@@ -1,25 +1,25 @@
 {
-  "name": "nuxt-app",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
-  },
-  "dependencies": {
-    "@vueuse/core": "^11.1.0",
-    "@vueuse/nuxt": "^11.1.0",
-    "cheerio": "^1.0.0",
-    "nuxt": "^3.13.0",
-    "vue": "latest",
-    "vue-router": "latest",
-    "vuetify-nuxt-module": "^0.18.3"
-  },
-  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447",
-  "devDependencies": {
-    "sass-embedded": "^1.79.3"
-  }
+	"name": "nuxt-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"dependencies": {
+		"@vueuse/core": "^11.1.0",
+		"@vueuse/nuxt": "^11.1.0",
+		"cheerio": "^1.0.0",
+		"nuxt": "^3.13.0",
+		"vue": "latest",
+		"vue-router": "latest",
+		"vuetify-nuxt-module": "^0.18.3"
+	},
+	"packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447",
+	"devDependencies": {
+		"sass-embedded": "^1.79.3"
+	}
 }

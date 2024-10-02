@@ -1,5 +1,13 @@
 <script setup lang="ts">
 const { picksTablePasteInput, playerName } = useUserInput()
+
+async function paste() {
+	try {
+		picksTablePasteInput.value = await navigator.clipboard.readText()
+	} catch (err) {
+		console.error('Failed to read clipboard contents: ', err)
+	}
+}
 </script>
 
 <template>
@@ -11,12 +19,17 @@ const { picksTablePasteInput, playerName } = useUserInput()
 						<v-text-field hideDetails v-model="playerName" label="Player name" />
 					</v-col>
 					<v-col>
-						<v-textarea
-							rows="1"
-							hideDetails
-							label="Paste Poolhost table html"
-							v-model="picksTablePasteInput"
-						></v-textarea>
+						<div class="d-flex">
+							<v-btn class="align-self-center me-1" size="large" @click="paste"
+								>Paste</v-btn
+							>
+							<v-textarea
+								rows="1"
+								hideDetails
+								label="Paste Poolhost table html"
+								v-model="picksTablePasteInput"
+							></v-textarea>
+						</div>
 					</v-col>
 				</v-row>
 				<v-row>

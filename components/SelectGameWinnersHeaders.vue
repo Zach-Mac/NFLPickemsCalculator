@@ -1,17 +1,27 @@
 <script setup lang="ts">
-const { loadHtmlData, playerName } = useUserInput()
+const { loadHtmlData, user } = useUserInput()
 
 function playerPickedTeam(teamName: string) {
-	const player = playerPicksInput.value.find(p => p.name == playerName.value)
-	return player ? player.picks.includes(teamName) : false
+	return user.value ? user.value.picks.includes(teamName) : false
 }
-function getButtonColor(teamName: string) {
-	const buttonColor = playerPickedTeam(teamName) ? 'success' : 'error'
-	return buttonColor
+const getButtonColor = (teamName: string) => (playerPickedTeam(teamName) ? 'success' : 'error')
+const getBaseButtonColor = (teamName: string) => (playerPickedTeam(teamName) ? 'accent' : '')
+
+function setUnfinishedToPlayerPicks() {
+	gameData.value.forEach(game => {
+		if (game.state != 'finished') {
+			if (!user.value) return
+
+			if (user.value.picks.includes(game.home)) game.winner = game.home
+			else if (user.value.picks.includes(game.away)) game.winner = game.away
+			else game.winner = 'none'
+		}
+	})
 }
-function getBaseButtonColor(teamName: string) {
-	return playerPickedTeam(teamName) ? 'accent' : ''
-}
+
+const lockFinishedGames = ref(false)
+
+const disableButton = (game: Game) => lockFinishedGames.value && game.state == 'finished'
 </script>
 
 <template>
@@ -37,6 +47,7 @@ function getBaseButtonColor(teamName: string) {
 					:value="game.home"
 					:baseColor="getBaseButtonColor(game.home)"
 					:color="getButtonColor(game.home)"
+					:disabled="disableButton(game)"
 				>
 					{{ game.home }}
 				</v-btn>
@@ -47,14 +58,37 @@ function getBaseButtonColor(teamName: string) {
 					:value="game.away"
 					:baseColor="getBaseButtonColor(game.away)"
 					:color="getButtonColor(game.away)"
+					:disabled="disableButton(game)"
 				>
 					{{ game.away }}
 				</v-btn>
 			</v-btn-toggle>
 		</th>
+		<th class="text-center font-weight-bold">
+			<v-tooltip text="Ideal rest of week" location="bottom">
+				<template v-slot:activator="{ props }">
+					<v-btn
+						v-bind="props"
+						icon="mdi-bullseye-arrow"
+						@click="setUnfinishedToPlayerPicks"
+					>
+					</v-btn>
+				</template>
+			</v-tooltip>
+		</th>
 		<th></th>
-		<th></th>
-		<th></th>
+		<th class="text-center font-weight-bold">
+			<v-tooltip text="Lock finished games" location="bottom">
+				<template v-slot:activator="{ props }">
+					<ToggleButton
+						v-bind="props"
+						v-model="lockFinishedGames"
+						iconToggled="mdi-lock"
+						iconUntoggled="mdi-lock-open"
+					/>
+				</template>
+			</v-tooltip>
+		</th>
 	</tr>
 </template>
 

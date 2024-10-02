@@ -6,6 +6,9 @@ const quarters = ['1st', '2nd', '3rd', '4th']
 export default function () {
 	const picksTablePasteInput = useStorage('paste', '')
 	const playerName = useStorage('playerName', '')
+	const user = computed(() =>
+		playerPicksInput.value.find(player => player.name == playerName.value)
+	)
 
 	const html = computed(() => cheerio.load(picksTablePasteInput.value))
 
@@ -89,6 +92,7 @@ export default function () {
 	return {
 		picksTablePasteInput,
 		playerName,
-		loadHtmlData
+		loadHtmlData,
+		user
 	}
 }
