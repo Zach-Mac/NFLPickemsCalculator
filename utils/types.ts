@@ -11,6 +11,7 @@ export interface Game {
 	timeLeft: string
 	quarter: string
 	teamWithPossession: string
+	ot: boolean
 	winner: string
 }
 

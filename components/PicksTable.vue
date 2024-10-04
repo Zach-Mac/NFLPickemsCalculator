@@ -109,7 +109,7 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 					<br />
 					{{ game.state == 'finished' ? 'Final' : game.timeLeft }}
 					<br />
-					{{ game.quarter }}
+					{{ game.ot ? 'OT' : game.quarter }}
 					<br />
 				</th>
 				<th

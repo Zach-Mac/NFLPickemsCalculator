@@ -33,9 +33,12 @@ export default function () {
 				let state: GameState = 'upcoming'
 				let timeLeft = ''
 				let quarter = ''
+				let ot = false
 
-				if (splitText[6] == 'Final') state = 'finished'
-				else if (splitText[6]) {
+				if (splitText[6].includes('Final')) {
+					state = 'finished'
+					if (splitText[6].includes('OT')) ot = true
+				} else if (splitText[6]) {
 					state = 'active'
 					timeLeft = splitText[6]
 
@@ -57,6 +60,7 @@ export default function () {
 					timeLeft,
 					quarter,
 					teamWithPossession,
+					ot,
 					winner: ''
 				}
 				game.winner = getWinner(game)
