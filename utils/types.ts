@@ -1,4 +1,4 @@
-export type GameWinner = 'home' | 'away' | 'none' | 'tie'
+export type GameWinner = 'home' | 'away' | '' | 'tie'
 
 export type GameState = 'finished' | 'active' | 'upcoming'
 
@@ -18,7 +18,6 @@ export interface Game {
 export interface PlayerPicks {
 	name: string
 	picks: Array<string>
-	realRank: string
 	originalSeasonTotal: number
 	tieBreaker: number
 }

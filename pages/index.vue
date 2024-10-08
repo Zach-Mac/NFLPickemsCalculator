@@ -32,20 +32,31 @@ async function paste() {
 						</div>
 					</v-col>
 				</v-row>
+
 				<v-row>
 					<v-col>
+						<Stats />
+					</v-col>
+				</v-row>
+
+				<v-divider class="ma-5"></v-divider>
+
+				<v-row>
+					<v-col>
+						<h1>Player Rankings</h1>
 						<PicksTable class="mb-5" />
 					</v-col>
 				</v-row>
-				<v-row> </v-row>
 			</v-col>
 		</v-row>
+
 		<v-divider class="ma-5"></v-divider>
+
 		<v-row class="mt-5 pt-5">
 			<h2>Internal Game Data:</h2>
 		</v-row>
-		<v-row justify="space-between">
-			<ObjectCard v-for="game in gameData" :obj="game" class="mt-1 py-3" />
+		<v-row justify="space-evenly">
+			<ObjectCard v-for="game in gameData" :obj="game" />
 		</v-row>
 	</v-container>
 </template>

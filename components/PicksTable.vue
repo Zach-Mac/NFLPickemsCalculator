@@ -14,14 +14,14 @@ const gameTiedClasses = 'bg-accent text-accent-darken-4 font-weight-bold'
 function getTdStyle(pick: string, gameNumber: number) {
 	const game = gameData.value[gameNumber]
 
-	if (!game.winner || game.winner == 'none') return ''
+	if (!game.winner || game.winner == '') return ''
 	if (game.winner == 'tie') return gameTiedClasses
 	if (pick == game.winner) return gameWonClasses
 	return gameLostClasses
 }
 
 const items = computed(() => {
-	return playerPicksInput.value.map(playerPicks => {
+	return picksData.value.map(playerPicks => {
 		return {
 			name: playerPicks.name,
 			picks: playerPicks.picks,
@@ -42,12 +42,14 @@ const headers = ref([
 const sortByOptions: Record<string, SortBy[]> = {
 	weekTotal: [
 		{ key: 'weekTotal', order: 'desc' },
-		{ key: 'tieBreaker', order: 'desc' }
+		{ key: 'tieBreaker', order: 'asc' }
 	],
 	seasonTotal: [
 		{ key: 'seasonTotal', order: 'desc' },
-		{ key: 'tieBreaker', order: 'desc' }
-	]
+		{ key: 'tieBreaker', order: 'asc' }
+	],
+	tieBreaker: [{ key: 'tieBreaker', order: 'desc' }],
+	name: [{ key: 'name', order: 'asc' }]
 }
 
 const sortBy = ref(sortByOptions.weekTotal)
@@ -84,7 +86,16 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 					<br />
 					Status:
 					<br />
-					<div class="text-center">Player Name</div>
+					<div class="cursor-pointer text-center" @click="sortBy = sortByOptions.name">
+						Player Name
+						<!-- <v-icon
+							class="v-data-table-header__sort-icon"
+							:class="
+								isSorted(columns.find(c => c.value === 'name')) ? 'opacity-100' : ''
+							"
+							icon="mdi-arrow-down"
+						/> -->
+					</div>
 				</th>
 				<th
 					v-for="game in gameData"
@@ -140,7 +151,7 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 						/>
 					</div>
 				</th>
-				<th class="text-center font-weight-bold">
+				<th class="text-center font-weight-bold" @click="sortBy = sortByOptions.tieBreaker">
 					<br /><br /><br /><br /><br />
 					<div class="d-flex justify-center">{{ tieBreakerText }}</div>
 				</th>
@@ -149,7 +160,10 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 		<template v-slot:item="{ item: playerPicks, index }">
 			<tr class="text-center" :class="playerPicks.name == playerName ? 'bg-accent' : ''">
 				<td class="font-weight-bold text-left border-e">{{ index + 1 }}.</td>
-				<td class="font-weight-bold text-left px-1 text-no-wrap border-e">
+				<td
+					class="font-weight-bold text-left cursor-pointer px-1 text-no-wrap border-e"
+					@click="playerName = playerPicks.name"
+				>
 					{{ playerPicks.name }}
 				</td>
 				<td

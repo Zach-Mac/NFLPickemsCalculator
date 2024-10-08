@@ -2,18 +2,29 @@ import * as cheerio from 'cheerio'
 import { useStorage } from '@vueuse/core'
 
 const quarters = ['1st', '2nd', '3rd', '4th']
+const blankUser = {
+	name: '',
+	picks: [],
+	originalSeasonTotal: 0,
+	tieBreaker: 0
+}
+
+const filterGames = ref(GAME_FILTERS.ALL)
 
 export default function () {
 	const picksTablePasteInput = useStorage('paste', '')
+	// const filterGames = useStorage('filterGames', GAME_FILTERS.ALL)
+
 	const playerName = useStorage('playerName', '')
-	const user = computed(() =>
-		playerPicksInput.value.find(player => player.name == playerName.value)
+
+	const user = computed(
+		() => picksData.value.find(player => player.name == playerName.value) ?? blankUser
 	)
 
 	const html = computed(() => cheerio.load(picksTablePasteInput.value))
 
 	function getWinner(game: Game): string {
-		if (game.state == 'upcoming') return 'none'
+		if (game.state == 'upcoming') return ''
 		if (game.scoreHome == game.scoreAway) return 'tie'
 		return game.scoreHome > game.scoreAway ? game.home : game.away
 	}
@@ -24,11 +35,10 @@ export default function () {
 			.toArray()
 			.map((th, i) => {
 				const teamWithPossession = $(th).find('span').text()
-
-				const splitText = $(th).text().split('\n')
-
-				const scoreHome = Number(splitText[1])
-				const scoreAway = Number(splitText[5])
+				const splitText = $(th)
+					.text()
+					.split('\n')
+					.map(t => t.trim())
 
 				let state: GameState = 'upcoming'
 				let timeLeft = ''
@@ -54,8 +64,8 @@ export default function () {
 				const game: Game = {
 					home: splitText[2],
 					away: splitText[4],
-					scoreHome,
-					scoreAway,
+					scoreHome: Number(splitText[1]),
+					scoreAway: Number(splitText[5]),
 					state,
 					timeLeft,
 					quarter,
@@ -68,7 +78,7 @@ export default function () {
 				return game
 			})
 
-		playerPicksInput.value = $('tbody tr')
+		picksData.value = $('tbody tr')
 			.toArray()
 			.map(row => {
 				const tds = $(row).find('td')
@@ -82,7 +92,6 @@ export default function () {
 				const seasonTotal = Number(tds.eq(-2).text())
 
 				return {
-					realRank: tds.eq(0).text(),
 					name: tds.eq(2).text().trim(),
 					picks,
 					originalSeasonTotal: seasonTotal - weekTotal,
@@ -94,6 +103,7 @@ export default function () {
 	watchEffect(loadHtmlData)
 
 	return {
+		filterGames,
 		picksTablePasteInput,
 		playerName,
 		loadHtmlData,

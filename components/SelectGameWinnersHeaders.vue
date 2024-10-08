@@ -18,7 +18,7 @@ function setUnfinishedToPlayerPicks() {
 
 			if (user.value.picks.includes(game.home)) game.winner = game.home
 			else if (user.value.picks.includes(game.away)) game.winner = game.away
-			else game.winner = 'none'
+			else game.winner = ''
 		}
 	})
 }
