@@ -87,10 +87,9 @@ const panel = ref(0)
 									:key="i"
 								>
 									<div class="d-flex flex-wrap">
-										<!-- <ObjectCard v-for="outcome in importantWinningOutcomes" :obj="outcome" /> -->
 										<v-card
 											v-for="outcome in outcomes.slice(startIndex, endIndex)"
-											@click="setGameWinners(outcome.weekOutcome)"
+											@click="setAllGameWinners(outcome.weekOutcome)"
 											class="ma-1"
 											hover
 										>
@@ -128,6 +127,5 @@ const panel = ref(0)
 				</v-expansion-panel>
 			</v-expansion-panels>
 		</v-col>
-		<!-- </div> -->
 	</v-row>
 </template>

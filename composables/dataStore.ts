@@ -19,7 +19,7 @@ export const playerTotals = computed(() => {
 	return totals
 })
 
-export function setGameWinners(weekOutcome: string[]) {
+export function setAllGameWinners(weekOutcome: string[]) {
 	gameData.value.forEach((game, i) => {
 		game.winner = weekOutcome[i]
 	})
@@ -28,7 +28,6 @@ export function setCertainGameWinners(teamNames: string[]) {
 	gameData.value.forEach(game => {
 		if (teamNames.includes(game.home)) game.winner = game.home
 		else if (teamNames.includes(game.away)) game.winner = game.away
-		else game.winner = ''
 	})
 }
 export function teamWon(team: string) {
