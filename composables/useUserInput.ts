@@ -14,6 +14,8 @@ const filterGames = ref(GAME_FILTERS.ALL)
 export default function () {
 	const picksTablePasteInput = useStorage('paste', '')
 
+	const highlightTiedRows = useStorage('highlightTiedRows', true)
+
 	const playerName = useStorage('playerName', '')
 
 	const picksTablePasteHistory1 = useStorage('pasteHistory1', '')
@@ -138,6 +140,7 @@ export default function () {
 		loadHtmlData,
 		user,
 		loadPasteHistory,
-		pasteHistoryExists
+		pasteHistoryExists,
+		highlightTiedRows
 	}
 }

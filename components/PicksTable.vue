@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { playerName } = useUserInput()
+const { playerName, highlightTiedRows } = useUserInput()
 const { smAndDown } = useDisplay()
 
 const rankText = computed(() => (smAndDown.value ? 'R' : 'Rank'))
@@ -11,7 +11,7 @@ const gameWonClasses = 'bg-success-lighten-2 text-success-darken-2 font-weight-b
 const gameLostClasses = 'bg-error-lighten-2 text-error line-through font-weight-bold'
 const gameTiedClasses = 'bg-accent text-accent-darken-4 font-weight-bold'
 
-function getTdStyle(pick: string, gameNumber: number) {
+function getTeamNameTdStyle(pick: string, gameNumber: number) {
 	const game = gameData.value[gameNumber]
 
 	if (!game.winner || game.winner == '') return ''
@@ -39,6 +39,12 @@ const headers = ref([
 	{ key: 'tieBreaker', title: 'TieBreaker', value: 'tieBreaker', sortable: true }
 ])
 
+type HeaderKey = 'name' | 'picks' | 'weekTotal' | 'seasonTotal' | 'tieBreaker'
+interface SortBy {
+	key: HeaderKey
+	order: boolean | 'desc' | 'asc' | undefined
+}
+
 const sortByOptions: Record<string, SortBy[]> = {
 	weekTotal: [
 		{ key: 'weekTotal', order: 'desc' },
@@ -55,6 +61,33 @@ const sortByOptions: Record<string, SortBy[]> = {
 const sortBy = ref(sortByOptions.weekTotal)
 
 const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border'
+
+const rowStyle = computed(() => {
+	if (!highlightTiedRows.value) return Array(items.value.length).fill('')
+
+	const colorRow = [false]
+
+	const sortedItems = items.value.sort((a, b) => {
+		if (a[sortBy.value[0].key] < b[sortBy.value[0].key])
+			return sortBy.value[0].order == 'asc' ? -1 : 1
+		if (a[sortBy.value[0].key] > b[sortBy.value[0].key])
+			return sortBy.value[0].order == 'asc' ? 1 : -1
+		return 0
+	})
+
+	for (let i = 1; i < sortedItems.length; i++) {
+		const rowSortValue = sortedItems[i][sortBy.value[0].key]
+		const prevRowSortValue = sortedItems[i - 1][sortBy.value[0].key]
+
+		if (rowSortValue == prevRowSortValue) {
+			colorRow.push(colorRow[i - 1])
+		} else {
+			colorRow.push(!colorRow[i - 1])
+		}
+	}
+
+	return colorRow.map(color => (color ? 'bg-grey-lighten-4' : ''))
+})
 </script>
 
 <template>
@@ -88,13 +121,6 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 					<br />
 					<div class="cursor-pointer text-center" @click="sortBy = sortByOptions.name">
 						Player Name
-						<!-- <v-icon
-							class="v-data-table-header__sort-icon"
-							:class="
-								isSorted(columns.find(c => c.value === 'name')) ? 'opacity-100' : ''
-							"
-							icon="mdi-arrow-down"
-						/> -->
 					</div>
 				</th>
 				<th
@@ -158,7 +184,10 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 			</tr>
 		</template>
 		<template v-slot:item="{ item: playerPicks, index }">
-			<tr class="text-center" :class="playerPicks.name == playerName ? 'bg-accent' : ''">
+			<tr
+				class="text-center"
+				:class="[rowStyle[index], playerPicks.name == playerName ? 'bg-accent' : '']"
+			>
 				<td class="font-weight-bold text-left border-e">{{ index + 1 }}.</td>
 				<td
 					class="font-weight-bold text-left cursor-pointer px-1 text-no-wrap border-e"
@@ -169,7 +198,7 @@ const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border
 				<td
 					class="border-e"
 					v-for="(p, gameNumber) in playerPicks.picks"
-					:class="getTdStyle(p, gameNumber)"
+					:class="getTeamNameTdStyle(p, gameNumber)"
 				>
 					{{ p }}
 				</td>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { loadHtmlData, user } = useUserInput()
+const { loadHtmlData, user, highlightTiedRows } = useUserInput()
 const { smAndDown, mdAndDown } = useDisplay()
 
 const teamButtonSize = computed(() => (mdAndDown.value ? 'x-small' : 'small'))
@@ -74,7 +74,6 @@ const disableButton = (game: Game) => lockFinishedGames.value && game.state == '
 					<template v-slot:activator="{ props }">
 						<v-btn
 							:size="iconButtonSize"
-							class="mr-1"
 							v-bind="props"
 							icon="mdi-bullseye-arrow"
 							@click="setUnfinishedToPlayerPicks"
@@ -86,6 +85,7 @@ const disableButton = (game: Game) => lockFinishedGames.value && game.state == '
 					<template v-slot:activator="{ props }">
 						<ToggleButton
 							v-bind="props"
+							class="ml-1"
 							:size="iconButtonSize"
 							v-model="lockFinishedGames"
 							iconToggled="mdi-lock"
@@ -93,6 +93,28 @@ const disableButton = (game: Game) => lockFinishedGames.value && game.state == '
 						/>
 					</template>
 				</v-tooltip>
+				<!-- <v-menu>
+					<template v-slot:activator="{ props }">
+						<v-btn
+							v-bind="props"
+							:size="iconButtonSize"
+							v-model="lockFinishedGames"
+							icon="mdi-cog-outline"
+							class="ml-1"
+						/>
+					</template>
+					<v-list>
+						<v-list-item>
+							<v-list-item-title>
+								<v-checkbox
+									label="Highlight tied rows"
+									v-model="highlightTiedRows"
+									hide-details
+								></v-checkbox>
+							</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-menu> -->
 			</div>
 		</th>
 	</tr>

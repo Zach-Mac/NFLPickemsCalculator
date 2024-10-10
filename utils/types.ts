@@ -21,8 +21,3 @@ export interface PlayerPicks {
 	originalSeasonTotal: number
 	tieBreaker: number
 }
-
-export interface SortBy {
-	key: string
-	order: boolean | 'desc' | 'asc' | undefined
-}
