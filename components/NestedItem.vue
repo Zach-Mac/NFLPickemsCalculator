@@ -5,10 +5,6 @@ const props = defineProps({
 	obj: {
 		type: Object as () => Record<string, any> | any[],
 		required: true
-	},
-	level: {
-		type: Number,
-		default: 0
 	}
 })
 
@@ -24,13 +20,13 @@ const isArrayOfPrimitives = (arr: any) => {
 </script>
 
 <template>
-	<div :style="{ paddingLeft: 20 + 'px' }">
+	<div>
 		<template v-if="isArrayOfPrimitives(obj)">
 			<b>{{ obj }}</b>
 		</template>
 		<template v-else-if="Array.isArray(obj)">
 			<b>[</b>
-			<NestedItem v-for="(item, index) in obj" :key="index" :obj="item" :level="level" />
+			<NestedItem v-for="(item, index) in obj" :key="index" :obj="item" class="ps-3" />
 			<b>]</b>
 		</template>
 		<template v-else>
@@ -40,7 +36,7 @@ const isArrayOfPrimitives = (arr: any) => {
 				</template>
 				<template v-else>
 					<b>{{ key }}: </b>
-					<NestedItem :obj="value" :level="level + 1" />
+					<NestedItem :obj="value" class="ps-3" />
 				</template>
 			</div>
 		</template>

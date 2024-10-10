@@ -95,7 +95,7 @@ async function paste() {
 			<v-row class="mt-5 pt-5">
 				<h2>Internal Game Data:</h2>
 			</v-row>
-			<v-row justify="space-evenly">
+			<v-row class="ga-3">
 				<ObjectCard v-for="game in gameData" :obj="game" />
 			</v-row>
 		</template>
