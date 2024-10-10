@@ -13,9 +13,38 @@ const filterGames = ref(GAME_FILTERS.ALL)
 
 export default function () {
 	const picksTablePasteInput = useStorage('paste', '')
-	// const filterGames = useStorage('filterGames', GAME_FILTERS.ALL)
 
 	const playerName = useStorage('playerName', '')
+
+	const picksTablePasteHistory1 = useStorage('pasteHistory1', '')
+	const picksTablePasteHistory2 = useStorage('pasteHistory2', '')
+	const picksTablePasteHistory3 = useStorage('pasteHistory3', '')
+
+	watch(picksTablePasteInput, () => {
+		if (
+			picksTablePasteInput.value == '' ||
+			picksTablePasteInput.value == picksTablePasteHistory1.value
+		)
+			return
+		picksTablePasteHistory3.value = picksTablePasteHistory2.value
+		picksTablePasteHistory2.value = picksTablePasteHistory1.value
+		picksTablePasteHistory1.value = picksTablePasteInput.value
+	})
+
+	function loadPasteHistory(index: number) {
+		picksTablePasteInput.value = [
+			picksTablePasteHistory1,
+			picksTablePasteHistory2,
+			picksTablePasteHistory3
+		][index].value
+	}
+
+	function pasteHistoryExists(index: number) {
+		return (
+			[picksTablePasteHistory1, picksTablePasteHistory2, picksTablePasteHistory3][index]
+				.value != ''
+		)
+	}
 
 	const user = computed(
 		() => picksData.value.find(player => player.name == playerName.value) ?? blankUser
@@ -107,6 +136,8 @@ export default function () {
 		picksTablePasteInput,
 		playerName,
 		loadHtmlData,
-		user
+		user,
+		loadPasteHistory,
+		pasteHistoryExists
 	}
 }

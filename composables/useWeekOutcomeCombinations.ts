@@ -112,7 +112,7 @@ export default function () {
 
 		let index = 0
 		while (next.size() > 0) {
-			if (index++ > 10) {
+			if (index++ > 100) {
 				throw Error('Too many iterations')
 				break
 			}
