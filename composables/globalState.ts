@@ -1,7 +1,5 @@
 export const gameData = ref([] as Game[])
 export const picksData = ref([] as PlayerPicks[])
-// export const filterGames = ref(GAME_FILTERS.ALL)
-// export const filterGames = ref(undefined)
 export const playerTotals = computed(() => {
 	const totals: Record<string, { weekTotal: number; seasonTotal: number }> = {}
 
@@ -10,7 +8,8 @@ export const playerTotals = computed(() => {
 			totals[player.name] = { weekTotal: 0, seasonTotal: player.originalSeasonTotal }
 
 		player.picks.forEach((pick, i) => {
-			if (pick == gameData.value[i].winner) totals[player.name].weekTotal++
+			if (pick && gameData.value[i].winner && pick == gameData.value[i].winner)
+				totals[player.name].weekTotal++
 		})
 
 		totals[player.name].seasonTotal += totals[player.name].weekTotal

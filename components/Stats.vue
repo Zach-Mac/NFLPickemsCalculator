@@ -1,10 +1,16 @@
 <script setup lang="ts">
-const { winningOutcomes, numWinningOutcomes, numPossibleOutcomes, mustWins } =
-	useWeekOutcomeCombinations()
+const {
+	winningOutcomes,
+	numWinningOutcomes,
+	numPossibleOutcomes,
+	mustWins,
+	nfeloWinChance,
+	mustWinsWinChance
+} = useWeekOutcomeCombinations()
 
-const { filterGames } = useUserInput()
+const { filterGames } = usePoolhostInput()
 
-const itemsPerPage = 10
+const itemsPerPage = 5
 const page = ref(1)
 const tab = ref(winningOutcomes.value.length - 1)
 watch(winningOutcomes, () => {
@@ -44,23 +50,34 @@ const panel = ref(0)
 				<b> {{ (numWinningOutcomes / numPossibleOutcomes) * 100 }}% </b>
 			</p>
 		</v-col>
-		<v-col cols="auto" class="">
+		<v-col cols="auto" class="text-no-wrap">
+			<h2>nfelo Chance</h2>
+			<p>{{ round(nfeloWinChance, 5) }}%</p>
+		</v-col>
+		<v-col v-if="numWinningOutcomes > 0" cols="auto" class="">
 			<h2>Must Wins</h2>
 			<p>
-				<b class="cursor-pointer" @click="setCertainGameWinners(mustWins)">
-					<span
-						v-for="(team, i) in mustWins"
-						:class="
-							teamWon(team)
-								? 'text-success-darken-1'
-								: teamLost(team)
-								? 'text-error'
-								: ''
-						"
-					>
-						{{ team + (i == mustWins.length - 1 ? '' : ', ') }}
-					</span>
-				</b>
+				<template v-if="mustWins.length">
+					<b class="cursor-pointer" @click="setCertainGameWinners(mustWins)">
+						<span
+							v-for="(team, i) in mustWins"
+							:class="
+								teamWon(team)
+									? 'text-success-darken-1'
+									: teamLost(team)
+									? 'text-error'
+									: ''
+							"
+						>
+							{{ team + (i == mustWins.length - 1 ? '' : ', ') }}
+						</span>
+					</b>
+					<br />
+					<template v-if="mustWinsWinChance">
+						Chance: {{ round(mustWinsWinChance, 5) }}%
+					</template>
+				</template>
+				<template v-else> None </template>
 			</p>
 		</v-col>
 
@@ -110,6 +127,9 @@ const panel = ref(0)
 													{{ outcome.userOutcome.tiedWith }}
 												</b>
 												others
+												<br />
+												Chance:
+												{{ round(outcome.userOutcome.nfeloChance, 5) }}%
 											</v-card-text>
 										</v-card>
 									</div>

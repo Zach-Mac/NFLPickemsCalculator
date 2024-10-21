@@ -13,6 +13,8 @@ export interface Game {
 	teamWithPossession: string
 	ot: boolean
 	winner: string
+	homeWinPercent: number | undefined
+	awayWinPercent: number | undefined
 }
 
 export interface PlayerPicks {

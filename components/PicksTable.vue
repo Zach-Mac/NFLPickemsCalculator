@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { playerName, highlightTiedRows } = useUserInput()
+const { playerName, highlightTiedRows } = usePoolhostInput()
 const { smAndDown } = useDisplay()
 
 const rankText = computed(() => (smAndDown.value ? 'R' : 'Rank'))
@@ -108,7 +108,7 @@ const rowStyle = computed(() => {
 					<br /><br /><br /><br /><br />
 					{{ rankText }}
 				</th>
-				<th class="text-right font-weight-bold w-0 border-e">
+				<th class="text-right font-weight-bold w-0 border-e pe-1">
 					Score:
 					<br />
 					Home:
@@ -217,5 +217,17 @@ const rowStyle = computed(() => {
 <style scoped>
 .line-through {
 	text-decoration: line-through;
+}
+
+.pa-05 {
+	padding: 2px !important;
+}
+.px-05 {
+	padding-left: 2px !important;
+	padding-right: 2px !important;
+}
+.py-05 {
+	padding-top: 2px !important;
+	padding-bottom: 2px !important;
 }
 </style>

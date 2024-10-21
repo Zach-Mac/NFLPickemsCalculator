@@ -8,6 +8,7 @@ interface UserOutcome {
 	tiedWith: number
 	pointsAwayFromTopScore: number
 	missedWins: string[]
+	nfeloChance: number
 }
 
 function generateSimilarBoolOutcomes(boolWeekOutcome: boolean[]): boolean[][] {
@@ -23,7 +24,9 @@ function generateSimilarBoolOutcomes(boolWeekOutcome: boolean[]): boolean[][] {
 }
 
 export default function () {
-	const { user, filterGames } = useUserInput()
+	const { user, filterGames } = usePoolhostInput()
+
+	const { nfeloTeamsWinChance } = useNfeloInput()
 
 	const ignoredGames = computed(() => {
 		if (filterGames.value == GAME_FILTERS.NOTSTARTED) {
@@ -78,7 +81,13 @@ export default function () {
 
 		const userRanking = playerRankings.find(player => player.name == user.value.name)
 		if (!userRanking)
-			return { userPosition: -1, tiedWith: -1, pointsAwayFromTopScore: -1, missedWins: [] }
+			return {
+				userPosition: -1,
+				tiedWith: -1,
+				pointsAwayFromTopScore: -1,
+				missedWins: [],
+				nfeloChance: 0
+			}
 
 		const userPosition =
 			playerRankings.filter(player => player.score > userRanking.score).length + 1
@@ -92,7 +101,12 @@ export default function () {
 			})
 			.filter(str => str != '')
 
-		return { userPosition, tiedWith, pointsAwayFromTopScore, missedWins }
+		const filteredOutcome = weekOutcome.filter((_, i) => !ignoredGames.value.includes(i))
+		const nfeloChance = filteredOutcome.reduce((acc, team) => {
+			return (acc * nfeloTeamsWinChance.value[team]) / 100
+		}, 100)
+
+		return { userPosition, tiedWith, pointsAwayFromTopScore, missedWins, nfeloChance }
 	}
 
 	function convertBoolWeekOutcomeToTeamNames(boolWeekOutcome: boolean[]): string[] {
@@ -154,9 +168,10 @@ export default function () {
 	})
 	const mustWins = computed(() => {
 		const allOutcomes = winningOutcomes.value.flat()
-		const mustWins = idealOutcome.value.filter(team =>
-			allOutcomes.every(outcome => outcome.weekOutcome.includes(team))
-		)
+		const mustWins = idealOutcome.value.filter((team, i) => {
+			if (ignoredGames.value.includes(i)) return false
+			return allOutcomes.every(outcome => outcome.weekOutcome.includes(team))
+		})
 		return mustWins
 	})
 
@@ -165,11 +180,34 @@ export default function () {
 	)
 	const numPossibleOutcomes = computed(() => Math.pow(2, numGames.value))
 
+	const nfeloWinChance = computed(() => {
+		return winningOutcomes.value.flat().reduce((acc, outcome) => {
+			return acc + outcome.userOutcome.nfeloChance
+		}, 0)
+	})
+
+	const mustWinsWinChance = computed(() => {
+		const games = gameData.value.filter(
+			game => mustWins.value.includes(game.home) || mustWins.value.includes(game.away)
+		)
+
+		if (!games.length) return 0
+
+		return games.reduce((acc, game) => {
+			if (!game.homeWinPercent || !game.awayWinPercent) return acc
+			if (mustWins.value.includes(game.home)) return (acc * game.homeWinPercent) / 100
+			if (mustWins.value.includes(game.away)) return (acc * game.awayWinPercent) / 100
+			return acc
+		}, 100)
+	})
+
 	return {
 		winningOutcomes,
 		importantWinningOutcomes,
 		mustWins,
 		numWinningOutcomes,
-		numPossibleOutcomes
+		numPossibleOutcomes,
+		nfeloWinChance,
+		mustWinsWinChance
 	}
 }

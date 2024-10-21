@@ -12,6 +12,8 @@ const blankUser = {
 const filterGames = ref(GAME_FILTERS.ALL)
 
 export default function () {
+	const { nfeloGames } = useNfeloInput()
+
 	const picksTablePasteInput = useStorage('paste', '')
 
 	const highlightTiedRows = useStorage('highlightTiedRows', true)
@@ -102,9 +104,21 @@ export default function () {
 					quarter,
 					teamWithPossession,
 					ot,
-					winner: ''
+					winner: '',
+					homeWinPercent: undefined,
+					awayWinPercent: undefined
 				}
 				game.winner = getWinner(game)
+
+				const nfeloGame = nfeloGames.value.find(nfeloGame => {
+					return nfeloGame.home == game.home && nfeloGame.away == game.away
+				})
+				if (!nfeloGame) {
+					console.error('Could not find nfelo game for: ', game)
+					return game
+				}
+				game.homeWinPercent = nfeloGame.homeWinPercent
+				game.awayWinPercent = nfeloGame.awayWinPercent
 
 				return game
 			})

@@ -1,3 +1,13 @@
+export function round(num: number, decimalPlaces: number): number {
+	return Math.round(num * 10 ** decimalPlaces) / 10 ** decimalPlaces
+}
+
+export function localStore<T>(ref: any, key: string) {
+	// watch(ref, () => {
+	// 	localStorage.setItem(key, JSON.stringify(ref.value))
+	// })
+}
+
 export class ArraySet {
 	private set: Set<string>
 

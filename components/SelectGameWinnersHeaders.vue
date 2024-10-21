@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { loadHtmlData, user, highlightTiedRows } = useUserInput()
+const { loadHtmlData, user, highlightTiedRows } = usePoolhostInput()
 const { smAndDown, mdAndDown } = useDisplay()
 
 const teamButtonSize = computed(() => (mdAndDown.value ? 'x-small' : 'small'))
@@ -10,6 +10,25 @@ function playerPickedTeam(teamName: string) {
 }
 const getButtonColor = (teamName: string) => (playerPickedTeam(teamName) ? 'success' : 'error')
 const getBaseButtonColor = (teamName: string) => (playerPickedTeam(teamName) ? 'accent' : '')
+
+const getWinChance = (game: Game) => {
+	if (!user.value) return 0
+
+	return user.value.picks.includes(game.home) ? game.homeWinPercent : game.awayWinPercent
+}
+
+const getWinChanceMean = () => {
+	if (!user.value) return 0
+
+	const total = gameData.value.reduce((acc, game) => {
+		if (!game.homeWinPercent || !game.awayWinPercent) return acc
+		if (user.value.picks.includes(game.home)) return acc + game.homeWinPercent
+		if (user.value.picks.includes(game.away)) return acc + game.awayWinPercent
+		return acc
+	}, 0)
+
+	return total / user.value.picks.length
+}
 
 function setUnfinishedToPlayerPicks() {
 	gameData.value.forEach(game => {
@@ -29,6 +48,18 @@ const disableButton = (game: Game) => lockFinishedGames.value && game.state == '
 </script>
 
 <template>
+	<tr>
+		<th class="text-center font-weight-bold border-e" :colspan="2">nfelo chance</th>
+		<th
+			v-for="game in gameData"
+			class="text-center border-e"
+			:class="[game.state == 'finished' ? 'dimmed' : '']"
+		>
+			{{ getWinChance(game) }}%
+		</th>
+		<th colspan="3" class="px-1">Mean: {{ round(getWinChanceMean(), 3) }}%</th>
+	</tr>
+
 	<tr class="font-weight-bold">
 		<th colspan="2" class="text-center font-weight-bold border-e">
 			<v-btn @click="loadHtmlData">Reset</v-btn>
