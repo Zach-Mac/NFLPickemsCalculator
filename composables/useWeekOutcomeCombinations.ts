@@ -23,25 +23,25 @@ function generateSimilarBoolOutcomes(boolWeekOutcome: boolean[]): boolean[][] {
 	return similarOutcomes
 }
 
-export default function () {
-	const { user, filterGames } = usePoolhostInput()
-
-	const { nfeloTeamsWinChance } = useNfeloInput()
+export default function useWeekOutcomeCombinations() {
+	const picksStore = usePicksStore()
+	const gamesStore = useGamesStore()
+	const nfeloStore = useNfeloStore()
 
 	const ignoredGames = computed(() => {
-		if (filterGames.value == GAME_FILTERS.NOTSTARTED) {
+		if (gamesStore.filterGames === GAME_FILTERS.NOTSTARTED) {
 			const ignoredGames = []
-			for (let i = 0; i < gameData.value.length; i++) {
-				if (gameData.value[i].state != 'upcoming') {
+			for (let i = 0; i < gamesStore.gameData.length; i++) {
+				if (gamesStore.gameData[i].state != 'upcoming') {
 					ignoredGames.push(i)
 				}
 			}
 			return ignoredGames
 		}
-		if (filterGames.value == GAME_FILTERS.UNFINISHED) {
+		if (gamesStore.filterGames == GAME_FILTERS.UNFINISHED) {
 			const ignoredGames = []
-			for (let i = 0; i < gameData.value.length; i++) {
-				if (gameData.value[i].state == 'finished') {
+			for (let i = 0; i < gamesStore.gameData.length; i++) {
+				if (gamesStore.gameData[i].state == 'finished') {
 					ignoredGames.push(i)
 				}
 			}
@@ -50,18 +50,20 @@ export default function () {
 		return []
 	})
 
-	const numGames = computed(() => gameData.value.length - ignoredGames.value.length)
+	const numGames = computed(() => gamesStore.gameData.length - ignoredGames.value.length)
 
-	const idealOutcome = computed(() => user.value.picks)
+	const idealOutcome = computed(() => picksStore.user.picks)
 	const worstOutcome = computed(() =>
-		user.value.picks.map((team, i) => {
-			return team == gameData.value[i].home ? gameData.value[i].away : gameData.value[i].home
+		picksStore.user.picks.map((team, i) => {
+			return team == gamesStore.gameData[i].home
+				? gamesStore.gameData[i].away
+				: gamesStore.gameData[i].home
 		})
 	)
 
 	function getUserOutcome(weekOutcome: string[]): UserOutcome {
 		const playerRankings: PlayerRanking[] = [] as PlayerRanking[]
-		picksData.value.forEach(player => {
+		picksStore.picksData.forEach(player => {
 			let score = 0
 			player.picks.forEach((pick, i) => {
 				if (pick == weekOutcome[i]) score++
@@ -79,7 +81,7 @@ export default function () {
 			else numPlayersAtEachScore[player.score]++
 		})
 
-		const userRanking = playerRankings.find(player => player.name == user.value.name)
+		const userRanking = playerRankings.find(player => player.name == picksStore.user.name)
 		if (!userRanking)
 			return {
 				userPosition: -1,
@@ -103,7 +105,7 @@ export default function () {
 
 		const filteredOutcome = weekOutcome.filter((_, i) => !ignoredGames.value.includes(i))
 		const nfeloChance = filteredOutcome.reduce((acc, team) => {
-			return (acc * nfeloTeamsWinChance.value[team]) / 100
+			return (acc * nfeloStore.nfeloTeamsWinChance[team]) / 100
 		}, 100)
 
 		return { userPosition, tiedWith, pointsAwayFromTopScore, missedWins, nfeloChance }
@@ -113,12 +115,13 @@ export default function () {
 		let j = 0
 
 		return idealOutcome.value.map((team, i) => {
-			if (ignoredGames.value.includes(i)) return gameData.value[i].winner
+			if (ignoredGames.value.includes(i)) return gamesStore.gameData[i].winner
 			return boolWeekOutcome[j++] ? team : worstOutcome.value[i]
 		})
 	}
 
 	const winningOutcomes = computed(() => {
+		const startTime = performance.now()
 		const output: { weekOutcome: string[]; userOutcome: UserOutcome }[][] = []
 		const ideal = Array(numGames.value).fill(true)
 		const next = new ArraySet()
@@ -127,7 +130,7 @@ export default function () {
 		let index = 0
 		while (next.size() > 0) {
 			if (index++ > 100) {
-				throw Error('Too many iterations')
+				throw Error('Too many iterations to find winningOutcomes')
 				break
 			}
 			const currentGroup = next.values()
@@ -161,6 +164,8 @@ export default function () {
 			if (!output[i]) output[i] = []
 		}
 
+		const endTime = performance.now()
+		console.log(`Calculation took ${endTime - startTime} milliseconds`)
 		return output
 	})
 	const importantWinningOutcomes = computed(() => {
@@ -187,17 +192,8 @@ export default function () {
 	})
 
 	const mustWinsWinChance = computed(() => {
-		const games = gameData.value.filter(
-			game => mustWins.value.includes(game.home) || mustWins.value.includes(game.away)
-		)
-
-		if (!games.length) return 0
-
-		return games.reduce((acc, game) => {
-			if (!game.homeWinPercent || !game.awayWinPercent) return acc
-			if (mustWins.value.includes(game.home)) return (acc * game.homeWinPercent) / 100
-			if (mustWins.value.includes(game.away)) return (acc * game.awayWinPercent) / 100
-			return acc
+		return mustWins.value.reduce((acc, team) => {
+			return (acc * nfeloStore.nfeloTeamsWinChance[team]) / 100
 		}, 100)
 	})
 

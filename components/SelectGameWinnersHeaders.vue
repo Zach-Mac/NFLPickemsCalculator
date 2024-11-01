@@ -1,42 +1,41 @@
 <script setup lang="ts">
-const { loadHtmlData, user, highlightTiedRows } = usePoolhostInput()
+const gamesStore = useGamesStore()
+const picksStore = usePicksStore()
+const nfeloStore = useNfeloStore()
 const { smAndDown, mdAndDown } = useDisplay()
 
 const teamButtonSize = computed(() => (mdAndDown.value ? 'x-small' : 'small'))
 const iconButtonSize = computed(() => (smAndDown.value ? 'small' : 'default'))
 
 function playerPickedTeam(teamName: string) {
-	return user.value ? user.value.picks.includes(teamName) : false
+	return picksStore.user ? picksStore.user.picks.includes(teamName) : false
 }
 const getButtonColor = (teamName: string) => (playerPickedTeam(teamName) ? 'success' : 'error')
 const getBaseButtonColor = (teamName: string) => (playerPickedTeam(teamName) ? 'accent' : '')
 
-const getWinChance = (game: Game) => {
-	if (!user.value) return 0
+const getNfeloWinChance = (gameIndex: number) => {
+	if (!picksStore.user) return 0
 
-	return user.value.picks.includes(game.home) ? game.homeWinPercent : game.awayWinPercent
+	return nfeloStore.nfeloTeamsWinChance[picksStore.user.picks[gameIndex]] + '%'
 }
 
-const getWinChanceMean = () => {
-	if (!user.value) return 0
+const getNfeloWinChanceMean = () => {
+	if (!picksStore.user) return 0
 
-	const total = gameData.value.reduce((acc, game) => {
-		if (!game.homeWinPercent || !game.awayWinPercent) return acc
-		if (user.value.picks.includes(game.home)) return acc + game.homeWinPercent
-		if (user.value.picks.includes(game.away)) return acc + game.awayWinPercent
-		return acc
+	const total = picksStore.user.picks.reduce((acc, pick) => {
+		return acc + nfeloStore.nfeloTeamsWinChance[pick]
 	}, 0)
 
-	return total / user.value.picks.length
+	return total / picksStore.user.picks.length
 }
 
 function setUnfinishedToPlayerPicks() {
-	gameData.value.forEach(game => {
+	gamesStore.gameData.forEach(game => {
 		if (game.state != 'finished') {
-			if (!user.value) return
+			if (!picksStore.user) return
 
-			if (user.value.picks.includes(game.home)) game.winner = game.home
-			else if (user.value.picks.includes(game.away)) game.winner = game.away
+			if (picksStore.user.picks.includes(game.home)) game.winner = game.home
+			else if (picksStore.user.picks.includes(game.away)) game.winner = game.away
 			else game.winner = ''
 		}
 	})
@@ -45,27 +44,85 @@ function setUnfinishedToPlayerPicks() {
 const lockFinishedGames = ref(false)
 
 const disableButton = (game: Game) => lockFinishedGames.value && game.state == 'finished'
+
+const espnWinProbabilities = computed(() => {
+	return gamesStore.gameData.map(game => {
+		const userPickedHome = picksStore.user.picks.includes(game.home)
+
+		const winProb = userPickedHome
+			? game.espnSituation?.lastPlay.probability.homeWinPercentage
+			: game.espnSituation?.lastPlay.probability.awayWinPercentage
+
+		return winProb ? winProb * 100 : null
+	})
+})
+const espnWinProbMean = computed(() => {
+	let numNull = 0
+	const total = espnWinProbabilities.value.reduce((acc, prob) => {
+		if (prob === null) {
+			numNull++
+			return acc
+		}
+		return acc || 0 + prob
+	}, 0)
+
+	if (!total) return 0
+
+	return total / (espnWinProbabilities.value.length - numNull)
+})
 </script>
 
 <template>
 	<tr>
 		<th class="text-center font-weight-bold border-e" :colspan="2">nfelo chance</th>
 		<th
-			v-for="game in gameData"
+			v-for="(game, index) in gamesStore.gameData"
 			class="text-center border-e"
 			:class="[game.state == 'finished' ? 'dimmed' : '']"
 		>
-			{{ getWinChance(game) }}%
+			{{ getNfeloWinChance(index) }}
 		</th>
-		<th colspan="3" class="px-1">Mean: {{ round(getWinChanceMean(), 3) }}%</th>
+		<th colspan="3" class="px-1">Mean: {{ round(getNfeloWinChanceMean(), 3) }}%</th>
+	</tr>
+
+	<!-- <tr>
+		<th class="text-center font-weight-bold border-e" :colspan="2">Manual game edit</th>
+		<th
+			v-for="game in gamesStore.gameData"
+			class="text-center border-e"
+			:class="[game.state == 'finished' ? 'dimmed' : '']"
+		>
+			<v-btn
+				@click=""
+				icon="mdi-pencil"
+				block
+				variant="text"
+				rounded="0"
+				:size="teamButtonSize"
+			></v-btn>
+		</th>
+		<th colspan="3" class="px-1"></th>
+	</tr> -->
+	<tr>
+		<th class="text-center font-weight-bold border-e" :colspan="2">ESPN Win Probability</th>
+		<th
+			v-for="(prob, i) in espnWinProbabilities"
+			class="text-center border-e"
+			:class="[gamesStore.gameData[i].state == 'finished' ? 'dimmed' : '']"
+		>
+			{{ prob ? round(prob, 4) + '%' : '' }}
+		</th>
+		<th colspan="3" class="px-1">Mean: {{ round(espnWinProbMean, 3) }}%</th>
 	</tr>
 
 	<tr class="font-weight-bold">
 		<th colspan="2" class="text-center font-weight-bold border-e">
-			<v-btn @click="loadHtmlData">Reset</v-btn>
+			<v-btn @click="gamesStore.loadEspnScoreboard" :loading="gamesStore.apiLoading">
+				Refresh
+			</v-btn>
 		</th>
 		<th
-			v-for="game in gameData"
+			v-for="game in gamesStore.gameData"
 			class="text-center border-e"
 			:class="[game.state == 'finished' ? 'dimmed' : '']"
 		>

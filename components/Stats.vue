@@ -1,4 +1,6 @@
 <script setup lang="ts">
+const gamesStore = useGamesStore()
+
 const {
 	winningOutcomes,
 	numWinningOutcomes,
@@ -8,11 +10,10 @@ const {
 	mustWinsWinChance
 } = useWeekOutcomeCombinations()
 
-const { filterGames } = usePoolhostInput()
-
 const itemsPerPage = 5
 const page = ref(1)
 const tab = ref(winningOutcomes.value.length - 1)
+
 watch(winningOutcomes, () => {
 	tab.value = winningOutcomes.value.length - 1
 })
@@ -32,7 +33,7 @@ const panel = ref(0)
 			<h1>Stats</h1>
 		</v-col>
 		<v-col>
-			<v-btn-toggle v-model="filterGames" variant="outlined" divided mandatory>
+			<v-btn-toggle v-model="gamesStore.filterGames" variant="outlined" divided mandatory>
 				<v-btn :value="GAME_FILTERS.ALL">All Games</v-btn>
 				<v-btn :value="GAME_FILTERS.UNFINISHED">Unfinished Only</v-btn>
 				<v-btn :value="GAME_FILTERS.NOTSTARTED">Not started Only</v-btn>
@@ -58,13 +59,13 @@ const panel = ref(0)
 			<h2>Must Wins</h2>
 			<p>
 				<template v-if="mustWins.length">
-					<b class="cursor-pointer" @click="setCertainGameWinners(mustWins)">
+					<b class="cursor-pointer" @click="gamesStore.setCertainGameWinners(mustWins)">
 						<span
 							v-for="(team, i) in mustWins"
 							:class="
-								teamWon(team)
+								gamesStore.teamWon(team)
 									? 'text-success-darken-1'
-									: teamLost(team)
+									: gamesStore.teamLost(team)
 									? 'text-error'
 									: ''
 							"
@@ -106,7 +107,9 @@ const panel = ref(0)
 									<div class="d-flex flex-wrap">
 										<v-card
 											v-for="outcome in outcomes.slice(startIndex, endIndex)"
-											@click="setAllGameWinners(outcome.weekOutcome)"
+											@click="
+												gamesStore.setAllGameWinners(outcome.weekOutcome)
+											"
 											class="ma-1"
 											hover
 										>

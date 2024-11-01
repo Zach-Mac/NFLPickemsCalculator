@@ -1,8 +1,15 @@
 HIGH:
 
+    TODO: teamWithPossession
+    TODO: find cool data I can put (eg espnWinChance)
+
     TODO: week and season outcome scores:
-            scoreseason(rankAccountingForTies, pointsAwayFromTop, numTiedWith, distanceFromGroupBelow, )
-    TODO: live game updates
+            scoreseason(rankAccountingForTies, pointsAwayFromTop, numTiedWith, distanceFromGroupBelow, numInGroupBelow, disanceFromMean, distanceFromMedian?)
+
+            best outcome is all correct right?
+
+            A > B if EV(A) > EV(B)
+
     TODO: store stats for each player so don't need to recalculate all the time
     TODO: put stats in table (eg nfelo)
 
@@ -21,3 +28,14 @@ LOW:
 
 
     BUG: 0 0 no tie color
+
+Paste picks table once per week. Should be behind upload.
+Use api to figure out game results info. Extra button to manually update game results info.
+Pick game winners is a temp view just for table numbers but no influence on stats? Can use manual game update button in order to update stats?
+
+build headers based on espn data then upload picks selection
+
+1. load espn data and build headers
+2. check if saved picks data matches
+3. if yes, load table, if no: display error and say to upload picks
+4. before loading table, reorder games array to match picks order
