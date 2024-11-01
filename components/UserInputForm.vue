@@ -1,12 +1,14 @@
 <script setup lang="ts">
-const { picksTablePasteInput, playerName, loadPasteHistory, pasteHistoryExists } =
-	usePoolhostInput()
+const gamesStore = useGamesStore()
+const picksStore = usePicksStore()
+const nfeloStore = useNfeloStore()
+
 const { smAndDown } = useDisplay()
 const pasteText = computed(() => (smAndDown.value ? 'Paste' : 'Paste'))
 
 async function paste() {
 	try {
-		picksTablePasteInput.value = await navigator.clipboard.readText()
+		picksStore.picksTablePasteInput = await navigator.clipboard.readText()
 	} catch (err) {
 		console.error('Failed to read clipboard contents: ', err)
 	}
@@ -14,46 +16,120 @@ async function paste() {
 </script>
 
 <template>
-	<v-row>
-		<v-col cols="4" sm="4" md="3" lg="2" class="pe-1 pe-md-3">
-			<v-text-field hideDetails v-model="playerName" label="Player name" />
+	<v-row align="center">
+		<v-col cols="auto" class="px-1 px-md-3">
+			<v-combobox
+				v-model="gamesStore.selectedWeek"
+				:items="[...Array(18).keys()].map(i => i + 1)"
+				label="Week"
+				type="number"
+				min-width="9rem"
+				placeholder="auto"
+				persistent-placeholder
+				hideDetails
+			></v-combobox>
+		</v-col>
+		<v-col cols="auto" class="px-1 px-md-3">
+			<v-btn
+				@click="gamesStore.loadEspnScoreboard"
+				:size="'large'"
+				:slim="smAndDown"
+				:color="!gamesStore.gameData.length ? 'primary' : undefined"
+				:loading="gamesStore.apiLoading"
+			>
+				Load ESPN
+			</v-btn>
+		</v-col>
+		<v-col cols="4" sm="4" md="3" lg="2" class="px-1 px-md-3">
+			<v-text-field hideDetails v-model="picksStore.playerName" label="Player name" />
 		</v-col>
 		<v-col class="px-1 px-md-3">
-			<div class="d-flex">
-				<v-btn
-					class="align-self-center me-1"
-					:size="'large'"
-					@click="paste"
-					:slim="smAndDown"
+			<v-expansion-panels>
+				<v-expansion-panel
+					:color="picksStore.picksDataValidated ? undefined : 'error-lighten-3'"
 				>
-					{{ pasteText }}
-				</v-btn>
-				<v-textarea
-					rows="1"
-					hideDetails
-					label="Paste Poolhost table html"
-					v-model="picksTablePasteInput"
-				></v-textarea>
-			</div>
-		</v-col>
-		<v-col cols="auto" class="ps-1 ps-md-3 align-self-center">
-			<v-btn size="large" :slim="smAndDown">
-				History
-
-				<v-menu activator="parent">
-					<v-list>
-						<v-list-item
-							v-for="(item, index) in 3"
-							:key="index"
-							:value="index"
-							:disabled="!pasteHistoryExists(index)"
-							@click="loadPasteHistory(index)"
+					<v-expansion-panel-title>
+						<template v-if="!picksStore.picksDataValidated" v-slot:actions>
+							<v-icon color="error" icon="mdi-alert-circle"> </v-icon>
+						</template>
+						<h3>Poolhost Table</h3>
+					</v-expansion-panel-title>
+					<v-expansion-panel-text>
+						<v-banner
+							v-if="!picksStore.picksDataValidated"
+							color="error"
+							icon="mdi-alert-circle"
 						>
-							<v-list-item-title> Load {{ item }} pastes ago</v-list-item-title>
-						</v-list-item>
-					</v-list>
-				</v-menu>
-			</v-btn>
+							<v-banner-text class="pe-3">
+								Picks paste doesn't match ESPN data
+							</v-banner-text>
+						</v-banner>
+						<div class="d-flex">
+							<v-btn
+								class="align-self-center me-1"
+								:size="'large'"
+								@click="paste"
+								:slim="smAndDown"
+							>
+								{{ pasteText }}
+							</v-btn>
+							<v-textarea
+								rows="10"
+								hideDetails
+								label="Paste Poolhost table html"
+								v-model="picksStore.picksTablePasteInput"
+							></v-textarea>
+						</div>
+					</v-expansion-panel-text>
+				</v-expansion-panel>
+			</v-expansion-panels>
+		</v-col>
+		<v-col class="px-1 px-md-3">
+			<v-expansion-panels>
+				<v-expansion-panel
+					max-height="700"
+					:color="nfeloStore.nfeloGamesValidated ? undefined : 'error-lighten-3'"
+				>
+					<v-expansion-panel-title>
+						<template v-if="!nfeloStore.nfeloGamesValidated" v-slot:actions>
+							<v-icon color="error" icon="mdi-alert-circle"> </v-icon>
+						</template>
+						<h3>nfelo Paste</h3>
+					</v-expansion-panel-title>
+					<v-expansion-panel-text>
+						<v-banner
+							v-if="!nfeloStore.nfeloGamesValidated"
+							color="error"
+							icon="mdi-alert-circle"
+						>
+							<v-banner-text class="pe-3">
+								nfelo paste doesn't match either the ESPN or Poolhost data
+							</v-banner-text>
+						</v-banner>
+						<v-textarea
+							hideDetails
+							label="Paste nfelo game data"
+							v-model="nfeloStore.nfeloGamesInput"
+							:rules="[() => nfeloStore.nfeloGamesValidated]"
+						></v-textarea>
+
+						<v-expansion-panels>
+							<v-expansion-panel>
+								<v-expansion-panel-title>
+									<h4>Internal data</h4>
+								</v-expansion-panel-title>
+								<v-expansion-panel-text>
+									<v-row class="ga-3" no-gutters>
+										<template v-for="game in nfeloStore.nfeloGames">
+											<ObjectCard v-if="game" :obj="game" />
+										</template>
+									</v-row>
+								</v-expansion-panel-text>
+							</v-expansion-panel>
+						</v-expansion-panels>
+					</v-expansion-panel-text>
+				</v-expansion-panel>
+			</v-expansion-panels>
 		</v-col>
 	</v-row>
 </template>

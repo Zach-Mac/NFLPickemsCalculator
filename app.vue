@@ -32,7 +32,7 @@ const currentPage = computed(() => pages.find(page => page.path === route.path))
 
 <template>
 	<v-layout>
-		<v-app-bar class="px-sm-4" density="compact">
+		<!-- <v-app-bar class="px-sm-4" density="compact">
 			<template #prepend>
 				<v-app-bar-nav-icon v-if="xs" @click="drawer = !drawer" />
 			</template>
@@ -62,7 +62,7 @@ const currentPage = computed(() => pages.find(page => page.path === route.path))
 					:title="page.title"
 				/>
 			</v-list>
-		</v-navigation-drawer>
+		</v-navigation-drawer> -->
 
 		<v-main>
 			<v-container fluid>

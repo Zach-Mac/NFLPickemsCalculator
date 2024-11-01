@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 			enabled: true
 		}
 	},
-	modules: ['vuetify-nuxt-module', '@vueuse/nuxt'],
+	modules: ['vuetify-nuxt-module', '@vueuse/nuxt', '@pinia/nuxt'],
 	vuetify: {
 		moduleOptions: {
 			/* module specific options */
@@ -86,6 +86,9 @@ export default defineNuxtConfig({
 					variant: 'outlined'
 				},
 				VButton: {
+					variant: 'outlined'
+				},
+				VCombobox: {
 					variant: 'outlined'
 				}
 			}

@@ -1,18 +1,21 @@
 <script setup lang="ts">
-const { playerName, highlightTiedRows } = usePoolhostInput()
-const { smAndDown } = useDisplay()
+const gamesStore = useGamesStore()
+const picksStore = usePicksStore()
+const { smAndDown, mdAndDown } = useDisplay()
 
-const rankText = computed(() => (smAndDown.value ? 'R' : 'Rank'))
-const weekText = computed(() => (smAndDown.value ? 'W' : 'Week'))
-const seasonText = computed(() => (smAndDown.value ? 'S' : 'Season'))
-const tieBreakerText = computed(() => (smAndDown.value ? 'TB' : 'Tie Breaker'))
+const quarters = ['1st', '2nd', '3rd', '4th']
+
+const rankText = computed(() => (mdAndDown.value ? 'R' : 'Rank'))
+const weekText = computed(() => (mdAndDown.value ? 'W' : 'Week'))
+const seasonText = computed(() => (mdAndDown.value ? 'S' : 'Season'))
+const tieBreakerText = computed(() => (mdAndDown.value ? 'TB' : 'Tie Break'))
 
 const gameWonClasses = 'bg-success-lighten-2 text-success-darken-2 font-weight-bold'
 const gameLostClasses = 'bg-error-lighten-2 text-error line-through font-weight-bold'
 const gameTiedClasses = 'bg-accent text-accent-darken-4 font-weight-bold'
 
 function getTeamNameTdStyle(pick: string, gameNumber: number) {
-	const game = gameData.value[gameNumber]
+	const game = gamesStore.gameData[gameNumber]
 
 	if (!game.winner || game.winner == '') return ''
 	if (game.winner == 'tie') return gameTiedClasses
@@ -21,12 +24,12 @@ function getTeamNameTdStyle(pick: string, gameNumber: number) {
 }
 
 const items = computed(() => {
-	return picksData.value.map(playerPicks => {
+	return picksStore.picksData.map(playerPicks => {
 		return {
 			name: playerPicks.name,
 			picks: playerPicks.picks,
-			weekTotal: playerTotals.value[playerPicks.name].weekTotal,
-			seasonTotal: playerTotals.value[playerPicks.name].seasonTotal,
+			weekTotal: picksStore.playerTotals[playerPicks.name]?.weekTotal || 0,
+			seasonTotal: picksStore.playerTotals[playerPicks.name]?.seasonTotal || 0,
 			tieBreaker: playerPicks.tieBreaker
 		}
 	})
@@ -57,13 +60,12 @@ const sortByOptions: Record<string, SortBy[]> = {
 	tieBreaker: [{ key: 'tieBreaker', order: 'desc' }],
 	name: [{ key: 'name', order: 'asc' }]
 }
-
 const sortBy = ref(sortByOptions.weekTotal)
 
 const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border'
 
 const rowStyle = computed(() => {
-	if (!highlightTiedRows.value) return Array(items.value.length).fill('')
+	if (!picksStore.highlightTiedRows) return Array(items.value.length).fill('')
 
 	const colorRow = [false]
 
@@ -88,10 +90,50 @@ const rowStyle = computed(() => {
 
 	return colorRow.map(color => (color ? 'bg-grey-lighten-4' : ''))
 })
+
+function getGameStatusText(game: Game) {
+	if (game.state == 'finished') return 'Final'
+	if (game.state == 'active') return game.timeLeft
+
+	const options: Intl.DateTimeFormatOptions = {}
+
+	if (mdAndDown.value) {
+		options.month = '2-digit'
+		options.day = '2-digit'
+	}
+	return game.date?.toLocaleDateString(undefined, options)
+}
+function getGameQuarterText(game: Game) {
+	if (game.ot) return 'OT'
+	if (game.state == 'active') return quarters[Number(game.quarter) - 1]
+	if (game.state == 'finished') return ''
+
+	const options: Intl.DateTimeFormatOptions = {
+		weekday: 'short'
+	}
+	const day = game.date?.toLocaleDateString(undefined, options)
+	let hours = game.date?.getHours()
+	const minutesNum = game.date?.getMinutes() ?? 0
+	const minutes = minutesNum < 10 ? '0' + minutesNum : minutesNum.toString()
+
+	let amPm = ''
+	if (hours! < 12) {
+		amPm = 'AM'
+	} else {
+		amPm = 'PM'
+		hours! -= 12
+	}
+
+	if (smAndDown.value) return `${day} ${hours}`
+	if (mdAndDown.value) return `${day} ${hours}${amPm}`
+
+	return `${day} ${hours}:${minutes}${amPm}`
+}
 </script>
 
 <template>
 	<v-data-table
+		v-bind="$attrs"
 		:items="items"
 		:headers="headers"
 		:items-per-page="50"
@@ -124,30 +166,34 @@ const rowStyle = computed(() => {
 					</div>
 				</th>
 				<th
-					v-for="game in gameData"
+					v-for="game in gamesStore.gameData"
 					class="text-center font-weight-bold border-e"
 					:class="[game.state == 'finished' ? 'dimmed' : '']"
 				>
 					{{ game.state != 'upcoming' ? game.scoreHome : '' }}
 					<br />
-					<span
-						:class="game.teamWithPossession == game.home ? ballPossessionClasses : ''"
-					>
+					<span :class="game.possession == 'home' ? ballPossessionClasses : ''">
 						{{ game.home }}
 					</span>
 					<br />
-					<span
-						:class="game.teamWithPossession == game.away ? ballPossessionClasses : ''"
-					>
+					<span :class="game.possession == 'away' ? ballPossessionClasses : ''">
 						{{ game.away }}
 					</span>
 					<br />
 					{{ game.state != 'upcoming' ? game.scoreAway : '' }}
 					<br />
-					{{ game.state == 'finished' ? 'Final' : game.timeLeft }}
+					<span class="text-no-wrap">
+						{{ getGameStatusText(game) }}
+					</span>
 					<br />
-					{{ game.ot ? 'OT' : game.quarter }}
+					<span class="text-no-wrap">
+						{{ getGameQuarterText(game) }}
+					</span>
 					<br />
+
+					<!-- <v-tooltip activator="parent" location="top">
+						{{ game.espnSituation?.lastPlay.text }}
+					</v-tooltip> -->
 				</th>
 				<th
 					class="cursor-pointer text-center font-weight-bold pr-md-1 border-e"
@@ -186,12 +232,15 @@ const rowStyle = computed(() => {
 		<template v-slot:item="{ item: playerPicks, index }">
 			<tr
 				class="text-center"
-				:class="[rowStyle[index], playerPicks.name == playerName ? 'bg-accent' : '']"
+				:class="[
+					rowStyle[index],
+					playerPicks.name == picksStore.playerName ? 'bg-accent' : ''
+				]"
 			>
 				<td class="font-weight-bold text-left border-e">{{ index + 1 }}.</td>
 				<td
 					class="font-weight-bold text-left cursor-pointer px-1 text-no-wrap border-e"
-					@click="playerName = playerPicks.name"
+					@click="picksStore.playerName = playerPicks.name"
 				>
 					{{ playerPicks.name }}
 				</td>
