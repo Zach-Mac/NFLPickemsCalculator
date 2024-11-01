@@ -15,7 +15,7 @@ api.interceptors.response.use(response => {
 
 async function getScoreboard(week?: number) {
 	const weekParam = week ? `?week=${week}` : ''
-	const url = `http://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard${weekParam}`
+	const url = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard${weekParam}`
 	const response = await api.get(url)
 	return response.data as Scoreboard
 }
