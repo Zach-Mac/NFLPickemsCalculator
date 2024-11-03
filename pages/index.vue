@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
+const weekOutcomeStore = useWeekOutcomeStore()
 
 const weekNumText = computed(() => (gamesStore.currentWeek != 0 ? gamesStore.currentWeek : 'None'))
 </script>

@@ -1,14 +1,7 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
-
-const {
-	winningOutcomes,
-	numWinningOutcomes,
-	numPossibleOutcomes,
-	mustWins,
-	nfeloWinChance,
-	mustWinsWinChance
-} = useWeekOutcomeCombinations()
+const outcomeCombosStore = useWeekOutcomeStore()
+const { winningOutcomes } = storeToRefs(outcomeCombosStore)
 
 const itemsPerPage = 5
 const page = ref(1)
@@ -25,6 +18,9 @@ const startIndex = computed(() => (page.value - 1) * itemsPerPage)
 const endIndex = computed(() => page.value * itemsPerPage)
 
 const panel = ref(0)
+
+const checkboxLabel = 'Consider outcome with possible 2nd place finish as winning'
+const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 </script>
 
 <template>
@@ -32,12 +28,26 @@ const panel = ref(0)
 		<v-col cols="auto">
 			<h1>Stats</h1>
 		</v-col>
-		<v-col>
-			<v-btn-toggle v-model="gamesStore.filterGames" variant="outlined" divided mandatory>
+		<v-col cols="auto">
+			<v-btn-toggle
+				v-model="outcomeCombosStore.filterGames"
+				variant="outlined"
+				divided
+				mandatory
+			>
 				<v-btn :value="GAME_FILTERS.ALL">All Games</v-btn>
 				<v-btn :value="GAME_FILTERS.UNFINISHED">Unfinished Only</v-btn>
 				<v-btn :value="GAME_FILTERS.NOTSTARTED">Not started Only</v-btn>
 			</v-btn-toggle>
+		</v-col>
+		<v-col :style="`min-width: ${checkboxColMinWidth}`">
+			<v-checkbox v-model="outcomeCombosStore.secondPlaceIsWinning" density="comfortable">
+				<template v-slot:label>
+					<span style="word-break: keep-all">
+						Consider outcome with possible 2nd place finish as winning
+					</span>
+				</template>
+			</v-checkbox>
 		</v-col>
 	</v-row>
 	<v-row>
@@ -46,22 +56,34 @@ const panel = ref(0)
 			<p>
 				# Winning / # Total
 				<br />
-				<b> {{ numWinningOutcomes }} / {{ numPossibleOutcomes }} </b>
+				<b>
+					{{ outcomeCombosStore.numWinningOutcomes }} /
+					{{ outcomeCombosStore.numPossibleOutcomes }}
+				</b>
 				<br />
-				<b> {{ (numWinningOutcomes / numPossibleOutcomes) * 100 }}% </b>
+				<b>
+					{{
+						(outcomeCombosStore.numWinningOutcomes /
+							outcomeCombosStore.numPossibleOutcomes) *
+						100
+					}}%
+				</b>
 			</p>
 		</v-col>
 		<v-col cols="auto" class="text-no-wrap">
 			<h2>nfelo Chance</h2>
-			<p>{{ round(nfeloWinChance, 5) }}%</p>
+			<p>{{ round(outcomeCombosStore.nfeloWinChance, 5) }}%</p>
 		</v-col>
-		<v-col v-if="numWinningOutcomes > 0" cols="auto" class="">
+		<v-col v-if="outcomeCombosStore.numWinningOutcomes > 0" cols="auto" class="">
 			<h2>Must Wins</h2>
 			<p>
-				<template v-if="mustWins.length">
-					<b class="cursor-pointer" @click="gamesStore.setCertainGameWinners(mustWins)">
+				<template v-if="outcomeCombosStore.mustWins.length">
+					<b
+						class="cursor-pointer"
+						@click="gamesStore.setCertainGameWinners(outcomeCombosStore.mustWins)"
+					>
 						<span
-							v-for="(team, i) in mustWins"
+							v-for="(team, i) in outcomeCombosStore.mustWins"
 							:class="
 								gamesStore.teamWon(team)
 									? 'text-success-darken-1'
@@ -70,12 +92,12 @@ const panel = ref(0)
 									: ''
 							"
 						>
-							{{ team + (i == mustWins.length - 1 ? '' : ', ') }}
+							{{ team + (i == outcomeCombosStore.mustWins.length - 1 ? '' : ', ') }}
 						</span>
 					</b>
 					<br />
-					<template v-if="mustWinsWinChance">
-						Chance: {{ round(mustWinsWinChance, 5) }}%
+					<template v-if="outcomeCombosStore.mustWinsWinChance">
+						Chance: {{ round(outcomeCombosStore.mustWinsWinChance, 5) }}%
 					</template>
 				</template>
 				<template v-else> None </template>

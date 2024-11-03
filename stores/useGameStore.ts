@@ -1,14 +1,12 @@
 export const useGamesStore = defineStore('games', () => {
 	// State
 	const espnScoreboard = ref<Scoreboard | undefined>()
-	const filterGames = ref(GAME_FILTERS.ALL)
 	const gameData = ref<Game[]>([])
 	const selectedWeek = ref()
 	const apiLoading = ref(false)
 
 	function $reset() {
 		espnScoreboard.value = undefined
-		filterGames.value = GAME_FILTERS.ALL
 		gameData.value = []
 		selectedWeek.value = undefined
 	}
@@ -237,7 +235,6 @@ export const useGamesStore = defineStore('games', () => {
 		$reset,
 		// State
 		espnScoreboard,
-		filterGames,
 		selectedWeek,
 		gameData,
 		apiLoading,

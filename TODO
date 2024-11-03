@@ -1,7 +1,9 @@
 HIGH:
 
-    TODO: teamWithPossession
-    TODO: find cool data I can put (eg espnWinChance)
+    TODO: option to include second place possibility for winning outcome
+
+    TODO: show last espn update
+    TODO: show lastplay and stuff
 
     TODO: week and season outcome scores:
             scoreseason(rankAccountingForTies, pointsAwayFromTop, numTiedWith, distanceFromGroupBelow, numInGroupBelow, disanceFromMean, distanceFromMedian?)
@@ -10,12 +12,14 @@ HIGH:
 
             A > B if EV(A) > EV(B)
 
-    TODO: store stats for each player so don't need to recalculate all the time
+    TODO: store stats for each player so don't need to recalculate all the time (and for each filteroption)
     TODO: put stats in table (eg nfelo)
 
     TODO: most important games: % of outcomes in which they are needed
 
 LOW:
+
+    TODO: highlight alternate rows such that user is always grey
 
     TODO: compare players button
     TODO: highlight same/similar picks
