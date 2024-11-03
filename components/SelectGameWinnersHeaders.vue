@@ -49,9 +49,12 @@ const espnWinProbabilities = computed(() => {
 	return gamesStore.gameData.map(game => {
 		const userPickedHome = picksStore.user.picks.includes(game.home)
 
+		const probability = game.espnSituation?.lastPlay.probability
+		if (!probability) return null
+
 		const winProb = userPickedHome
-			? game.espnSituation?.lastPlay.probability.homeWinPercentage
-			: game.espnSituation?.lastPlay.probability.awayWinPercentage
+			? probability.homeWinPercentage
+			: probability.awayWinPercentage
 
 		return winProb ? winProb * 100 : null
 	})
@@ -59,11 +62,12 @@ const espnWinProbabilities = computed(() => {
 const espnWinProbMean = computed(() => {
 	let numNull = 0
 	const total = espnWinProbabilities.value.reduce((acc, prob) => {
+		console.log('prob', prob)
 		if (prob === null) {
 			numNull++
-			return acc
+			return acc || 0
 		}
-		return acc || 0 + prob
+		return (acc || 0) + prob
 	}, 0)
 
 	if (!total) return 0
