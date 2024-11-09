@@ -1,10 +1,3 @@
-export interface PlayerPicks {
-	name: string
-	picks: Array<string>
-	originalSeasonTotal: number
-	tieBreaker: number
-}
-
 export type GameDataSource = 'poolhost' | 'espn'
 
 export interface Scoreboard {

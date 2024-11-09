@@ -71,6 +71,10 @@ function evDiffColor(evDiff: number) {
 	return output
 }
 
+const nfeloChancesExist = computed(() => {
+	return nfeloStore.nfeloTeamsWinChance && Object.keys(nfeloStore.nfeloTeamsWinChance).length > 0
+})
+
 const numTotalHeaders = inject<Ref<number>>('numHeaders') ?? ref(0)
 const headerRow = ref()
 const numCurrentHeaders = computed(() => headerRow.value?.children.length ?? 0)
@@ -128,15 +132,21 @@ const numHeadersNeeded = computed(() => {
 		<th class="text-center font-weight-bold border-e text-no-wrap" :colspan="2">
 			nfelo chance
 		</th>
-		<th
-			v-for="(game, index) in gamesStore.gameData"
-			class="text-center border-e"
-			:class="[game.state == 'finished' ? 'dimmed' : '']"
-		>
-			{{ getNfeloWinChance(index) }}
-		</th>
-		<th :colspan="numHeadersNeeded" class="px-1">
-			Mean: {{ round(getNfeloWinChanceMean(), 3) }}%
+		<template v-if="nfeloChancesExist">
+			<th
+				v-for="(game, index) in gamesStore.gameData"
+				class="text-center border-e"
+				:class="[game.state == 'finished' ? 'dimmed' : '']"
+			>
+				{{ getNfeloWinChance(index) }}
+			</th>
+			<th :colspan="numHeadersNeeded" class="px-1">
+				Mean: {{ round(getNfeloWinChanceMean(), 3) }}%
+			</th>
+		</template>
+
+		<th v-else :colspan="numHeadersNeeded" class="px-1">
+			Paste nfelo data to see nfelo chances
 		</th>
 	</tr>
 	<tr>

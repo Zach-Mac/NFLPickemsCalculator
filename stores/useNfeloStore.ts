@@ -8,14 +8,13 @@ interface NfeloGame {
 }
 
 export const useNfeloStore = defineStore('nfelo', () => {
+	const picksStore = usePicksStore()
+	const gamesStore = useGamesStore()
 	// State
 	const nfeloGamesInput = useStorage('nfeloPaste', '')
 
 	// Getters
 	const nfeloGames = computed(() => {
-		const picksStore = usePicksStore()
-		const gamesStore = useGamesStore()
-
 		if (!nfeloGamesInput.value) return []
 		if (!picksStore.poolhostGameOrder.length) return []
 		if (!gamesStore.gameData.length) return []
@@ -68,8 +67,7 @@ export const useNfeloStore = defineStore('nfelo', () => {
 	})
 
 	const nfeloGamesValidated = computed(() => {
-		const gamesStore = useGamesStore()
-		const picksStore = usePicksStore()
+		if (!nfeloGames.value.length) return false
 
 		for (let i = 0; i < nfeloGames.value.length; i++) {
 			const nfeloGame = nfeloGames.value[i]
@@ -121,6 +119,8 @@ export const useNfeloStore = defineStore('nfelo', () => {
 
 		const teams: Record<string, number> = {}
 		nfeloGames.value.forEach(game => {
+			if (!game) return
+
 			if (!teams[game.home]) teams[game.home] = 0
 			if (!teams[game.away]) teams[game.away] = 0
 
