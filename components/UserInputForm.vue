@@ -4,7 +4,7 @@ const picksStore = usePicksStore()
 const nfeloStore = useNfeloStore()
 
 const { smAndDown } = useDisplay()
-const pasteText = computed(() => (smAndDown.value ? 'Paste' : 'Paste'))
+const pasteText = 'Paste'
 
 async function paste() {
 	try {
@@ -13,10 +13,12 @@ async function paste() {
 		console.error('Failed to read clipboard contents: ', err)
 	}
 }
+
+const playerNameRules = [(v: string) => !!v || 'Player name is required']
 </script>
 
 <template>
-	<v-row align="center">
+	<v-row>
 		<v-col cols="12" md="5" lg="4">
 			<v-row>
 				<v-col cols="auto" class="px-1 px-md-1">
@@ -43,7 +45,11 @@ async function paste() {
 					</v-btn>
 				</v-col>
 				<v-col class="px-1 px-md-1">
-					<v-text-field hideDetails v-model="picksStore.playerName" label="Player name" />
+					<v-text-field
+						v-model="picksStore.playerName"
+						label="Player name"
+						:rules="playerNameRules"
+					/>
 				</v-col>
 			</v-row>
 		</v-col>

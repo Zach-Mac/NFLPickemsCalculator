@@ -10,6 +10,8 @@ HIGH:
 
 LOW:
 
+    TODO: validate player name
+
     TODO: highlight alternate rows such that user is always grey
 
     TODO: compare players button
