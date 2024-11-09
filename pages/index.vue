@@ -3,6 +3,22 @@ const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
 
 const weekNumText = computed(() => (gamesStore.currentWeek != 0 ? gamesStore.currentWeek : 'None'))
+
+const espnUpdateText = computed(() => {
+	if (gamesStore.lastEspnUpdate) {
+		const options: Intl.DateTimeFormatOptions = {
+			year: 'numeric',
+			weekday: 'short',
+			month: 'short',
+			day: 'numeric',
+			hour: 'numeric',
+			minute: 'numeric',
+			second: 'numeric'
+		}
+		return new Date(gamesStore.lastEspnUpdate).toLocaleString('en-us', options)
+	}
+	return 'None'
+})
 </script>
 
 <template>
@@ -38,10 +54,12 @@ const weekNumText = computed(() => (gamesStore.currentWeek != 0 ? gamesStore.cur
 				<h2>Load ESPN data to view table</h2>
 			</template>
 			<template v-else>
-				<small
-					>Last ESPN update:
-					{{ new Date(gamesStore.lastEspnUpdate).toLocaleString() }}</small
-				>
+				<small>
+					Last ESPN update:
+					<b>
+						{{ espnUpdateText }}
+					</b>
+				</small>
 				<PicksTable class="mb-5" />
 				<v-dialog v-model="gamesStore.showEditGamesDialog" max-width="500">
 					<v-card>
