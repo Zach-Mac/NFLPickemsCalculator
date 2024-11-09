@@ -1,7 +1,8 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
-const nfeloStore = useNfeloStore()
+const weekOutcomesStore = useWeekOutcomeStore()
+const tableStore = useTableStore()
 const { smAndDown, mdAndDown } = useDisplay()
 
 const teamButtonSize = computed(() => (mdAndDown.value ? 'x-small' : 'small'))
@@ -12,22 +13,6 @@ function playerPickedTeam(teamName: string) {
 }
 const getButtonColor = (teamName: string) => (playerPickedTeam(teamName) ? 'success' : 'error')
 const getBaseButtonColor = (teamName: string) => (playerPickedTeam(teamName) ? 'accent' : '')
-
-const getNfeloWinChance = (gameIndex: number) => {
-	if (!picksStore.user) return 0
-
-	return nfeloStore.nfeloTeamsWinChance[picksStore.user.picks[gameIndex]] + '%'
-}
-
-const getNfeloWinChanceMean = () => {
-	if (!picksStore.user) return 0
-
-	const total = picksStore.user.picks.reduce((acc, pick) => {
-		return acc + nfeloStore.nfeloTeamsWinChance[pick]
-	}, 0)
-
-	return total / picksStore.user.picks.length
-}
 
 function setUnfinishedToPlayerPicks() {
 	gamesStore.gameData.forEach(game => {
@@ -45,81 +30,16 @@ const lockFinishedGames = ref(false)
 
 const disableButton = (game: Game) => lockFinishedGames.value && game.state == 'finished'
 
-const espnWinProbabilities = computed(() => {
-	return gamesStore.gameData.map(game => {
-		const userPickedHome = picksStore.user.picks.includes(game.home)
-
-		const probability = game.espnSituation?.lastPlay.probability
-		if (!probability) return null
-
-		const winProb = userPickedHome
-			? probability.homeWinPercentage
-			: probability.awayWinPercentage
-
-		return winProb ? winProb * 100 : null
-	})
-})
-const espnWinProbMean = computed(() => {
-	let numNull = 0
-	const total = espnWinProbabilities.value.reduce((acc, prob) => {
-		console.log('prob', prob)
-		if (prob === null) {
-			numNull++
-			return acc || 0
-		}
-		return (acc || 0) + prob
-	}, 0)
-
-	if (!total) return 0
-
-	return total / (espnWinProbabilities.value.length - numNull)
+const numTotalHeaders = inject<Ref<number>>('numHeaders') ?? ref(0)
+const headerRow = ref()
+const numCurrentHeaders = computed(() => headerRow.value?.children.length ?? 0)
+const numHeadersNeeded = computed(() => {
+	return numTotalHeaders.value - numCurrentHeaders.value
 })
 </script>
 
 <template>
-	<tr>
-		<th class="text-center font-weight-bold border-e" :colspan="2">nfelo chance</th>
-		<th
-			v-for="(game, index) in gamesStore.gameData"
-			class="text-center border-e"
-			:class="[game.state == 'finished' ? 'dimmed' : '']"
-		>
-			{{ getNfeloWinChance(index) }}
-		</th>
-		<th colspan="3" class="px-1">Mean: {{ round(getNfeloWinChanceMean(), 3) }}%</th>
-	</tr>
-
-	<!-- <tr>
-		<th class="text-center font-weight-bold border-e" :colspan="2">Manual game edit</th>
-		<th
-			v-for="game in gamesStore.gameData"
-			class="text-center border-e"
-			:class="[game.state == 'finished' ? 'dimmed' : '']"
-		>
-			<v-btn
-				@click=""
-				icon="mdi-pencil"
-				block
-				variant="text"
-				rounded="0"
-				:size="teamButtonSize"
-			></v-btn>
-		</th>
-		<th colspan="3" class="px-1"></th>
-	</tr> -->
-	<tr>
-		<th class="text-center font-weight-bold border-e" :colspan="2">ESPN Win Probability</th>
-		<th
-			v-for="(prob, i) in espnWinProbabilities"
-			class="text-center border-e"
-			:class="[gamesStore.gameData[i].state == 'finished' ? 'dimmed' : '']"
-		>
-			{{ prob ? round(prob, 4) + '%' : '' }}
-		</th>
-		<th colspan="3" class="px-1">Mean: {{ round(espnWinProbMean, 3) }}%</th>
-	</tr>
-
-	<tr class="font-weight-bold">
+	<tr ref="headerRow" class="font-weight-bold">
 		<th colspan="2" class="text-center font-weight-bold border-e">
 			<v-btn @click="gamesStore.loadEspnScoreboard" :loading="gamesStore.apiLoading">
 				Refresh
@@ -160,7 +80,7 @@ const espnWinProbMean = computed(() => {
 				</v-btn>
 			</v-btn-toggle>
 		</th>
-		<th colspan="3">
+		<th :colspan="numHeadersNeeded">
 			<div class="d-flex justify-space-evenly">
 				<v-tooltip text="Ideal rest of week" location="bottom">
 					<template v-slot:activator="{ props }">
@@ -185,6 +105,29 @@ const espnWinProbMean = computed(() => {
 						/>
 					</template>
 				</v-tooltip>
+				<v-tooltip text="Manually edit games" location="bottom">
+					<template v-slot:activator="{ props }">
+						<ToggleButton
+							v-bind="props"
+							class="ml-1"
+							:size="iconButtonSize"
+							v-model="tableStore.editGamesMode"
+							iconToggled="mdi-pencil"
+							iconUntoggled="mdi-pencil"
+						/>
+					</template>
+				</v-tooltip>
+				<!-- <v-number-input
+					v-model="weekOutcomesStore.maxGamesToSimLive"
+					type="number"
+					label="#games to sim"
+					hide-details
+					variant="outlined"
+					control-variant="stacked"
+					max-width="8em"
+					:min="1"
+					:max="16"
+				/> -->
 				<!-- <v-menu>
 					<template v-slot:activator="{ props }">
 						<v-btn

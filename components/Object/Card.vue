@@ -10,7 +10,7 @@ const props = defineProps({
 <template>
 	<v-card>
 		<v-card-text>
-			<NestedItem :obj="obj" />
+			<ObjectNestedItem :obj="obj" />
 		</v-card-text>
 	</v-card>
 </template>

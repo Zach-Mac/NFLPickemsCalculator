@@ -1,14 +1,68 @@
+import { useStorage } from '@vueuse/core'
+import { z } from 'zod'
+
+const possessionOptions = ['home', 'away', ''] as const
+const gameStateOptions = ['finished', 'active', 'upcoming'] as const
+
+const PossessionZodEnum = z.enum(possessionOptions)
+const GameStateZodEnum = z.enum(gameStateOptions)
+
+const gameSchema = z.object({
+	date: z.string().optional(),
+	scoreHome: z.number(),
+	home: z.string(),
+	away: z.string(),
+	scoreAway: z.number(),
+	state: GameStateZodEnum,
+	timeLeft: z.string(),
+	quarter: z.string(),
+	possession: PossessionZodEnum,
+	ot: z.boolean(),
+	winner: z.string(),
+	espn: z.object({
+		situation: z.any().optional(),
+		gamecastLink: z.string()
+	})
+})
+
+export type Game = z.infer<typeof gameSchema>
+type GameState = (typeof gameStateOptions)[number]
+
+const editGameOptions = {
+	state: gameStateOptions,
+	possession: possessionOptions
+}
+
 export const useGamesStore = defineStore('games', () => {
 	// State
 	const espnScoreboard = ref<Scoreboard | undefined>()
-	const gameData = ref<Game[]>([])
+	const gameData = useStorage('gameData', [] as Game[])
+	const lastEspnUpdate = useStorage('lastEspnUpdate', 0)
 	const selectedWeek = ref()
 	const apiLoading = ref(false)
+	const showEditGamesDialog = ref(false)
+	const editGameIndex = ref(-1)
 
 	function $reset() {
 		espnScoreboard.value = undefined
 		gameData.value = []
 		selectedWeek.value = undefined
+	}
+
+	function validateGameData(data: unknown): data is Game[] {
+		const result = z.array(gameSchema).safeParse(data)
+		if (!result.success) {
+			console.error('Invalid game data:', result.error)
+			return false
+		}
+		return true
+	}
+
+	if (validateGameData(gameData.value)) {
+		console.log('Game data is valid')
+	} else {
+		console.log('Game data is invalid')
+		gameData.value = []
 	}
 
 	// Getters
@@ -53,7 +107,7 @@ export const useGamesStore = defineStore('games', () => {
 	const currentSeason = computed(() => espnScoreboard.value?.season.year || 0)
 	const currentSeasonType = computed(() => espnScoreboard.value?.season.type || '')
 
-	function getPossession(event: EspnEvent): string {
+	function getPossession(event: EspnEvent) {
 		const competition = event.competitions[0]
 		if (
 			competition.situation?.possession ===
@@ -76,7 +130,6 @@ export const useGamesStore = defineStore('games', () => {
 			const competition = event.competitions[0]
 			const homeTeam = competition.competitors.find(comp => comp.homeAway === 'home')!
 			const awayTeam = competition.competitors.find(comp => comp.homeAway === 'away')!
-
 			const scoreHome = Number(homeTeam.score) || 0
 			const scoreAway = Number(awayTeam.score) || 0
 
@@ -99,7 +152,7 @@ export const useGamesStore = defineStore('games', () => {
 			}
 
 			games.push({
-				date: new Date(event.date),
+				date: event.date,
 				home: homeTeam.team.abbreviation,
 				away: awayTeam.team.abbreviation,
 				scoreHome,
@@ -110,7 +163,10 @@ export const useGamesStore = defineStore('games', () => {
 				quarter: event.status.period.toString(),
 				possession,
 				ot: event.status.period > 4,
-				espnSituation: event.competitions[0].situation || undefined
+				espn: {
+					situation: event.competitions[0].situation || undefined,
+					gamecastLink: event.links.find(link => link.rel.includes('summary'))?.href || ''
+				}
 			})
 		})
 
@@ -125,6 +181,11 @@ export const useGamesStore = defineStore('games', () => {
 		})
 	}
 
+	function editGame(index: number) {
+		showEditGamesDialog.value = true
+		editGameIndex.value = index
+	}
+
 	const loadEspnScoreboard = async () => {
 		try {
 			apiLoading.value = true
@@ -133,14 +194,11 @@ export const useGamesStore = defineStore('games', () => {
 
 			setGameData(scoreboard.events)
 			apiLoading.value = false
+			lastEspnUpdate.value = Date.now()
 		} catch (error) {
 			console.error('Failed to load scoreboard:', error)
-			// Handle the error appropriately (e.g., show a notification to the user)
 		}
 	}
-
-	// TEMP
-	// loadEspnScoreboard(8)
 
 	const getGameState = (state: string): GameState => {
 		switch (state) {
@@ -194,10 +252,7 @@ export const useGamesStore = defineStore('games', () => {
 	}
 
 	const getGameWithTeam = (team: string): Game | undefined => {
-		if (!gameData.value || gameData.value.length === 0) {
-			console.warn('No game data available to find the game.')
-			return undefined
-		}
+		if (!gameData.value || gameData.value.length === 0) return undefined
 
 		const game = gameData.value.find(game => game && (game.home === team || game.away === team))
 
@@ -209,41 +264,38 @@ export const useGamesStore = defineStore('games', () => {
 	}
 
 	const teamWon = (team: string): boolean => {
-		if (!gameData.value || gameData.value.length === 0) {
-			console.warn('No game data available to check if team won.')
-			return false
-		}
-
+		if (!gameData.value || gameData.value.length === 0) return false
 		return gameData.value.some(game => game && game.winner === team)
 	}
-
 	const teamLost = (team: string): boolean => {
 		const game = getGameWithTeam(team)
 		if (!game) {
 			console.warn(`Cannot determine if team "${team}" lost because the game was not found.`)
 			return false
 		}
-		if (game.state === 'upcoming') {
-			console.warn(`Game for team "${team}" has not started yet.`)
-			return false
-		}
+		if (game.state === 'upcoming') return false
 		return game.winner !== team
 	}
 
 	// Return state, getters, and actions
 	return {
 		$reset,
+		editGameOptions,
 		// State
 		espnScoreboard,
 		selectedWeek,
 		gameData,
 		apiLoading,
+		showEditGamesDialog,
+		editGameIndex,
+		lastEspnUpdate,
 		// Getters
 		// espnGameData,
 		currentWeek,
 		currentSeason,
 		currentSeasonType,
 		// Actions
+		editGame,
 		setAllGameWinners,
 		setCertainGameWinners,
 		getGameWithTeam,

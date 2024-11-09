@@ -10,16 +10,19 @@
 		"postinstall": "nuxt prepare"
 	},
 	"dependencies": {
-		"@pinia/nuxt": "^0.6.0",
+		"@pinia/nuxt": "^0.7.0",
+		"@vueuse/components": "^11.2.0",
 		"@vueuse/core": "^11.1.0",
 		"@vueuse/nuxt": "^11.1.0",
 		"axios": "^1.7.7",
 		"cheerio": "^1.0.0",
 		"nuxt": "^3.13.0",
+		"nuxt-workers": "^0.0.3",
 		"pinia": "^2.2.5",
 		"vue": "latest",
 		"vue-router": "latest",
-		"vuetify-nuxt-module": "^0.18.3"
+		"vuetify-nuxt-module": "^0.18.3",
+		"zod": "^3.23.8"
 	},
 	"packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447",
 	"devDependencies": {

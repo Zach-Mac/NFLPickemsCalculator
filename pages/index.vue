@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
-const weekOutcomeStore = useWeekOutcomeStore()
 
 const weekNumText = computed(() => (gamesStore.currentWeek != 0 ? gamesStore.currentWeek : 'None'))
 </script>
@@ -39,7 +38,33 @@ const weekNumText = computed(() => (gamesStore.currentWeek != 0 ? gamesStore.cur
 				<h2>Load ESPN data to view table</h2>
 			</template>
 			<template v-else>
+				<small
+					>Last ESPN update:
+					{{ new Date(gamesStore.lastEspnUpdate).toLocaleString() }}</small
+				>
 				<PicksTable class="mb-5" />
+				<v-dialog v-model="gamesStore.showEditGamesDialog" max-width="500">
+					<v-card>
+						<v-card-title> Edit Game </v-card-title>
+						<v-card-text>
+							<v-container>
+								<v-row>
+									<v-col>
+										<ObjectCard
+											:obj="gamesStore.gameData[gamesStore.editGameIndex]"
+										/>
+										<v-divider class="my-5"></v-divider>
+
+										<EditObjectForm
+											v-model="gamesStore.gameData[gamesStore.editGameIndex]"
+											:options="gamesStore.editGameOptions"
+										/>
+									</v-col>
+								</v-row>
+							</v-container>
+						</v-card-text>
+					</v-card>
+				</v-dialog>
 			</template>
 		</v-col>
 	</v-row>
@@ -78,8 +103,9 @@ const weekNumText = computed(() => (gamesStore.currentWeek != 0 ? gamesStore.cur
 }
 
 table {
-	font-size: 10px;
+	font-size: 0.8em;
 }
+
 td,
 th {
 	padding-left: 0px !important;

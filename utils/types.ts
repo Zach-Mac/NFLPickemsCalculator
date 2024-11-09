@@ -1,22 +1,3 @@
-export type GameWinner = 'home' | 'away' | '' | 'tie'
-
-export type GameState = 'finished' | 'active' | 'upcoming'
-
-export interface Game {
-	date?: Date
-	scoreHome: number
-	home: string
-	away: string
-	scoreAway: number
-	state: GameState
-	timeLeft: string
-	quarter: string
-	possession: string
-	ot: boolean
-	winner: string
-	espnSituation: Situation | undefined
-}
-
 export interface PlayerPicks {
 	name: string
 	picks: Array<string>
@@ -85,7 +66,7 @@ interface Competition {
 	situation: Situation | undefined
 }
 
-interface Situation {
+export interface Situation {
 	lastPlay: LastPlay
 	down: number
 	yardLine: number

@@ -1,18 +1,58 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
-const { smAndDown, mdAndDown } = useDisplay()
-
-const quarters = ['1st', '2nd', '3rd', '4th']
-
-const rankText = computed(() => (mdAndDown.value ? 'R' : 'Rank'))
-const weekText = computed(() => (mdAndDown.value ? 'W' : 'Week'))
-const seasonText = computed(() => (mdAndDown.value ? 'S' : 'Season'))
-const tieBreakerText = computed(() => (mdAndDown.value ? 'TB' : 'Tie Break'))
+const weekOutcomesStore = useWeekOutcomeStore()
+const tableStore = useTableStore()
 
 const gameWonClasses = 'bg-success-lighten-2 text-success-darken-2 font-weight-bold'
 const gameLostClasses = 'bg-error-lighten-2 text-error line-through font-weight-bold'
 const gameTiedClasses = 'bg-accent text-accent-darken-4 font-weight-bold'
+
+function getEvChangeTdStyle(name: string) {
+	if (!picksStore.seasonEvsChange) return ''
+	const value = picksStore.seasonEvsChange[name]
+	if (value === 0) return ''
+
+	// Get all non-zero values for percentile calculation
+	const allValues = Object.values(picksStore.seasonEvsChange).filter(v => v !== 0)
+	const values = value > 0 ? allValues.filter(v => v > 0) : allValues.filter(v => v < 0)
+	const percentile =
+		values.filter(v => (value > 0 ? v <= value : v >= value)).length / values.length
+
+	// Map percentile to lighten class
+	const conversion = 1 + (1 - percentile) * 5
+	const brightnessLevel = Math.abs(Math.round(conversion))
+	const baseClass = value > 0 ? 'success' : 'error'
+
+	const bold = percentile > 0.9 ? ' font-weight-bold' : ''
+
+	const output = `bg-${baseClass}-lighten-${brightnessLevel} ${bold}`
+
+	return output
+}
+
+function getEvTdStyle(name: string) {
+	if (!picksStore.seasonEvs) return ''
+	const value = picksStore.seasonEvs[name]
+	if (value === 0) return ''
+
+	// Get all non-zero values for percentile calculation
+	const allValues = Object.values(picksStore.seasonEvs).filter(v => v !== 0)
+	const values = value > 0 ? allValues.filter(v => v > 0) : allValues.filter(v => v < 0)
+	const percentile =
+		values.filter(v => (value > 0 ? v <= value : v >= value)).length / values.length
+
+	// Map percentile to lighten class
+	const conversion = 1 + (1 - percentile) * 5
+	let brightnessLevel = Math.abs(Math.round(conversion))
+	const baseClass = value > 0 ? 'success' : 'error'
+	const bold = percentile > 0.9 ? ' font-weight-bold' : ''
+
+	if (baseClass == 'error' && brightnessLevel == 1) brightnessLevel = 2
+
+	const output = `bg-${baseClass}-lighten-${brightnessLevel} ${bold}`
+	return output
+}
 
 function getTeamNameTdStyle(pick: string, gameNumber: number) {
 	const game = gamesStore.gameData[gameNumber]
@@ -23,46 +63,21 @@ function getTeamNameTdStyle(pick: string, gameNumber: number) {
 	return gameLostClasses
 }
 
-const items = computed(() => {
+const items = computed<PlayerItem[]>(() => {
 	return picksStore.picksData.map(playerPicks => {
 		return {
 			name: playerPicks.name,
 			picks: playerPicks.picks,
 			weekTotal: picksStore.playerTotals[playerPicks.name]?.weekTotal || 0,
 			seasonTotal: picksStore.playerTotals[playerPicks.name]?.seasonTotal || 0,
-			tieBreaker: playerPicks.tieBreaker
+			tieBreaker: playerPicks.tieBreaker,
+			nfeloWinChance: nfeloWinChance(playerPicks.name),
+			winningOutcomesPercent: winOutcomesPercent(playerPicks.name),
+			seasonEv: picksStore.seasonEvs?.[playerPicks.name] || 0,
+			evChange: picksStore.seasonEvsChange?.[playerPicks.name] || 0
 		}
 	})
 })
-const headers = ref([
-	{ key: 'name', title: 'Name', value: 'name', sortable: true },
-	{ key: 'picks', title: 'Picks', value: 'picks', sortable: true },
-	{ key: 'weekTotal', title: 'WeekTotal', value: 'weekTotal', sortable: true },
-	{ key: 'seasonTotal', title: 'SeasonTotal', value: 'seasonTotal', sortable: true },
-	{ key: 'tieBreaker', title: 'TieBreaker', value: 'tieBreaker', sortable: true }
-])
-
-type HeaderKey = 'name' | 'picks' | 'weekTotal' | 'seasonTotal' | 'tieBreaker'
-interface SortBy {
-	key: HeaderKey
-	order: boolean | 'desc' | 'asc' | undefined
-}
-
-const sortByOptions: Record<string, SortBy[]> = {
-	weekTotal: [
-		{ key: 'weekTotal', order: 'desc' },
-		{ key: 'tieBreaker', order: 'asc' }
-	],
-	seasonTotal: [
-		{ key: 'seasonTotal', order: 'desc' },
-		{ key: 'tieBreaker', order: 'asc' }
-	],
-	tieBreaker: [{ key: 'tieBreaker', order: 'desc' }],
-	name: [{ key: 'name', order: 'asc' }]
-}
-const sortBy = ref(sortByOptions.weekTotal)
-
-const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border'
 
 const rowStyle = computed(() => {
 	if (!picksStore.highlightTiedRows) return Array(items.value.length).fill('')
@@ -70,16 +85,16 @@ const rowStyle = computed(() => {
 	const colorRow = [false]
 
 	const sortedItems = items.value.sort((a, b) => {
-		if (a[sortBy.value[0].key] < b[sortBy.value[0].key])
-			return sortBy.value[0].order == 'asc' ? -1 : 1
-		if (a[sortBy.value[0].key] > b[sortBy.value[0].key])
-			return sortBy.value[0].order == 'asc' ? 1 : -1
+		if (a[tableStore.sortBy[0].key] < b[tableStore.sortBy[0].key])
+			return tableStore.sortBy[0].order == 'asc' ? -1 : 1
+		if (a[tableStore.sortBy[0].key] > b[tableStore.sortBy[0].key])
+			return tableStore.sortBy[0].order == 'asc' ? 1 : -1
 		return 0
 	})
 
 	for (let i = 1; i < sortedItems.length; i++) {
-		const rowSortValue = sortedItems[i][sortBy.value[0].key]
-		const prevRowSortValue = sortedItems[i - 1][sortBy.value[0].key]
+		const rowSortValue = sortedItems[i][tableStore.sortBy[0].key]
+		const prevRowSortValue = sortedItems[i - 1][tableStore.sortBy[0].key]
 
 		if (rowSortValue == prevRowSortValue) {
 			colorRow.push(colorRow[i - 1])
@@ -91,43 +106,14 @@ const rowStyle = computed(() => {
 	return colorRow.map(color => (color ? 'bg-grey-lighten-4' : ''))
 })
 
-function getGameStatusText(game: Game) {
-	if (game.state == 'finished') return 'Final'
-	if (game.state == 'active') return game.timeLeft
-
-	const options: Intl.DateTimeFormatOptions = {}
-
-	if (mdAndDown.value) {
-		options.month = '2-digit'
-		options.day = '2-digit'
-	}
-	return game.date?.toLocaleDateString(undefined, options)
+const nfeloWinChance = (name: string) => {
+	const chance = weekOutcomesStore.liveStatsComputed.nfeloChance[name]
+	return Math.round(chance * 10) / 10
 }
-function getGameQuarterText(game: Game) {
-	if (game.ot) return 'OT'
-	if (game.state == 'active') return quarters[Number(game.quarter) - 1]
-	if (game.state == 'finished') return ''
 
-	const options: Intl.DateTimeFormatOptions = {
-		weekday: 'short'
-	}
-	const day = game.date?.toLocaleDateString(undefined, options)
-	let hours = game.date?.getHours()
-	const minutesNum = game.date?.getMinutes() ?? 0
-	const minutes = minutesNum < 10 ? '0' + minutesNum : minutesNum.toString()
-
-	let amPm = ''
-	if (hours! < 12) {
-		amPm = 'AM'
-	} else {
-		amPm = 'PM'
-		hours! -= 12
-	}
-
-	if (smAndDown.value) return `${day} ${hours}`
-	if (mdAndDown.value) return `${day} ${hours}${amPm}`
-
-	return `${day} ${hours}:${minutes}${amPm}`
+const winOutcomesPercent = (name: string) => {
+	const chance = weekOutcomesStore.liveStatsComputed.winningOutcomesPercent[name]
+	return Math.round(chance * 10) / 10
 }
 </script>
 
@@ -135,99 +121,16 @@ function getGameQuarterText(game: Game) {
 	<v-data-table
 		v-bind="$attrs"
 		:items="items"
-		:headers="headers"
+		:headers="tableStore.headers"
 		:items-per-page="50"
 		density="compact"
 		hover
 		class="border"
 		multi-sort
-		:sort-by="sortBy"
+		:sort-by="tableStore.sortBy"
 	>
-		<template v-slot:headers="{ columns, isSorted, getSortIcon, toggleSort }">
-			<SelectGameWinnersHeaders />
-			<tr>
-				<th class="text-center font-weight-bold w-0 border-e">
-					<br /><br /><br /><br /><br />
-					{{ rankText }}
-				</th>
-				<th class="text-right font-weight-bold w-0 border-e pe-1">
-					Score:
-					<br />
-					Home:
-					<br />
-					Away:
-					<br />
-					Score:
-					<br />
-					Status:
-					<br />
-					<div class="cursor-pointer text-center" @click="sortBy = sortByOptions.name">
-						Player Name
-					</div>
-				</th>
-				<th
-					v-for="game in gamesStore.gameData"
-					class="text-center font-weight-bold border-e"
-					:class="[game.state == 'finished' ? 'dimmed' : '']"
-				>
-					{{ game.state != 'upcoming' ? game.scoreHome : '' }}
-					<br />
-					<span :class="game.possession == 'home' ? ballPossessionClasses : ''">
-						{{ game.home }}
-					</span>
-					<br />
-					<span :class="game.possession == 'away' ? ballPossessionClasses : ''">
-						{{ game.away }}
-					</span>
-					<br />
-					{{ game.state != 'upcoming' ? game.scoreAway : '' }}
-					<br />
-					<span class="text-no-wrap">
-						{{ getGameStatusText(game) }}
-					</span>
-					<br />
-					<span class="text-no-wrap">
-						{{ getGameQuarterText(game) }}
-					</span>
-					<br />
-
-					<!-- <v-tooltip activator="parent" location="top">
-						{{ game.espnSituation?.lastPlay.text }}
-					</v-tooltip> -->
-				</th>
-				<th
-					class="cursor-pointer text-center font-weight-bold pr-md-1 border-e"
-					@click="sortBy = sortByOptions.weekTotal"
-				>
-					<br /><br /><br /><br /><br />
-					<div class="pl-lg-3 d-flex justify-center">
-						{{ weekText }}
-						<v-icon
-							class="v-data-table-header__sort-icon"
-							:class="isSorted(columns.at(-3)!) ? 'opacity-100' : ''"
-							icon="mdi-arrow-down"
-						/>
-					</div>
-				</th>
-				<th
-					class="cursor-pointer text-center font-weight-bold pr-md-1 border-e"
-					@click="sortBy = sortByOptions.seasonTotal"
-				>
-					<br /><br /><br /><br /><br />
-					<div class="pl-lg-3 d-flex justify-center">
-						{{ seasonText }}
-						<v-icon
-							class="v-data-table-header__sort-icon"
-							:class="isSorted(columns.at(-2)!) ? 'opacity-100' : ''"
-							icon="mdi-arrow-down"
-						/>
-					</div>
-				</th>
-				<th class="text-center font-weight-bold" @click="sortBy = sortByOptions.tieBreaker">
-					<br /><br /><br /><br /><br />
-					<div class="d-flex justify-center">{{ tieBreakerText }}</div>
-				</th>
-			</tr>
+		<template v-slot:headers="props">
+			<TableHeaders v-bind="props" />
 		</template>
 		<template v-slot:item="{ item: playerPicks, index }">
 			<tr
@@ -257,15 +160,45 @@ function getGameQuarterText(game: Game) {
 				<td class="border-e">
 					{{ playerPicks.seasonTotal }}
 				</td>
-				<td>{{ playerPicks.tieBreaker }}</td>
+				<td class="border-e">{{ playerPicks.tieBreaker }}</td>
+				<td class="border-e text-center">
+					<v-skeleton-loader
+						v-if="weekOutcomesStore.loadingCalculations"
+						class="ma-0 pa-0 mx-auto text-center"
+						type="text"
+						width="3em"
+					>
+					</v-skeleton-loader>
+					<template v-else> {{ nfeloWinChance(playerPicks.name) }}% </template>
+				</td>
+				<td class="border-e text-center">
+					<v-skeleton-loader
+						v-if="weekOutcomesStore.loadingCalculations"
+						class="ma-0 pa-0 mx-auto text-center"
+						type="text"
+						width="3em"
+					>
+					</v-skeleton-loader>
+					<template v-else> {{ winOutcomesPercent(playerPicks.name) }}% </template>
+				</td>
+				<td class="border-e" :class="getEvTdStyle(playerPicks.name)">
+					{{ picksStore.seasonEvs ? picksStore.seasonEvs[playerPicks.name] : '-' }}
+				</td>
+				<td class="border-e" :class="getEvChangeTdStyle(playerPicks.name)">
+					{{ picksStore.seasonEvsChange[playerPicks.name] ?? '-' }}
+				</td>
 			</tr>
 		</template>
 	</v-data-table>
 </template>
 
-<style scoped>
+<style>
 .line-through {
 	text-decoration: line-through;
+}
+
+.v-skeleton-loader__bone {
+	margin: 0 !important;
 }
 
 .pa-05 {

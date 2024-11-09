@@ -70,22 +70,20 @@ async function paste() {
 										Picks paste doesn't match ESPN data
 									</v-banner-text>
 								</v-banner>
-								<div class="d-flex">
-									<v-btn
-										class="align-self-center me-1"
-										:size="'large'"
-										@click="paste"
-										:slim="smAndDown"
-									>
-										{{ pasteText }}
-									</v-btn>
-									<v-textarea
-										rows="10"
-										hideDetails
-										label="Paste Poolhost table html"
-										v-model="picksStore.picksTablePasteInput"
-									></v-textarea>
-								</div>
+								<v-textarea
+									rows="10"
+									hideDetails
+									label="Paste Poolhost table html"
+									v-model="picksStore.picksTablePasteInput"
+								/>
+								<v-btn
+									class="align-self-center me-1"
+									:size="'large'"
+									@click="paste"
+									:slim="smAndDown"
+								>
+									{{ pasteText }}
+								</v-btn>
 							</v-expansion-panel-text>
 						</v-expansion-panel>
 					</v-expansion-panels>

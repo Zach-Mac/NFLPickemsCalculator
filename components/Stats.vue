@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
-const outcomeCombosStore = useWeekOutcomeStore()
-const { winningOutcomes } = storeToRefs(outcomeCombosStore)
+const weekOutcomesStore = useWeekOutcomeStore()
+const { winningOutcomes } = storeToRefs(weekOutcomesStore)
 
 const itemsPerPage = 5
 const page = ref(1)
@@ -30,7 +30,7 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 		</v-col>
 		<v-col cols="auto">
 			<v-btn-toggle
-				v-model="outcomeCombosStore.filterGames"
+				v-model="weekOutcomesStore.filterGames"
 				variant="outlined"
 				divided
 				mandatory
@@ -41,7 +41,11 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 			</v-btn-toggle>
 		</v-col>
 		<v-col :style="`min-width: ${checkboxColMinWidth}`">
-			<v-checkbox v-model="outcomeCombosStore.secondPlaceIsWinning" density="comfortable">
+			<v-checkbox
+				v-model="weekOutcomesStore.secondPlaceIsWinning"
+				density="comfortable"
+				hide-details
+			>
 				<template v-slot:label>
 					<span style="word-break: keep-all">
 						Consider outcome with possible 2nd place finish as winning
@@ -57,33 +61,36 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 				# Winning / # Total
 				<br />
 				<b>
-					{{ outcomeCombosStore.numWinningOutcomes }} /
-					{{ outcomeCombosStore.numPossibleOutcomes }}
+					{{ weekOutcomesStore.numWinningOutcomes }} /
+					{{ weekOutcomesStore.numPossibleOutcomes }}
 				</b>
 				<br />
 				<b>
 					{{
-						(outcomeCombosStore.numWinningOutcomes /
-							outcomeCombosStore.numPossibleOutcomes) *
-						100
+						round(
+							(weekOutcomesStore.numWinningOutcomes /
+								weekOutcomesStore.numPossibleOutcomes) *
+								100,
+							2
+						)
 					}}%
 				</b>
 			</p>
 		</v-col>
 		<v-col cols="auto" class="text-no-wrap">
 			<h2>nfelo Chance</h2>
-			<p>{{ round(outcomeCombosStore.nfeloWinChance, 5) }}%</p>
+			<p>{{ round(weekOutcomesStore.nfeloWinChance, 2) }}%</p>
 		</v-col>
-		<v-col v-if="outcomeCombosStore.numWinningOutcomes > 0" cols="auto" class="">
+		<v-col v-if="weekOutcomesStore.numWinningOutcomes > 0" cols="auto" class="">
 			<h2>Must Wins</h2>
 			<p>
-				<template v-if="outcomeCombosStore.mustWins.length">
+				<template v-if="weekOutcomesStore.mustWins.length">
 					<b
 						class="cursor-pointer"
-						@click="gamesStore.setCertainGameWinners(outcomeCombosStore.mustWins)"
+						@click="gamesStore.setCertainGameWinners(weekOutcomesStore.mustWins)"
 					>
 						<span
-							v-for="(team, i) in outcomeCombosStore.mustWins"
+							v-for="(team, i) in weekOutcomesStore.mustWins"
 							:class="
 								gamesStore.teamWon(team)
 									? 'text-success-darken-1'
@@ -92,12 +99,12 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 									: ''
 							"
 						>
-							{{ team + (i == outcomeCombosStore.mustWins.length - 1 ? '' : ', ') }}
+							{{ team + (i == weekOutcomesStore.mustWins.length - 1 ? '' : ', ') }}
 						</span>
 					</b>
 					<br />
-					<template v-if="outcomeCombosStore.mustWinsWinChance">
-						Chance: {{ round(outcomeCombosStore.mustWinsWinChance, 5) }}%
+					<template v-if="weekOutcomesStore.mustWinsWinChance">
+						Chance: {{ round(weekOutcomesStore.mustWinsWinChance, 2) }}%
 					</template>
 				</template>
 				<template v-else> None </template>
@@ -112,13 +119,15 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 					</v-expansion-panel-title>
 					<v-expansion-panel-text>
 						<template v-if="winningOutcomes.flat().length">
+							<h3># of missed wins:</h3>
 							<v-tabs v-model="tab">
 								<v-tab
 									v-for="(outcome, i) in winningOutcomes"
 									:key="i"
 									:disabled="!outcome.length"
+									slim
 								>
-									{{ i }} Wrong ({{ outcome.length }})
+									{{ i }} ({{ outcome.length }})
 								</v-tab>
 							</v-tabs>
 							<v-tabs-window v-model="tab">

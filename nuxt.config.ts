@@ -11,15 +11,28 @@ export default defineNuxtConfig({
 			enabled: true
 		}
 	},
-	modules: ['vuetify-nuxt-module', '@vueuse/nuxt', '@pinia/nuxt'],
+	modules: ['vuetify-nuxt-module', '@vueuse/nuxt', '@pinia/nuxt', 'nuxt-workers'],
 	vuetify: {
 		moduleOptions: {
 			/* module specific options */
 			styles: { configFile: 'styles/settings.scss' }
 		},
 		vuetifyOptions: {
+			labComponents: true,
 			display: {
-				mobileBreakpoint: 'sm'
+				mobileBreakpoint: 'sm',
+				thresholds: {
+					// xs: 600,
+					// sm: 960,
+					// md: 1280,
+					// lg: 1920,
+					// xl: 2560
+					sm: 600,
+					md: 1000,
+					lg: 1350,
+					xl: 1920,
+					xxl: 2560
+				}
 			},
 			// blueprint: md3,
 			theme: {
