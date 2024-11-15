@@ -171,23 +171,17 @@ export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
 		return winningOutcomes.value[winningOutcomes.value.length - 1]
 	})
 	const gamesImportanceScores = computed(() => {
-		const allOutcomes = winningOutcomes.value.flat()
-		const halfOutcomes = numWinningOutcomes.value / 2
+		const allWinningOutcomes = winningOutcomes.value.flat()
+		const numHalfOutcomes = numWinningOutcomes.value / 2
 
 		return idealOutcome.value.map((team, index) => {
-			if (ignoredGames.value.includes(index)) return 0
+			if (ignoredGames.value.includes(index) || !allWinningOutcomes.length) return 0
 
-			const count = allOutcomes.filter(outcome => outcome.weekOutcome[index] === team).length
-			return ((count - halfOutcomes) / halfOutcomes) * 100
+			const count = allWinningOutcomes.filter(
+				outcome => outcome.weekOutcome[index] === team
+			).length
+			return ((count - numHalfOutcomes) / numHalfOutcomes) * 100
 		})
-
-		// return idealOutcome.value.reduce((importanceScores, team, index) => {
-		// 	if (ignoredGames.value.includes(index)) return importanceScores
-
-		// 	const count = allOutcomes.filter(outcome => outcome.weekOutcome[index] === team).length
-		// 	importanceScores[team] = ((count - halfOutcomes) / halfOutcomes) * 100
-		// 	return importanceScores
-		// }, {} as Record<string, number>)
 	})
 	const mustWins = computed(() => {
 		const allOutcomes = winningOutcomes.value.flat()
@@ -338,12 +332,11 @@ export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
 
 		loadingCalculations.value = true
 		const stats = await getAllUsersStats(
-			picksStore.picksData,
-			pickedGames,
-			unref(toRaw(unref(gamesStore.gameData))),
-			nfeloStore.nfeloTeamsWinChance
+			deepToRaw(picksStore.picksData),
+			deepToRaw(pickedGames),
+			deepToRaw(gamesStore.gameData),
+			deepToRaw(nfeloStore.nfeloTeamsWinChance)
 		)
-		loadingCalculations.value = false
 
 		for (const userName of Object.keys(stats)) {
 			const userStats = stats[userName]
@@ -354,6 +347,7 @@ export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
 			liveStats.top2.winningOutcomesPercent[userName] =
 				userStats.top2.winningOutcomesPercentage
 		}
+		loadingCalculations.value = false
 
 		return liveStats
 	}

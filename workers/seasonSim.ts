@@ -70,6 +70,8 @@ class SeasonSimulator {
 		// Pre-allocate arrays
 		const simWins = new Float32Array(this.numPlayers)
 		const simMoney = new Float32Array(this.numPlayers)
+		const simPrizeWins = new Uint32Array(this.numPlayers)
+		const simPrizeOver100 = new Uint32Array(this.numPlayers)
 		const finalScores = new Float32Array(this.numPlayers)
 		const sortedIndices = new Uint16Array(this.numPlayers)
 
@@ -113,10 +115,6 @@ class SeasonSimulator {
 					finalScores[b] - finalScores[a] || this.currentScores[b] - this.currentScores[a]
 			)
 
-			// // Distribute prize money
-			// for (let i = 0; i < 4; i++) {
-			// 	simMoney[sortedIndices[i]] += this.prizeMoneyArray[i]
-			// }
 			// Handle ties in prize money
 			let prizeIndex = 0
 			let currentPrizePosition = 0 // Tracks position in prizeMoneyArray
@@ -155,6 +153,10 @@ class SeasonSimulator {
 				// Distribute the average prize money to all tied players
 				for (let j = 0; j < tieCount; j++) {
 					simMoney[sortedIndices[prizeIndex + j]] += prizePerPlayer
+					simPrizeWins[sortedIndices[prizeIndex + j]] += 1
+					if (prizePerPlayer >= 100) {
+						simPrizeOver100[sortedIndices[prizeIndex + j]] += 1
+					}
 				}
 
 				// Update indices
@@ -169,29 +171,23 @@ class SeasonSimulator {
 		}
 
 		// Generate output
-		// const output: SimOutput = {}
-		// for (let i = 0; i < this.numPlayers; i++) {
-		// 	output[this.players[i]] = {
-		// 		prob: (simWins[i] / numSimulations) * 100,
-		// 		money: Math.round((simMoney[i] / numSimulations) * 10) / 10
-		// 	}
-		// }
-		// return Object.fromEntries(Object.entries(output).sort(([, a], [, b]) => b.money - a.money))
-		// return just the money for each player
-		const output: Record<string, number> = {}
+		const output: Record<string, { money: number; chance: number; chanceOver100: number }> = {}
 		for (let i = 0; i < this.numPlayers; i++) {
-			output[this.players[i]] = Math.round(simMoney[i] / numSimulations)
+			output[this.players[i]] = {
+				money: Math.round(simMoney[i] / numSimulations),
+				chance: (simPrizeWins[i] / numSimulations) * 100,
+				chanceOver100: (simPrizeOver100[i] / numSimulations) * 100
+			}
 		}
 
-		// sort by money
+		// Sort by money
 		const sortedOutput = Object.fromEntries(
-			Object.entries(output).sort(([, a], [, b]) => b - a)
+			Object.entries(output).sort(([, a], [, b]) => b.money - a.money)
 		)
 
 		console.timeEnd('simulation')
 
 		return sortedOutput
-		// Sort by money
 	}
 }
 
@@ -223,7 +219,7 @@ export async function runSim(
 	// 	})
 
 	// Print totals
-	const totalMoney = Object.values(results).reduce((sum, money) => sum + money, 0)
+	const totalMoney = Object.values(results).reduce((sum, result) => sum + result.money, 0)
 	// const totalProb = Object.values(results).reduce((sum, stats) => sum + stats.prob, 0)
 	// const totalMoney = Object.values(results).reduce((sum, stats) => sum + stats.money, 0)
 

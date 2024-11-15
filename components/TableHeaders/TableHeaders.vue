@@ -189,45 +189,18 @@ provide('numHeaders', numHeaders)
 		<RotatedTableHeader>
 			{{ tieBreakerText }}
 		</RotatedTableHeader>
-		<RotatedTableHeader @click="tableStore.sortBy = tableStore.sortByOptions.nfeloWinChance">
-			nfelo Win %
-			<SortIcon :columns="columns" :isSorted="isSorted" keyToSortBy="nfeloWinChance" />
-			<v-tooltip activator="parent" location="top">
-				Chance of winning based on nfelo predictions
-			</v-tooltip>
-		</RotatedTableHeader>
-		<RotatedTableHeader
-			@click="tableStore.sortBy = tableStore.sortByOptions.winningOutcomesPercent"
-		>
-			Win Outcomes %
-			<SortIcon
-				:columns="columns"
-				:isSorted="isSorted"
-				keyToSortBy="winningOutcomesPercent"
-			/>
-			<v-tooltip activator="parent" location="top">
-				Percentage of winning outcomes with selected game winners
-			</v-tooltip>
-		</RotatedTableHeader>
-		<RotatedTableHeader @click="tableStore.sortBy = tableStore.sortByOptions.seasonEv">
-			Season EV
-			<SortIcon :columns="columns" :isSorted="isSorted" keyToSortBy="seasonEv" />
-			<v-tooltip activator="parent" location="top">
-				Expected season winnings based on selected winners (in $)
-			</v-tooltip>
-		</RotatedTableHeader>
-		<RotatedTableHeader
-			@click="tableStore.sortBy = tableStore.sortByOptions.evChange"
-			:style="lastThStyle"
-		>
-			<div ref="lastThContent">
-				EV Δ
-				<SortIcon :columns="columns" :isSorted="isSorted" keyToSortBy="evChange" />
+		<template v-for="(value, columnKey) in tableStore.showOptionalColumns" :key="columnKey">
+			<RotatedTableHeader
+				v-if="tableStore.showOptionalColumns[columnKey]"
+				@click="tableStore.sortBy = tableStore.sortByOptions[columnKey]"
+			>
+				{{ tableStore.getHeaderTitle(columnKey) }}
+				<SortIcon :columns="columns" :isSorted="isSorted" :keyToSortBy="columnKey" />
 				<v-tooltip activator="parent" location="top">
-					Difference in expected season winnings from last week (in $)
+					{{ tableStore.headerTooltips[columnKey] }}
 				</v-tooltip>
-			</div>
-		</RotatedTableHeader>
+			</RotatedTableHeader>
+		</template>
 	</tr>
 </template>
 

@@ -1,6 +1,7 @@
 testTables
 simulation
 old
+oldWeeks
 
 # Nuxt dev/build outputs
 .output

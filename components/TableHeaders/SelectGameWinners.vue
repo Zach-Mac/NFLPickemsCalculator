@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { mergeProps } from 'vue'
+
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
 const weekOutcomesStore = useWeekOutcomeStore()
@@ -29,6 +31,8 @@ function setUnfinishedToPlayerPicks() {
 const lockFinishedGames = ref(false)
 
 const disableButton = (game: Game) => lockFinishedGames.value && game.state == 'finished'
+
+const menu = ref(false)
 
 const numTotalHeaders = inject<Ref<number>>('numHeaders') ?? ref(0)
 const headerRow = ref()
@@ -117,6 +121,30 @@ const numHeadersNeeded = computed(() => {
 						/>
 					</template>
 				</v-tooltip>
+				<v-menu :close-on-content-click="false">
+					<template v-slot:activator="{ props: menu }">
+						<v-tooltip text="Select table columns" location="top">
+							<template v-slot:activator="{ props: tooltip }">
+								<v-btn
+									:size="iconButtonSize"
+									v-bind="mergeProps(menu, tooltip)"
+									icon="mdi-view-column"
+								></v-btn>
+							</template>
+						</v-tooltip>
+					</template>
+					<v-list>
+						<v-list-item v-for="(value, columnKey) in tableStore.showOptionalColumns">
+							<v-list-item-title>
+								<v-checkbox
+									:label="tableStore.getHeaderTitle(columnKey)"
+									v-model="tableStore.showOptionalColumns[columnKey]"
+									hide-details
+								></v-checkbox>
+							</v-list-item-title>
+						</v-list-item>
+					</v-list>
+				</v-menu>
 				<!-- <v-number-input
 					v-model="weekOutcomesStore.maxGamesToSimLive"
 					type="number"

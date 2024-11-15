@@ -18,7 +18,7 @@ const gameSchema = z.object({
 	quarter: z.string(),
 	possession: PossessionZodEnum,
 	ot: z.boolean(),
-	winner: z.string(),
+	winner: z.string().optional(),
 	espn: z.object({
 		situation: z.any().optional(),
 		gamecastLink: z.string()
@@ -42,12 +42,9 @@ export const useGamesStore = defineStore('games', () => {
 	const apiLoading = ref(false)
 	const showEditGamesDialog = ref(false)
 	const editGameIndex = ref(-1)
-
-	function $reset() {
-		espnScoreboard.value = undefined
-		gameData.value = []
-		selectedWeek.value = undefined
-	}
+	const currentWeek = useStorage('currentWeek', 0)
+	const currentSeason = useStorage('currentSeason', 0)
+	const currentSeasonType = useStorage('currentSeasonType', 0)
 
 	function validateGameData(data: unknown): data is Game[] {
 		const result = z.array(gameSchema).safeParse(data)
@@ -59,54 +56,29 @@ export const useGamesStore = defineStore('games', () => {
 	}
 
 	if (validateGameData(gameData.value)) {
-		console.log('Game data is valid')
+		console.debug('Game data is valid')
 	} else {
-		console.log('Game data is invalid')
+		console.debug('Game data is invalid')
 		gameData.value = []
+		currentWeek.value = 0
+		currentSeason.value = 0
+		currentSeasonType.value = 0
 	}
 
+	watch(gameData, () => {
+		gameData.value.forEach(game => {
+			if (game.winner === undefined) {
+				game.winner = ''
+			}
+		})
+	})
+
 	// Getters
-	// const espnGameData = computed(() => {
-	// 	if (!espnScoreboard.value) return []
-	// 	return espnScoreboard.value.events.map(event => {
-	// 		const competition = event.competitions[0]
-	// 		const homeTeam = competition.competitors.find(comp => comp.homeAway === 'home')!
-	// 		const awayTeam = competition.competitors.find(comp => comp.homeAway === 'away')!
+	const numGamesWithNoWinners = computed(() => {
+		return gameData.value.filter(game => !game.winner || game.winner === '').length
+	})
 
-	// 		const state = getGameState(event.status.type.state)
-
-	// 		return {
-	// 			date: new Date(event.date),
-	// 			home: homeTeam.team.abbreviation,
-	// 			away: awayTeam.team.abbreviation,
-	// 			scoreHome: Number(scoreHome),
-	// 			scoreAway: Number(awayTeam.score),
-	// 			state,
-	// 			winner: competition.competitors.find(comp => comp.winner)?.team.abbreviation || '',
-	// 			timeLeft: event.status.displayClock,
-	// 			quarter: event.status.period.toString(),
-	// 			teamWithPossession: event.status.type.detail,
-	// 			ot: event.status.period > 4,
-	// 			homeWinPercent: undefined,
-	// 			awayWinPercent: undefined
-	// 		} as Game
-	// 	})
-	// })
-	// const gameData = computed(() => {
-	// 	if (!espnGameData.value.length) return []
-	// 	const picksStore = usePicksStore()
-	// 	return picksStore.poolhostGameOrder.map(team => {
-	// 		const espnGame = espnGameData.value.find(g => g.home === team || g.away === team)
-	// 		if (!espnGame) {
-	// 			console.error(`No game found for team "${team}". espnGameData:`, espnGameData.value)
-	// 		}
-	// 		return espnGame
-	// 	})
-	// })
-	const currentWeek = computed(() => espnScoreboard.value?.week.number || 0)
-	const currentSeason = computed(() => espnScoreboard.value?.season.year || 0)
-	const currentSeasonType = computed(() => espnScoreboard.value?.season.type || '')
-
+	// Actions
 	function getPossession(event: EspnEvent) {
 		const competition = event.competitions[0]
 		if (
@@ -123,7 +95,12 @@ export const useGamesStore = defineStore('games', () => {
 		return ''
 	}
 
-	// Actions
+	function setMetadata(scoreboard: Scoreboard) {
+		currentWeek.value = scoreboard.week.number
+		currentSeason.value = scoreboard.season.year
+		currentSeasonType.value = scoreboard.season.type
+	}
+
 	const setGameData = (events: EspnEvent[]) => {
 		const games: Game[] = []
 		events.forEach(event => {
@@ -165,7 +142,8 @@ export const useGamesStore = defineStore('games', () => {
 				ot: event.status.period > 4,
 				espn: {
 					situation: event.competitions[0].situation || undefined,
-					gamecastLink: event.links.find(link => link.rel.includes('summary'))?.href || ''
+					gamecastLink:
+						event.links.find(link => link.text.includes('Gamecast'))?.href || ''
 				}
 			})
 		})
@@ -192,6 +170,7 @@ export const useGamesStore = defineStore('games', () => {
 			const scoreboard = await espnApi.getScoreboard(selectedWeek.value)
 			espnScoreboard.value = scoreboard
 
+			setMetadata(scoreboard)
 			setGameData(scoreboard.events)
 			apiLoading.value = false
 			lastEspnUpdate.value = Date.now()
@@ -212,18 +191,12 @@ export const useGamesStore = defineStore('games', () => {
 	}
 
 	const setAllGameWinners = (weekOutcome: string[]) => {
-		if (!gameData.value || gameData.value.length === 0) {
-			console.warn('No game data available to set winners.')
-			return
-		}
+		if (!gameData.value || gameData.value.length === 0) return
 
 		gameData.value.forEach((game, i) => {
 			if (game) {
-				if (weekOutcome[i] !== undefined) {
-					game.winner = weekOutcome[i]
-				} else {
-					console.warn(`No outcome provided for game at index ${i}.`)
-				}
+				if (weekOutcome[i] !== undefined) game.winner = weekOutcome[i]
+				else console.warn(`No outcome provided for game at index ${i}.`)
 			} else {
 				console.warn(`Game at index ${i} is undefined.`)
 			}
@@ -231,20 +204,13 @@ export const useGamesStore = defineStore('games', () => {
 	}
 
 	const setCertainGameWinners = (teamNames: string[]) => {
-		if (!gameData.value || gameData.value.length === 0) {
-			console.warn('No game data available to set winners.')
-			return
-		}
+		if (!gameData.value || gameData.value.length === 0) return
 
 		gameData.value.forEach((game, index) => {
 			if (game) {
-				if (teamNames.includes(game.home)) {
-					game.winner = game.home
-				} else if (teamNames.includes(game.away)) {
-					game.winner = game.away
-				} else {
-					console.warn(`Team not found in game at index ${index}.`)
-				}
+				if (teamNames.includes(game.home)) game.winner = game.home
+				else if (teamNames.includes(game.away)) game.winner = game.away
+				else console.warn(`Team not found in game at index ${index}.`)
 			} else {
 				console.warn(`Game at index ${index} is undefined.`)
 			}
@@ -255,14 +221,10 @@ export const useGamesStore = defineStore('games', () => {
 		if (!gameData.value || gameData.value.length === 0) return undefined
 
 		const game = gameData.value.find(game => game && (game.home === team || game.away === team))
-
-		if (!game) {
-			console.warn(`Game with team "${team}" not found.`)
-		}
+		if (!game) console.warn(`Game with team "${team}" not found.`)
 
 		return game
 	}
-
 	const teamWon = (team: string): boolean => {
 		if (!gameData.value || gameData.value.length === 0) return false
 		return gameData.value.some(game => game && game.winner === team)
@@ -277,9 +239,7 @@ export const useGamesStore = defineStore('games', () => {
 		return game.winner !== team
 	}
 
-	// Return state, getters, and actions
 	return {
-		$reset,
 		editGameOptions,
 		// State
 		espnScoreboard,
@@ -289,11 +249,11 @@ export const useGamesStore = defineStore('games', () => {
 		showEditGamesDialog,
 		editGameIndex,
 		lastEspnUpdate,
-		// Getters
-		// espnGameData,
 		currentWeek,
 		currentSeason,
 		currentSeasonType,
+		// Getters
+		numGamesWithNoWinners,
 		// Actions
 		editGame,
 		setAllGameWinners,
@@ -301,7 +261,6 @@ export const useGamesStore = defineStore('games', () => {
 		getGameWithTeam,
 		teamWon,
 		teamLost,
-		loadEspnScoreboard,
-		getGameState
+		loadEspnScoreboard
 	}
 })

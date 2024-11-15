@@ -109,6 +109,9 @@ const numHeadersNeeded = computed(() => {
 				:loading="picksStore.gameEvRangesLoading"
 			>
 				Calculate
+				<v-tooltip activator="parent" location="top">
+					Calculate based on currently selected winners
+				</v-tooltip>
 			</v-btn>
 		</th>
 	</tr>

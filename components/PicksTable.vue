@@ -33,14 +33,15 @@ function getEvChangeTdStyle(name: string) {
 
 function getEvTdStyle(name: string) {
 	if (!picksStore.seasonEvs) return ''
-	const value = picksStore.seasonEvs[name]
+	const value = picksStore.seasonEvs[name].money
 	if (value === 0) return ''
 
 	// Get all non-zero values for percentile calculation
-	const allValues = Object.values(picksStore.seasonEvs).filter(v => v !== 0)
-	const values = value > 0 ? allValues.filter(v => v > 0) : allValues.filter(v => v < 0)
+	const allValues = Object.values(picksStore.seasonEvs).filter(v => v.money !== 0)
+	const values =
+		value > 0 ? allValues.filter(v => v.money > 0) : allValues.filter(v => v.money < 0)
 	const percentile =
-		values.filter(v => (value > 0 ? v <= value : v >= value)).length / values.length
+		values.filter(v => (value > 0 ? v.money <= value : v.money >= value)).length / values.length
 
 	// Map percentile to lighten class
 	const conversion = 1 + (1 - percentile) * 5
@@ -71,9 +72,12 @@ const items = computed<PlayerItem[]>(() => {
 			weekTotal: picksStore.playerTotals[playerPicks.name]?.weekTotal || 0,
 			seasonTotal: picksStore.playerTotals[playerPicks.name]?.seasonTotal || 0,
 			tieBreaker: playerPicks.tieBreaker,
-			nfeloWinChance: nfeloWinChance(playerPicks.name),
-			winningOutcomesPercent: winOutcomesPercent(playerPicks.name),
-			seasonEv: picksStore.seasonEvs?.[playerPicks.name] || 0,
+			nfeloWinChance: weekOutcomesStore.liveStatsComputed.nfeloChance[playerPicks.name],
+			winningOutcomesPercent:
+				weekOutcomesStore.liveStatsComputed.winningOutcomesPercent[playerPicks.name],
+			seasonPrizeChance: picksStore.seasonEvs?.[playerPicks.name].chance || 0,
+			chanceMake100: picksStore.seasonEvs?.[playerPicks.name].chanceOver100 || 0,
+			seasonEv: picksStore.seasonEvs?.[playerPicks.name].money || 0,
 			evChange: picksStore.seasonEvsChange?.[playerPicks.name] || 0
 		}
 	})
@@ -106,14 +110,9 @@ const rowStyle = computed(() => {
 	return colorRow.map(color => (color ? 'bg-grey-lighten-4' : ''))
 })
 
-const nfeloWinChance = (name: string) => {
-	const chance = weekOutcomesStore.liveStatsComputed.nfeloChance[name]
-	return Math.round(chance * 10) / 10
-}
-
-const winOutcomesPercent = (name: string) => {
-	const chance = weekOutcomesStore.liveStatsComputed.winningOutcomesPercent[name]
-	return Math.round(chance * 10) / 10
+function displayPercentage(value?: number) {
+	if (!value) return '-'
+	return Math.round(value * 10) / 10 + '%'
 }
 </script>
 
@@ -161,7 +160,10 @@ const winOutcomesPercent = (name: string) => {
 					{{ playerPicks.seasonTotal }}
 				</td>
 				<td class="border-e">{{ playerPicks.tieBreaker }}</td>
-				<td class="border-e text-center">
+				<td
+					class="border-e text-center"
+					v-if="tableStore.showOptionalColumns.nfeloWinChance"
+				>
 					<v-skeleton-loader
 						v-if="weekOutcomesStore.loadingCalculations"
 						class="ma-0 pa-0 mx-auto text-center"
@@ -169,9 +171,18 @@ const winOutcomesPercent = (name: string) => {
 						width="3em"
 					>
 					</v-skeleton-loader>
-					<template v-else> {{ nfeloWinChance(playerPicks.name) }}% </template>
+					<template v-else>
+						{{
+							displayPercentage(
+								weekOutcomesStore.liveStatsComputed.nfeloChance[playerPicks.name]
+							)
+						}}
+					</template>
 				</td>
-				<td class="border-e text-center">
+				<td
+					class="border-e text-center"
+					v-if="tableStore.showOptionalColumns.winningOutcomesPercent"
+				>
 					<v-skeleton-loader
 						v-if="weekOutcomesStore.loadingCalculations"
 						class="ma-0 pa-0 mx-auto text-center"
@@ -179,12 +190,42 @@ const winOutcomesPercent = (name: string) => {
 						width="3em"
 					>
 					</v-skeleton-loader>
-					<template v-else> {{ winOutcomesPercent(playerPicks.name) }}% </template>
+					<template v-else>
+						{{
+							displayPercentage(
+								weekOutcomesStore.liveStatsComputed.winningOutcomesPercent[
+									playerPicks.name
+								]
+							)
+						}}
+					</template>
 				</td>
-				<td class="border-e" :class="getEvTdStyle(playerPicks.name)">
-					{{ picksStore.seasonEvs ? picksStore.seasonEvs[playerPicks.name] : '-' }}
+				<td
+					class="border-e"
+					:class="getEvTdStyle(playerPicks.name)"
+					v-if="tableStore.showOptionalColumns.seasonPrizeChance"
+				>
+					{{ displayPercentage(picksStore.seasonEvs?.[playerPicks.name].chance) }}
 				</td>
-				<td class="border-e" :class="getEvChangeTdStyle(playerPicks.name)">
+				<td
+					class="border-e"
+					:class="getEvTdStyle(playerPicks.name)"
+					v-if="tableStore.showOptionalColumns.chanceMake100"
+				>
+					{{ displayPercentage(picksStore.seasonEvs?.[playerPicks.name].chanceOver100) }}
+				</td>
+				<td
+					class="border-e"
+					:class="getEvTdStyle(playerPicks.name)"
+					v-if="tableStore.showOptionalColumns.seasonEv"
+				>
+					{{ picksStore.seasonEvs ? picksStore.seasonEvs[playerPicks.name].money : '-' }}
+				</td>
+				<td
+					class="border-e"
+					:class="getEvChangeTdStyle(playerPicks.name)"
+					v-if="tableStore.showOptionalColumns.evChange"
+				>
 					{{ picksStore.seasonEvsChange[playerPicks.name] ?? '-' }}
 				</td>
 			</tr>
