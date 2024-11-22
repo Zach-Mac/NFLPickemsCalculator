@@ -24,12 +24,8 @@ function setRandomNums() {
 
 const evalFunctionInput = useStorage('evalFunctionInput', '')
 
-const evalFunction = computed(() => {
-	try {
+const evalFunction = computed<((x: number, y: number, a: number) => boolean)>(() => {
 		return (x: number, y: number, a: number) => eval(evalFunctionInput.value)
-	} catch (e) {
-		return e
-	}
 })
 
 function checkCorrect() {
@@ -67,6 +63,7 @@ function clickNum(num: number) {
 // get button width
 const button = ref(null as VNodeRef | null)
 const { width } = useElementSize(button)
+const buttonHeight = computed(() => width.value * 0.8)
 </script>
 
 <template>
@@ -164,21 +161,28 @@ const { width } = useElementSize(button)
 
     <!-- numeric keypad -->
     <v-container>
-        <v-row v-for="i in [3,2,1]" no-gutters>
+        <v-row v-for="i in [3,2,1]" no-gutters >
             <v-col v-for="j in 3" :key="j">
-                <button ref="button" @click="clickNum(3*(i-1)+j)" :style="{height: width + 'px'}" class="w-100">{{ 3*(i-1)+j }}</button>
+                <button ref="button" @click="clickNum(3*(i-1)+j)" :style="{height: buttonHeight + 'px'}" class="w-100 num-button">{{ 3*(i-1)+j }}</button>
             </v-col>
         </v-row>
-        <v-row no-gutters>
+        <v-row no-gutters >
             <v-col>
-                <button @click="clickNum(-1)" :style="{height: width + 'px'}" class="w-100">-</button>
+                <button @click="clickNum(-1)" :style="{height: buttonHeight + 'px'}" class="w-100 num-button">-</button>
             </v-col>
             <v-col>
-                <button @click="clickNum(0)" :style="{height: width + 'px'}" class="w-100">0</button>
+                <button @click="clickNum(0)" :style="{height: buttonHeight + 'px'}" class="w-100 num-button">0</button>
             </v-col>
             <v-col>
-                <button @click="clickNum(-2)" :style="{height: width + 'px'}" class="w-100">Del</button>
+                <button @click="clickNum(-2)" :style="{height: buttonHeight + 'px'}" class="w-100 num-button">Del</button>
             </v-col>
         </v-row>
-        </v-container>
+    </v-container>
 </template>
+
+<style scoped>
+.num-button {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+</style>
