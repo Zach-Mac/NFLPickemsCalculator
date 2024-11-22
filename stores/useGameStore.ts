@@ -253,7 +253,6 @@ export const useGamesStore = defineStore('games', () => {
 			const scoreboard = await espnApi.getScoreboard(selectedWeek.value)
 			apiLoading.value = false
 			espnScoreboard.value = scoreboard
-
 			setMetadata(scoreboard)
 			setGameData(scoreboard.events)
 			lastEspnUpdate.value = Date.now()

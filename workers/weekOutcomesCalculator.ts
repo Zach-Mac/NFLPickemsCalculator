@@ -1,3 +1,5 @@
+import { getUserOutcomeInputData, getUserOutcome } from '@/utils/weekOutcomesCalculatorUtils'
+
 const blankPositionStats = {
 	numWinningOutcomes: 0,
 	winningOutcomesPercent: 0,
