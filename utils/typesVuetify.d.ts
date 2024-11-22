@@ -1,4 +1,5 @@
 import type { UnwrapRef, FunctionalComponent } from 'vue'
+import { VDataTable } from 'vuetify/components'
 
 export type SelectItemKey<T = Record<string, any>> =
 	| boolean
@@ -8,31 +9,32 @@ export type SelectItemKey<T = Record<string, any>> =
 	| readonly (string | number)[] // Nested lookup by key, each array item is a key in the next level
 	| ((item: T, fallback?: any) => any)
 
-export type DataTableHeader<T = Record<string, any>> = {
-	key?: 'data-table-group' | 'data-table-select' | 'data-table-expand' | (string & {})
-	value?: SelectItemKey<T>
-	title?: string
+export type DataTableHeader = VDataTable['$props']['headers']
 
-	fixed?: boolean
-	align?: 'start' | 'end' | 'center'
-
-	width?: number | string
-	minWidth?: string
-	maxWidth?: string
-	nowrap?: boolean
-
-	headerProps?: Record<string, any>
-	// cellProps?: HeaderCellProps
-
-	sortable?: boolean
-	// sort?: DataTableCompareFunction
-	// sortRaw?: DataTableCompareFunction
-	// filter?: FilterFunction
-
-	mobile?: boolean
-
-	children?: DataTableHeader<T>[]
-}
+// export type DataTableHeader<T = Record<string, any>> = {
+// 	key?: (string & {}) | 'data-table-group' | 'data-table-select' | 'data-table-expand' | undefined
+// 	value?: SelectItemKey<any>
+// 	title?: string | undefined
+// 	fixed?: boolean | undefined
+// 	align?: 'start' | 'end' | 'center' | undefined
+// 	width?: string | number | undefined
+// 	minWidth?: string | undefined
+// 	maxWidth?: string | undefined
+// 	nowrap?: boolean | undefined
+// 	headerProps?: { [x: string]: any } | undefined
+// 	cellProps?:
+// 		| { [x: string]: any }
+// 		| ((
+// 				data: Pick<ItemKeySlot<any>, 'value' | 'item' | 'index' | 'internalItem'>
+// 		  ) => Record<string, any>)
+// 		| undefined
+// 	sortable?: boolean | undefined
+// 	sort?: DataTableCompareFunction<any> | undefined
+// 	sortRaw?: DataTableCompareFunction<any> | undefined
+// 	filter?: FilterFunction | undefined
+// 	mobile?: boolean | undefined
+// 	children?: any[] | undefined
+// }
 
 export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'children'> & {
 	key: string | null
@@ -46,16 +48,27 @@ export type InternalDataTableHeader = Omit<DataTableHeader, 'key' | 'value' | 'c
 	children?: InternalDataTableHeader[]
 }
 
+// interface HeadersSlotProps {
+// 	headers: InternalDataTableHeader[][]
+// 	columns: InternalDataTableHeader[]
+// 	sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
+// 	// someSelected: UnwrapRef<ReturnType<typeof provideSelection>['someSelected']>
+// 	// allSelected: UnwrapRef<ReturnType<typeof provideSelection>['allSelected']>
+// 	someSelected: boolean
+// 	allSelected: boolean
+// 	toggleSort: ReturnType<typeof provideSort>['toggleSort']
+// 	// selectAll: ReturnType<typeof provideSelection>['selectAll']
+// 	selectAll: (value: boolean) => void
+// 	getSortIcon: (column: InternalDataTableHeader) => IconValue
+// 	isSorted: ReturnType<typeof provideSort>['isSorted']
+// }
 export interface HeadersSlotProps {
 	headers: InternalDataTableHeader[][]
 	columns: InternalDataTableHeader[]
 	sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
-	// someSelected: UnwrapRef<ReturnType<typeof provideSelection>['someSelected']>
-	// allSelected: UnwrapRef<ReturnType<typeof provideSelection>['allSelected']>
 	someSelected: boolean
 	allSelected: boolean
 	toggleSort: ReturnType<typeof provideSort>['toggleSort']
-	// selectAll: ReturnType<typeof provideSelection>['selectAll']
 	selectAll: (value: boolean) => void
 	getSortIcon: (column: InternalDataTableHeader) => IconValue
 	isSorted: ReturnType<typeof provideSort>['isSorted']

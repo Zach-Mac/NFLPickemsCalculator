@@ -1,78 +1,37 @@
 export interface UserOutcome {
 	contenderForFirst: boolean
-	contenderForSecond: boolean
+	contenderForTop2: boolean
 	tiedWith: number
 	pointsAwayFromTopScore: number
 	missedWins: string[]
 	nfeloChance: number
+	espnChance: number
 	position: number
 	numTiedForFirst: number
 }
 
+interface UserPositionStats {
+	numWinningOutcomes: number
+	winningOutcomesPercent: number
+	nfeloChance: number
+	espnChance: number
+}
+
 export interface UserStats {
-	firstPlaceOutcomes: {
-		weekOutcome: string[]
-		userOutcome: UserOutcome
-	}[][]
-	secondPlaceOutcomes: {
-		weekOutcome: string[]
-		userOutcome: UserOutcome
-	}[][]
-	firstPlace: {
-		nfeloChance: number
-		numWinningOutcomes: number
-		winningOutcomesPercentage: number
-	}
-	top2: {
-		nfeloChance: number
-		numWinningOutcomes: number
-		winningOutcomesPercentage: number
-	}
-}
-interface PlayerRanking {
-	name: string
-	score: number
-	tieBreaker: number
+	firstPlace: Record<string, UserPositionStats>
+	top2: Record<string, UserPositionStats>
 }
 
-function findInsertionIndex(arr: PlayerRanking[], ranking: PlayerRanking): number {
-	let low = 0
-	let high = arr.length - 1
-
-	while (low <= high) {
-		const mid = Math.floor((low + high) / 2)
-
-		// Compare scores first
-		if (arr[mid].score === ranking.score) {
-			// If scores equal, compare tieBreakers
-			if (arr[mid].tieBreaker > ranking.tieBreaker) {
-				low = mid + 1
-			} else {
-				high = mid - 1
-			}
-		} else if (arr[mid].score < ranking.score) {
-			high = mid - 1
-		} else {
-			low = mid + 1
-		}
-	}
-
-	return low
+export interface WinningOutcome {
+	weekOutcome: string[]
+	userOutcome: UserOutcome
 }
 
-function generateSimilarBoolOutcomes(boolWeekOutcome: boolean[]): boolean[][] {
-	const similarOutcomes: boolean[][] = []
-	for (let i = 0; i < boolWeekOutcome.length; i++) {
-		const copy = boolWeekOutcome.slice()
-		if (copy[i]) {
-			copy[i] = false
-			similarOutcomes.push(copy)
-		}
-	}
-	return similarOutcomes
+export interface SingleUsersStats extends UserPositionStats {
+	winningOutcomes: WinningOutcome[][]
 }
 
-export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
+export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 	const picksStore = usePicksStore()
 	const gamesStore = useGamesStore()
 	const nfeloStore = useNfeloStore()
@@ -80,7 +39,6 @@ export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
 	// State
 	const secondPlaceIsWinning = ref(false)
 	const filterGames = ref(GAME_FILTERS.ALL)
-	const statsForAllUsers = ref<Record<string, UserStats>>({})
 	const maxGamesToSimLive = ref(16)
 	const loadingCalculations = ref(false)
 	// filterGames.value = GAME_FILTERS.ALL
@@ -108,71 +66,58 @@ export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
 	)
 
 	// Getters
-	const winningOutcomes = computed(() => {
-		let startTime, endTime, duration
-
-		startTime = performance.now()
-
-		const output: { weekOutcome: string[]; userOutcome: UserOutcome }[][] = []
-		const ideal = Array(numGames.value).fill(true)
-		const next = new ArraySet()
-		next.add(ideal)
-
-		let index = 0
-		while (next.size() > 0) {
-			if (index++ > 100) {
-				throw Error('Too many iterations to find winningOutcomes')
-				break
-			}
-
-			const currentGroup = next.values()
-			next.clear()
-			const toRemove = []
-
-			for (const currentBoolWeekOutcome of currentGroup) {
-				const currentWeekOutcome = convertBoolWeekOutcomeToTeamNames(currentBoolWeekOutcome)
-				const userOutcome = getUserOutcome(currentWeekOutcome)
-
-				const similarOutcomes = generateSimilarBoolOutcomes(currentBoolWeekOutcome)
-
-				if (userOutcomeWinning(userOutcome)) {
-					if (!output[userOutcome.missedWins.length])
-						output[userOutcome.missedWins.length] = []
-
-					output[userOutcome.missedWins.length].push({
-						weekOutcome: currentWeekOutcome,
-						userOutcome
-					})
-
-					next.addAll(similarOutcomes)
-				} else {
-					toRemove.push(...similarOutcomes)
-				}
-			}
-			next.removeAll(toRemove)
-		}
-
-		for (let i = 0; i < output.length; i++) {
-			if (!output[i]) output[i] = []
-		}
-
-		endTime = performance.now()
-		console.log('Total time:', endTime - startTime)
-
-		return output
+	const userStats = ref({
+		numWinningOutcomes: 0,
+		winningOutcomesPercent: 0,
+		nfeloChance: 0,
+		espnChance: 0,
+		winningOutcomes: []
+	} as SingleUsersStats)
+	const mustWins = ref([] as string[])
+	const mustWinsWinChances = ref({
+		nfelo: undefined as number | undefined,
+		espn: undefined as number | undefined
 	})
+	watchEffect(() => {
+		let start, end
+		start = performance.now()
 
-	const numWinningOutcomes = computed(() =>
-		Object.values(winningOutcomes.value).reduce((acc, outcomes) => acc + outcomes.length, 0)
-	)
+		if (!picksStore.picksData.length || !picksStore.user.name) return
+		userStats.value = runFunctionRaw(
+			getSingleUsersStats,
+			picksStore.user.name,
+			picksStore.picksData,
+			ignoredGames.value,
+			gamesStore.gameData,
+			idealOutcome.value,
+			worstOutcome.value,
+			nfeloStore.nfeloTeamsWinChance,
+			gamesStore.espnTeamsWinChances,
+			secondPlaceIsWinning.value
+		)
+
+		const allOutcomes = userStats.value.winningOutcomes.flat()
+		mustWins.value = idealOutcome.value.filter((team, i) => {
+			if (ignoredGames.value.includes(i)) return false
+			return allOutcomes.every(outcome => outcome.weekOutcome.includes(team))
+		})
+
+		mustWinsWinChances.value.nfelo = mustWins.value.reduce((acc, team) => {
+			return (acc * nfeloStore.nfeloTeamsWinChance[team]) / 100
+		}, 100)
+
+		mustWinsWinChances.value.espn = mustWins.value.reduce((acc, team) => {
+			return (acc * gamesStore.espnTeamsWinChances[team]) / 100
+		}, 100)
+
+		end = performance.now()
+		console.log(`Time taken to calculate userStats: ${end - start}ms`)
+	})
 	const numPossibleOutcomes = computed(() => Math.pow(2, numGames.value))
 
-	const importantWinningOutcomes = computed(() => {
-		return winningOutcomes.value[winningOutcomes.value.length - 1]
-	})
 	const gamesImportanceScores = computed(() => {
-		const allWinningOutcomes = winningOutcomes.value.flat()
-		const numHalfOutcomes = numWinningOutcomes.value / 2
+		const allWinningOutcomes = userStats.value.winningOutcomes.flat()
+		const numHalfOutcomes = userStats.value.numWinningOutcomes / 2
 
 		return idealOutcome.value.map((team, index) => {
 			if (ignoredGames.value.includes(index) || !allWinningOutcomes.length) return 0
@@ -183,184 +128,48 @@ export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
 			return ((count - numHalfOutcomes) / numHalfOutcomes) * 100
 		})
 	})
-	const mustWins = computed(() => {
-		const allOutcomes = winningOutcomes.value.flat()
-		const mustWins = idealOutcome.value.filter((team, i) => {
-			if (ignoredGames.value.includes(i)) return false
-			return allOutcomes.every(outcome => outcome.weekOutcome.includes(team))
-		})
-		return mustWins
+
+	const liveStats = ref<UserStats>({
+		firstPlace: {} as Record<string, UserPositionStats>,
+		top2: {} as Record<string, UserPositionStats>
 	})
-
-	const nfeloWinChance = computed(() => {
-		return winningOutcomes.value.flat().reduce((acc, outcome) => {
-			return acc + outcome.userOutcome.nfeloChance
-		}, 0)
+	picksStore.picksData.forEach(player => {
+		liveStats.value.firstPlace[player.name] = {
+			numWinningOutcomes: 0,
+			winningOutcomesPercent: 0,
+			nfeloChance: 0,
+			espnChance: 0
+		}
+		liveStats.value.top2[player.name] = {
+			numWinningOutcomes: 0,
+			winningOutcomesPercent: 0,
+			nfeloChance: 0,
+			espnChance: 0
+		}
 	})
-	const mustWinsWinChance = computed(() => {
-		return mustWins.value.reduce((acc, team) => {
-			return (acc * nfeloStore.nfeloTeamsWinChance[team]) / 100
-		}, 100)
-	})
-
-	// Helper Functions
-	function getUserOutcome(weekOutcome: string[]): UserOutcome {
-		let userRanking: PlayerRanking | undefined
-
-		const playerRankings: PlayerRanking[] = [] as PlayerRanking[]
-		picksStore.picksData.forEach(player => {
-			let score = 0
-			for (let i = 0; i < player.picks.length; i++) {
-				if (player.picks[i] === weekOutcome[i]) score++
-			}
-
-			const ranking = {
-				name: player.name,
-				score,
-				tieBreaker: player.tieBreaker
-			}
-
-			if (player.name === picksStore.user.name) {
-				userRanking = ranking
-			}
-
-			// Find correct insertion point and insert
-			const insertIndex = findInsertionIndex(playerRankings, ranking)
-			playerRankings.splice(insertIndex, 0, ranking)
-		})
-
-		const numTiedForFirst = playerRankings.filter(
-			player => player.score == playerRankings[0].score
-		).length
-
-		const numPlayersAtEachScore: Record<number, number> = {}
-		playerRankings.forEach(player => {
-			if (!numPlayersAtEachScore[player.score]) numPlayersAtEachScore[player.score] = 1
-			else numPlayersAtEachScore[player.score]++
-		})
-
-		if (!userRanking)
-			return {
-				contenderForFirst: false,
-				contenderForSecond: false,
-				tiedWith: -1,
-				pointsAwayFromTopScore: -1,
-				missedWins: [],
-				nfeloChance: 0,
-				position: -1,
-				numTiedForFirst: -1
-			}
-
-		const position =
-			playerRankings.filter(player => player.score > userRanking!.score).length + 1
-
-		const contenderForFirst = position === 1
-		const contenderForSecond = position === 2 && numTiedForFirst === 1
-
-		const tiedWith = numPlayersAtEachScore[userRanking.score] - 1
-		const pointsAwayFromTopScore = playerRankings[0].score - userRanking.score
-
-		const missedWins = weekOutcome
-			.map((team, i) => {
-				if (team == idealOutcome.value[i]) return ''
-				return team
-			})
-			.filter(str => str != '')
-
-		let nfeloChance = 100
-		for (let i = 0; i < weekOutcome.length; i++) {
-			if (!ignoredGames.value.includes(i)) {
-				nfeloChance *= nfeloStore.nfeloTeamsWinChance[weekOutcome[i]] / 100
-			}
-		}
-
-		return {
-			contenderForFirst,
-			contenderForSecond,
-			tiedWith,
-			pointsAwayFromTopScore,
-			missedWins,
-			nfeloChance,
-			position,
-			numTiedForFirst
-		}
-	}
-	function convertBoolWeekOutcomeToTeamNames(boolWeekOutcome: boolean[]): string[] {
-		let j = 0
-
-		return idealOutcome.value.map((team, i) => {
-			if (ignoredGames.value.includes(i)) return gamesStore.gameData[i].winner
-			return boolWeekOutcome[j++] ? team : worstOutcome.value[i]
-		})
-	}
-	function userOutcomeWinning(userOutcome: UserOutcome) {
-		return (
-			userOutcome.contenderForFirst ||
-			(secondPlaceIsWinning.value && userOutcome.contenderForSecond)
-		)
-	}
-
-	interface LiveStatsInternal {
-		firstPlace: {
-			nfeloChance: Record<string, number>
-			winningOutcomesPercent: Record<string, number>
-		}
-		top2: {
-			nfeloChance: Record<string, number>
-			winningOutcomesPercent: Record<string, number>
-		}
-	}
 	const calcLiveStats = async () => {
+		if (!picksStore.picksData.length) return liveStats.value
+
 		const pickedGames = []
 		for (let i = 0; i < gamesStore.gameData.length; i++) {
 			if (gamesStore.gameData[i].winner) pickedGames.push(i)
 		}
 
-		const liveStats: LiveStatsInternal = {
-			firstPlace: {
-				nfeloChance: {},
-				winningOutcomesPercent: {}
-			},
-			top2: {
-				nfeloChance: {},
-				winningOutcomesPercent: {}
-			}
-		}
-
-		const numGamesToSim = gamesStore.gameData.length - pickedGames.length
-		if (numGamesToSim > maxGamesToSimLive.value) return liveStats
+		// const numGamesToSim = gamesStore.gameData.length - pickedGames.length
+		// if (numGamesToSim > maxGamesToSimLive.value) return liveStats
 
 		loadingCalculations.value = true
 		const stats = await getAllUsersStats(
 			deepToRaw(picksStore.picksData),
 			deepToRaw(pickedGames),
 			deepToRaw(gamesStore.gameData),
-			deepToRaw(nfeloStore.nfeloTeamsWinChance)
+			deepToRaw(nfeloStore.nfeloTeamsWinChance),
+			deepToRaw(gamesStore.espnTeamsWinChances)
 		)
-
-		for (const userName of Object.keys(stats)) {
-			const userStats = stats[userName]
-			liveStats.firstPlace.nfeloChance[userName] = userStats.firstPlace.nfeloChance
-			liveStats.top2.nfeloChance[userName] = userStats.top2.nfeloChance
-			liveStats.firstPlace.winningOutcomesPercent[userName] =
-				userStats.firstPlace.winningOutcomesPercentage
-			liveStats.top2.winningOutcomesPercent[userName] =
-				userStats.top2.winningOutcomesPercentage
-		}
 		loadingCalculations.value = false
 
-		return liveStats
+		return stats
 	}
-	const liveStats = ref({
-		firstPlace: {
-			nfeloChance: {},
-			winningOutcomesPercent: {}
-		},
-		top2: {
-			nfeloChance: {},
-			winningOutcomesPercent: {}
-		}
-	} as LiveStatsInternal)
 	watch(
 		() => [gamesStore.gameData, picksStore.picksData, nfeloStore.nfeloTeamsWinChance],
 		async () => {
@@ -368,20 +177,10 @@ export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
 		},
 		{ deep: true, immediate: true }
 	)
-
 	const liveStatsComputed = computed(() => {
 		if (secondPlaceIsWinning.value) return liveStats.value.top2
 		return liveStats.value.firstPlace
 	})
-
-	async function getStatsForAllUsers() {
-		statsForAllUsers.value = await getAllUsersStats(
-			picksStore.picksData,
-			ignoredGames.value,
-			unref(toRaw(unref(gamesStore.gameData))),
-			nfeloStore.nfeloTeamsWinChance
-		)
-	}
 
 	return {
 		// State
@@ -390,18 +189,11 @@ export const useWeekOutcomeStore = defineStore('weekOutcomeCombos', () => {
 		maxGamesToSimLive,
 		loadingCalculations,
 		// Getters
-		winningOutcomes,
-		statsForAllUsers,
-		importantWinningOutcomes,
+		userStats: readonly(userStats),
+		mustWins: readonly(mustWins),
+		mustWinsWinChance: readonly(mustWinsWinChances),
 		gamesImportanceScores,
-		mustWins,
-		numWinningOutcomes,
 		numPossibleOutcomes,
-		nfeloWinChance,
-		mustWinsWinChance,
-		liveStatsComputed,
-		// Actions
-		getStatsForAllUsers
-		// getAllOutcomesForAllUsers
+		liveStatsComputed
 	}
 })

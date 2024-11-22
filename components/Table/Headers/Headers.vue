@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { UnwrapRef } from 'vue'
-import type { IconValue, InternalDataTableHeader, provideSort } from '~/utils/typesVuetify'
+import { VDataTable } from 'vuetify/components'
 
 const gamesStore = useGamesStore()
 const tableStore = useTableStore()
@@ -17,18 +16,15 @@ const weekText = 'Week'
 const seasonText = 'Season'
 const tieBreakerText = 'Tie Breaker'
 
-interface HeadersSlotProps {
-	headers: InternalDataTableHeader[][]
-	columns: InternalDataTableHeader[]
-	sortBy: UnwrapRef<ReturnType<typeof provideSort>['sortBy']>
-	someSelected: boolean
-	allSelected: boolean
-	toggleSort: ReturnType<typeof provideSort>['toggleSort']
-	selectAll: (value: boolean) => void
-	getSortIcon: (column: InternalDataTableHeader) => IconValue
-	isSorted: ReturnType<typeof provideSort>['isSorted']
+type VDataTableSlots = VDataTable['$slots']
+type VDataTableHeadersSlot = VDataTableSlots['headers']
+type VDataTableHeadersSlotProps = Parameters<NonNullable<VDataTableHeadersSlot>>[0]
+
+interface Props {
+	columns: VDataTableHeadersSlotProps['columns']
+	isSorted: VDataTableHeadersSlotProps['isSorted']
 }
-const props = defineProps<HeadersSlotProps>()
+const props = defineProps<Props>()
 
 const ballPossessionClasses = 'bg-primary-lighten-3 text-black px-1 py-05 border'
 
@@ -81,20 +77,10 @@ function getGameQuarterText(game: Game) {
 function onGameClick(game: Game, index: number) {
 	if (tableStore.editGamesMode) {
 		gamesStore.editGame(index)
-	} else {
 	}
 }
 
 const componentType = computed(() => (tableStore.editGamesMode ? 'template' : 'a'))
-
-const lastThContent = ref()
-const { width, height } = useElementSize(lastThContent)
-const lastThStyle = computed(() => {
-	const w = width.value / 1.8
-	return {
-		maxWidth: w + 'px !important'
-	}
-})
 
 const headerRow = ref()
 const numHeaders = computed(() => headerRow.value?.children.length ?? 0)
@@ -168,8 +154,12 @@ provide('numHeaders', numHeaders)
 			<v-tooltip v-if="tableStore.editGamesMode" activator="parent" location="top">
 				Click to edit game
 			</v-tooltip>
-			<v-tooltip v-else-if="game.espn.situation" activator="parent" location="top">
-				{{ game.espn.situation?.lastPlay.text }}
+			<v-tooltip
+				v-else-if="game.espn.situation && game.espn.situation.lastPlay"
+				activator="parent"
+				location="top"
+			>
+				{{ game.espn.situation?.lastPlay?.text }}
 				Click to see Gamecast
 			</v-tooltip>
 		</th>
@@ -189,15 +179,15 @@ provide('numHeaders', numHeaders)
 		<RotatedTableHeader>
 			{{ tieBreakerText }}
 		</RotatedTableHeader>
-		<template v-for="(value, columnKey) in tableStore.showOptionalColumns" :key="columnKey">
+		<template v-for="(value, columnKey) in tableStore.optionalColumns" :key="columnKey">
 			<RotatedTableHeader
-				v-if="tableStore.showOptionalColumns[columnKey]"
+				v-if="tableStore.optionalColumns[columnKey]"
 				@click="tableStore.sortBy = tableStore.sortByOptions[columnKey]"
 			>
 				{{ tableStore.getHeaderTitle(columnKey) }}
 				<SortIcon :columns="columns" :isSorted="isSorted" :keyToSortBy="columnKey" />
 				<v-tooltip activator="parent" location="top">
-					{{ tableStore.headerTooltips[columnKey] }}
+					{{ tableStore.getHeaderSubtitle(columnKey) }}
 				</v-tooltip>
 			</RotatedTableHeader>
 		</template>

@@ -1,12 +1,14 @@
 import { useStorage } from '@vueuse/core'
 
 export interface PlayerItem {
+	rank: number
 	name: string
 	picks: string[]
 	weekTotal: number
 	seasonTotal: number
 	tieBreaker: number
 	nfeloWinChance: number
+	espnWinChance: number
 	winningOutcomesPercent: number
 	seasonPrizeChance: number
 	chanceMake100: number
@@ -15,73 +17,122 @@ export interface PlayerItem {
 }
 export type HeaderKey = keyof PlayerItem
 
-const headers = [
+type Header = {
+	key: HeaderKey
+	value: HeaderKey
+	title: string
+	subtitle?: string
+	sortable: boolean
+}
+
+const baseHeaders: Header[] = [
 	{ key: 'rank', title: 'Rank', value: 'rank', sortable: false },
 	{ key: 'name', title: 'Name', value: 'name', sortable: true },
 	{ key: 'weekTotal', title: 'Week Total', value: 'weekTotal', sortable: true },
 	{ key: 'seasonTotal', title: 'Season Total', value: 'seasonTotal', sortable: true },
-	{ key: 'tieBreaker', title: 'Tie Breaker', value: 'tieBreaker', sortable: true },
+	{ key: 'tieBreaker', title: 'Tie Breaker', value: 'tieBreaker', sortable: true }
+]
+const optionalHeadersItems: Header[] = [
 	{
 		key: 'nfeloWinChance',
-		title: 'nfelo Win %',
 		value: 'nfeloWinChance',
+		title: 'nfelo Win %',
+		subtitle: 'Chance of winning based on nfelo predictions',
+		sortable: true
+	},
+	{
+		key: 'espnWinChance',
+		value: 'espnWinChance',
+		title: 'ESPN Win %',
+		subtitle: 'Chance of winning based on ESPN predictions',
 		sortable: true
 	},
 	{
 		key: 'winningOutcomesPercent',
-		title: 'Winning Outcomes %',
 		value: 'winningOutcomesPercent',
+		title: 'Win Outcomes %',
+		subtitle: 'Percentage of winning outcomes with selected game winners',
 		sortable: true
 	},
 	{
 		key: 'seasonPrizeChance',
-		title: 'Season Prize %',
 		value: 'seasonPrizeChance',
+		title: 'Season Prize %',
+		subtitle: 'Chance to win money at end of season',
 		sortable: true
 	},
 	{
 		key: 'chanceMake100',
-		title: 'Chance $100',
 		value: 'chanceMake100',
+		title: 'Chance $100',
+		subtitle: 'Chance to win $100 or more at end of season',
 		sortable: true
 	},
-	{ key: 'seasonEv', title: 'Season EV', value: 'seasonEv', sortable: true },
-	{ key: 'evChange', title: 'EV Δ', value: 'evChange', sortable: true }
+	{
+		key: 'seasonEv',
+		value: 'seasonEv',
+		title: 'Season EV',
+		subtitle: 'Expected season winnings based on selected winners (in $)',
+		sortable: true
+	},
+	{
+		key: 'evChange',
+		value: 'evChange',
+		title: 'EV Δ',
+		subtitle: 'Difference in expected season winnings from last week (in $)',
+		sortable: true
+	}
+]
+const headers = baseHeaders.concat(optionalHeadersItems)
+
+type SettingsValue = 'highlightTiedRows'
+const settingsItems = [
+	{
+		title: 'Highlight tied rows',
+		subtitle: 'Highlight tied rows in the table',
+		value: 'highlightTiedRows' as SettingsValue
+	}
 ]
 
-const headerTooltips: Partial<Record<HeaderKey, string>> = {
-	nfeloWinChance: 'Chance of winning based on nfelo predictions',
-	winningOutcomesPercent: 'Percentage of winning outcomes with selected game winners',
-	seasonPrizeChance: 'Chance to win money at end of season',
-	chanceMake100: 'Chance to win $100 or more at end of season',
-	seasonEv: 'Expected season winnings based on selected winners (in $)',
-	evChange: 'Difference in expected season winnings from last week (in $)'
-}
-
 export const useTableStore = defineStore('table', () => {
+	const picksStore = usePicksStore()
+	const weekOutcomesStore = useWeekOutcomesStore()
+
 	const editGamesMode = ref(false)
-	// const showOptionalColumns = ref({
-	// 	nfeloWinChance: true,
-	// 	winningOutcomesPercent: true,
-	// 	seasonPrizeChance: true,
-	// 	chanceMake100: true,
-	// 	seasonEv: true,
-	// 	evChange: true
-	// } as Record<HeaderKey, boolean>)
-	const showOptionalColumns: Ref<Partial<Record<HeaderKey, boolean>>> = useStorage(
-		'showOptionalColumns',
-		{
-			nfeloWinChance: true,
-			winningOutcomesPercent: true,
-			seasonPrizeChance: true,
-			chanceMake100: true,
-			seasonEv: true,
-			evChange: true
-		}
-	)
+
+	const optionalColumnsSelection = useStorage('optionalHeadersSelection', [
+		'nfeloWinChance',
+		'espnWinChance',
+		'winningOutcomesPercent',
+		'seasonPrizeChance',
+		'chanceMake100',
+		'seasonEv',
+		'evChange'
+	] as HeaderKey[])
+	const optionalColumns = computed(() => {
+		return Object.fromEntries(
+			optionalHeadersItems.map(item => [
+				item.value,
+				optionalColumnsSelection.value.includes(item.value)
+			])
+		) as Record<HeaderKey, boolean>
+	})
+
+	const settingsSelection = useStorage('settingsSelection', [
+		'highlightTiedRows'
+	] as SettingsValue[])
+
+	const settings = computed(() => {
+		return Object.fromEntries(
+			settingsItems.map(item => [item.value, settingsSelection.value.includes(item.value)])
+		) as Record<SettingsValue, boolean>
+	})
 
 	function getHeaderTitle(key: HeaderKey) {
 		return headers.find(header => header.key === key)?.title || key
+	}
+	function getHeaderSubtitle(key: HeaderKey) {
+		return headers.find(header => header.key === key)?.subtitle || ''
 	}
 
 	interface SortBy {
@@ -100,21 +151,53 @@ export const useTableStore = defineStore('table', () => {
 		tieBreaker: [{ key: 'tieBreaker', order: 'desc' }],
 		name: [{ key: 'name', order: 'asc' }],
 		nfeloWinChance: [{ key: 'nfeloWinChance', order: 'desc' }],
+		espnWinChance: [{ key: 'espnWinChance', order: 'desc' }],
 		winningOutcomesPercent: [{ key: 'winningOutcomesPercent', order: 'desc' }],
 		seasonPrizeChance: [{ key: 'seasonPrizeChance', order: 'desc' }],
 		chanceMake100: [{ key: 'chanceMake100', order: 'desc' }],
 		seasonEv: [{ key: 'seasonEv', order: 'desc' }],
 		evChange: [{ key: 'evChange', order: 'desc' }],
+		rank: [],
 		picks: []
 	}
 	const sortBy = ref(sortByOptions.weekTotal)
 
+	const items = computed<PlayerItem[]>(() => {
+		return picksStore.picksData.map(playerPicks => {
+			return {
+				rank: 0,
+				name: playerPicks.name,
+				picks: playerPicks.picks,
+				weekTotal: picksStore.playerTotals[playerPicks.name]?.weekTotal || 0,
+				seasonTotal: picksStore.playerTotals[playerPicks.name]?.seasonTotal || 0,
+				tieBreaker: playerPicks.tieBreaker,
+				nfeloWinChance:
+					weekOutcomesStore.liveStatsComputed[playerPicks.name]?.nfeloChance || 0,
+				espnWinChance:
+					weekOutcomesStore.liveStatsComputed[playerPicks.name]?.espnChance || 0,
+				winningOutcomesPercent:
+					weekOutcomesStore.liveStatsComputed[playerPicks.name]?.winningOutcomesPercent ||
+					0,
+				seasonPrizeChance: picksStore.seasonEvs?.[playerPicks.name]?.chance || 0,
+				chanceMake100: picksStore.seasonEvs?.[playerPicks.name]?.chanceOver100 || 0,
+				seasonEv: picksStore.seasonEvs?.[playerPicks.name]?.money || 0,
+				evChange: picksStore.seasonEvsChange?.[playerPicks.name] || 0
+			}
+		})
+	})
+
 	return {
+		settings,
+		settingsSelection,
+		settingsItems,
+		optionalColumns,
+		optionalColumnsSelection,
+		optionalHeadersItems,
+		items,
 		headers,
-		headerTooltips,
-		showOptionalColumns,
 		editGamesMode,
 		getHeaderTitle,
+		getHeaderSubtitle,
 		sortByOptions,
 		sortBy
 	}

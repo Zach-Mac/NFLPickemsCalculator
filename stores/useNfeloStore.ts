@@ -1,17 +1,19 @@
 import { useStorage } from '@vueuse/core'
 
-interface NfeloGame {
-	home: string
-	away: string
-	homeWinPercent: number
-	awayWinPercent: number
+const blankNfeloGame = {
+	home: '',
+	away: '',
+	homeWinPercent: 0,
+	awayWinPercent: 0
 }
+type NfeloGame = typeof blankNfeloGame
 
 export const useNfeloStore = defineStore('nfelo', () => {
 	const picksStore = usePicksStore()
 	const gamesStore = useGamesStore()
 	// State
 	const nfeloGamesInput = useStorage('nfeloPaste', '')
+	const nfeloGamesValidated = ref(false)
 
 	// Getters
 	const nfeloGames = computed(() => {
@@ -35,8 +37,10 @@ export const useNfeloStore = defineStore('nfelo', () => {
 				str => NFL_TEAM_NAMES.includes(str) && str != awayName
 			)
 
-			if (!homeName)
-				throw new Error('Home team not found for game: ' + gameStrSplit.join(' '))
+			if (!homeName) {
+				console.error('Home team not found for game:', gameStrSplit.join(' '))
+				nfeloGamesValidated.value = false
+			}
 
 			const awayWinPercent = Number(gameStrSplit.find(str => str.includes('%'))?.slice(0, -1))
 			const homeWinPercent = 100 - awayWinPercent
@@ -54,6 +58,7 @@ export const useNfeloStore = defineStore('nfelo', () => {
 			const nfeloGame = nfeloGames.find(g => g.home === team || g.away === team)
 			if (!nfeloGame) {
 				console.error(`No game found for team "${team}". nfeloGames:`, nfeloGames)
+				// return blankNfeloGame
 			}
 			return nfeloGame
 		})
@@ -65,14 +70,19 @@ export const useNfeloStore = defineStore('nfelo', () => {
 
 		return sorted
 	})
+	watchEffect(() => {
+		nfeloGamesValidated.value = validateNfeloGames()
+	})
 
-	const nfeloGamesValidated = computed(() => {
+	function validateNfeloGames() {
+		if (!nfeloGamesInput.value) return false
+		if (!picksStore.poolhostGameOrder.length) return true
+		if (!gamesStore.gameData.length) return true
 		if (!nfeloGames.value.length) return false
 
 		for (let i = 0; i < nfeloGames.value.length; i++) {
 			const nfeloGame = nfeloGames.value[i]
 			const game = gamesStore.gameData[i]
-			const pick = picksStore.user.picks[i]
 
 			if (!nfeloGame) {
 				console.error(
@@ -97,22 +107,10 @@ export const useNfeloStore = defineStore('nfelo', () => {
 				)
 				return false
 			}
-			if (pick != game.home && pick != game.away) {
-				console.error(
-					'nfeloGames validation failed:',
-					'pick:',
-					pick,
-					'game.home:',
-					game.home,
-					'game.away:',
-					game.away
-				)
-				return false
-			}
 		}
 
 		return true
-	})
+	}
 
 	const nfeloTeamsWinChance = computed(() => {
 		if (!nfeloGamesValidated.value) return {}

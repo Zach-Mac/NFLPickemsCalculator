@@ -1,14 +1,14 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
-const weekOutcomesStore = useWeekOutcomeStore()
-const { winningOutcomes } = storeToRefs(weekOutcomesStore)
+const weekOutcomesStore = useWeekOutcomesStore()
+const { userStats } = storeToRefs(weekOutcomesStore)
 
 const itemsPerPage = 5
 const page = ref(1)
-const tab = ref(winningOutcomes.value.length - 1)
+const tab = ref(userStats.value.winningOutcomes.length - 1)
 
-watch(winningOutcomes, () => {
-	tab.value = winningOutcomes.value.length - 1
+watch(userStats.value.winningOutcomes, () => {
+	tab.value = userStats.value.winningOutcomes.length - 1
 })
 watch(tab, () => {
 	page.value = 1
@@ -61,27 +61,19 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 				# Winning / # Total
 				<br />
 				<b>
-					{{ weekOutcomesStore.numWinningOutcomes }} /
+					{{ weekOutcomesStore.userStats.numWinningOutcomes }} /
 					{{ weekOutcomesStore.numPossibleOutcomes }}
 				</b>
 				<br />
-				<b>
-					{{
-						round(
-							(weekOutcomesStore.numWinningOutcomes /
-								weekOutcomesStore.numPossibleOutcomes) *
-								100,
-							2
-						)
-					}}%
-				</b>
+				<b> {{ round(weekOutcomesStore.userStats.winningOutcomesPercent, 2) }}% </b>
 			</p>
 		</v-col>
 		<v-col cols="auto" class="text-no-wrap">
-			<h2>nfelo Chance</h2>
-			<p>{{ round(weekOutcomesStore.nfeloWinChance, 2) }}%</p>
+			<h2>Chance</h2>
+			<p>nfelo: {{ round(weekOutcomesStore.userStats.nfeloChance, 2) }}%</p>
+			<p>espn: {{ round(weekOutcomesStore.userStats.espnChance, 2) }}%</p>
 		</v-col>
-		<v-col v-if="weekOutcomesStore.numWinningOutcomes > 0" cols="auto" class="">
+		<v-col v-if="weekOutcomesStore.userStats.numWinningOutcomes > 0" cols="auto" class="">
 			<h2>Must Wins</h2>
 			<p>
 				<template v-if="weekOutcomesStore.mustWins.length">
@@ -103,8 +95,12 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 						</span>
 					</b>
 					<br />
-					<template v-if="weekOutcomesStore.mustWinsWinChance">
-						Chance: {{ round(weekOutcomesStore.mustWinsWinChance, 2) }}%
+					<template v-if="weekOutcomesStore.mustWinsWinChance.nfelo">
+						nfelo chance: {{ round(weekOutcomesStore.mustWinsWinChance.nfelo, 2) }}%
+					</template>
+					<br />
+					<template v-if="weekOutcomesStore.mustWinsWinChance.espn">
+						espn chance: {{ round(weekOutcomesStore.mustWinsWinChance.espn, 2) }}%
 					</template>
 				</template>
 				<template v-else> None </template>
@@ -118,11 +114,11 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 						<h2>Winning Outcomes</h2>
 					</v-expansion-panel-title>
 					<v-expansion-panel-text>
-						<template v-if="winningOutcomes.flat().length">
+						<template v-if="userStats.winningOutcomes.flat().length">
 							<h3># of missed wins:</h3>
-							<v-tabs v-model="tab">
+							<v-tabs v-model="tab" density="compact">
 								<v-tab
-									v-for="(outcome, i) in winningOutcomes"
+									v-for="(outcome, i) in userStats.winningOutcomes"
 									:key="i"
 									:disabled="!outcome.length"
 									slim
@@ -132,7 +128,7 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 							</v-tabs>
 							<v-tabs-window v-model="tab">
 								<v-tabs-window-item
-									v-for="(outcomes, i) in winningOutcomes"
+									v-for="(outcomes, i) in userStats.winningOutcomes"
 									:key="i"
 								>
 									<div class="d-flex flex-wrap">
@@ -170,6 +166,7 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 									<v-pagination
 										v-model="page"
 										:length="Math.ceil(outcomes.length / itemsPerPage)"
+										density="compact"
 									></v-pagination>
 								</v-tabs-window-item>
 							</v-tabs-window>

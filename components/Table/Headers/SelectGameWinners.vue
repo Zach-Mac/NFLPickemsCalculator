@@ -3,7 +3,7 @@ import { mergeProps } from 'vue'
 
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
-const weekOutcomesStore = useWeekOutcomeStore()
+const weekOutcomesStore = useWeekOutcomesStore()
 const tableStore = useTableStore()
 const { smAndDown, mdAndDown } = useDisplay()
 
@@ -31,8 +31,6 @@ function setUnfinishedToPlayerPicks() {
 const lockFinishedGames = ref(false)
 
 const disableButton = (game: Game) => lockFinishedGames.value && game.state == 'finished'
-
-const menu = ref(false)
 
 const numTotalHeaders = inject<Ref<number>>('numHeaders') ?? ref(0)
 const headerRow = ref()
@@ -123,61 +121,62 @@ const numHeadersNeeded = computed(() => {
 				</v-tooltip>
 				<v-menu :close-on-content-click="false">
 					<template v-slot:activator="{ props: menu }">
-						<v-tooltip text="Select table columns" location="top">
+						<v-tooltip text="Settings" location="top">
 							<template v-slot:activator="{ props: tooltip }">
 								<v-btn
+									class="ml-1"
 									:size="iconButtonSize"
 									v-bind="mergeProps(menu, tooltip)"
-									icon="mdi-view-column"
+									icon="mdi-cog-outline"
 								></v-btn>
 							</template>
 						</v-tooltip>
 					</template>
-					<v-list>
-						<v-list-item v-for="(value, columnKey) in tableStore.showOptionalColumns">
-							<v-list-item-title>
-								<v-checkbox
-									:label="tableStore.getHeaderTitle(columnKey)"
-									v-model="tableStore.showOptionalColumns[columnKey]"
-									hide-details
-								></v-checkbox>
-							</v-list-item-title>
-						</v-list-item>
-					</v-list>
+					<v-card>
+						<v-card-title> Settings </v-card-title>
+						<v-list
+							v-model:selected="tableStore.settingsSelection"
+							lines="two"
+							select-strategy="leaf"
+						>
+							<v-list-subheader>General</v-list-subheader>
+							<v-list-item
+								v-for="item in tableStore.settingsItems"
+								:key="item.value"
+								:subtitle="item.subtitle"
+								:title="item.title"
+								:value="item.value"
+							>
+								<template v-slot:prepend="{ isSelected }">
+									<v-list-item-action start>
+										<v-checkbox-btn :model-value="isSelected"></v-checkbox-btn>
+									</v-list-item-action>
+								</template>
+							</v-list-item>
+						</v-list>
+						<v-divider></v-divider>
+						<v-list
+							v-model:selected="tableStore.optionalColumnsSelection"
+							lines="two"
+							select-strategy="leaf"
+						>
+							<v-list-subheader>Select Columns</v-list-subheader>
+							<v-list-item
+								v-for="item in tableStore.optionalHeadersItems"
+								:key="item.value"
+								:subtitle="item.subtitle"
+								:title="item.title"
+								:value="item.value"
+							>
+								<template v-slot:prepend="{ isSelected }">
+									<v-list-item-action start>
+										<v-checkbox-btn :model-value="isSelected"></v-checkbox-btn>
+									</v-list-item-action>
+								</template>
+							</v-list-item>
+						</v-list>
+					</v-card>
 				</v-menu>
-				<!-- <v-number-input
-					v-model="weekOutcomesStore.maxGamesToSimLive"
-					type="number"
-					label="#games to sim"
-					hide-details
-					variant="outlined"
-					control-variant="stacked"
-					max-width="8em"
-					:min="1"
-					:max="16"
-				/> -->
-				<!-- <v-menu>
-					<template v-slot:activator="{ props }">
-						<v-btn
-							v-bind="props"
-							:size="iconButtonSize"
-							v-model="lockFinishedGames"
-							icon="mdi-cog-outline"
-							class="ml-1"
-						/>
-					</template>
-					<v-list>
-						<v-list-item>
-							<v-list-item-title>
-								<v-checkbox
-									label="Highlight tied rows"
-									v-model="highlightTiedRows"
-									hide-details
-								></v-checkbox>
-							</v-list-item-title>
-						</v-list-item>
-					</v-list>
-				</v-menu> -->
 			</div>
 		</th>
 	</tr>

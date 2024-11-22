@@ -14,11 +14,11 @@ export const usePicksStore = defineStore('picks', () => {
 
 	// State
 	const picksTablePasteInput = useStorage('paste', '')
-	const highlightTiedRows = useStorage('highlightTiedRows', true)
 	const playerName = useStorage('playerName', '')
+	const picksDataValidated = ref(false)
 
 	// Getters
-	const picksData = computed(() => {
+	const picksData_ = computed(() => {
 		const $ = cheerio.load(picksTablePasteInput.value)
 		return $('tbody tr')
 			.toArray()
@@ -60,19 +60,24 @@ export const usePicksStore = defineStore('picks', () => {
 				return POOLHOST_TO_ESPN_ABBREVIATION[abbreviation] ?? abbreviation
 			})
 	})
-	const picksDataValidated = computed(() => {
-		if (!picksTablePasteInput.value) return false
+	const picksData = computed(() => {
+		if (!picksTablePasteInput.value) {
+			picksDataValidated.value = false
+			return []
+		}
 
-		// if poolhostgameorder doesn't match gameData, return false
+		// Validate poolhostGameOrder
 		for (let i = 0; i < gamesStore.gameData.length; i++) {
 			if (
 				gamesStore.gameData[i].home !== poolhostGameOrder.value[i] &&
 				gamesStore.gameData[i].away !== poolhostGameOrder.value[i]
 			) {
-				return false
+				picksDataValidated.value = false
+				return []
 			}
 		}
-		return true
+		picksDataValidated.value = true
+		return picksData_.value
 	})
 
 	const user = computed(() => {
@@ -105,22 +110,26 @@ export const usePicksStore = defineStore('picks', () => {
 		)
 	})
 	const prevSeasonTotals = computed(() => {
-		// seasonTotal - weekTotal
 		return Object.fromEntries(
-			Object.entries(playerTotals.value).map(([name, { weekTotal, seasonTotal }]) => [
+			Object.entries(picksData.value).map(([index, { name, originalSeasonTotal }]) => [
 				name,
-				seasonTotal - weekTotal
+				originalSeasonTotal
 			])
 		)
 	})
-	const numGamesLeft = computed(() => {
+	const numGamesLeftAfterWeek = computed(() => {
 		const weeksLeft = 18 - gamesStore.currentWeek
 		const seasonGamesLeft = weeksLeft * 15
 		const playoffGamesLeft = 13
-
 		const gamesLeftAfterWeek = seasonGamesLeft + playoffGamesLeft
 
-		return gamesLeftAfterWeek + gamesStore.numGamesWithNoWinners
+		return gamesLeftAfterWeek
+	})
+	const numGamesLeft = computed(() => {
+		return numGamesLeftAfterWeek.value + gamesStore.numGamesWithNoWinners
+	})
+	const prevNumGamesLeft = computed(() => {
+		return numGamesLeftAfterWeek.value + gamesStore.gameData.length
 	})
 
 	const gameEvRanges = ref({} as Record<string, number[]>)
@@ -169,27 +178,34 @@ export const usePicksStore = defineStore('picks', () => {
 		gameEvRangesLoading.value = false
 	}
 
-	const seasonEvs = computedAsync(async () => {
-		const winProb = 0.6
-		const numSimulations = 10000
+	const seasonEvsEvaluating = ref(false)
+	const seasonEvs = computedAsync(
+		async () => {
+			const winProb = 0.6
+			const numSims = 10000
 
-		const evs = await runSim(seasonTotals.value, numGamesLeft.value, winProb, numSimulations)
-		return evs
-	})
+			const evs = await runSim(seasonTotals.value, numGamesLeft.value, winProb, numSims)
+			return evs
+		},
+		undefined,
+		seasonEvsEvaluating
+	)
 	const previousSeasonEvs = computedAsync(async () => {
 		const winProb = 0.6
 		const numSims = 10000
 
-		const evs = await runSim(prevSeasonTotals.value, numGamesLeft.value, winProb, numSims)
+		const evs = await runSim(prevSeasonTotals.value, prevNumGamesLeft.value, winProb, numSims)
 		return evs
 	})
 	const seasonEvsChange = computed(() => {
 		if (!seasonEvs.value || !previousSeasonEvs.value) return {}
+
 		return Object.fromEntries(
-			Object.entries(seasonEvs.value).map(([name, result]) => [
-				name,
-				result.money - previousSeasonEvs.value![name].money
-			])
+			Object.entries(seasonEvs.value).map(([name, result]) => {
+				const prevResult = previousSeasonEvs.value?.[name]
+				const prevMoney = prevResult?.money ?? 0
+				return [name, result.money - prevMoney]
+			})
 		)
 	})
 
@@ -216,7 +232,6 @@ export const usePicksStore = defineStore('picks', () => {
 	return {
 		// State
 		picksTablePasteInput,
-		highlightTiedRows,
 		playerName,
 		gameEvRanges,
 		userGameEvRanges,
@@ -227,6 +242,7 @@ export const usePicksStore = defineStore('picks', () => {
 		picksDataValidated,
 		seasonEvs,
 		seasonEvsChange,
+		seasonEvsEvaluating,
 		user,
 		playerTotals,
 		numGamesLeft,

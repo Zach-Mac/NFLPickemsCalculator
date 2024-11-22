@@ -48,9 +48,13 @@ const espnUpdateText = computed(() => {
 		<v-col>
 			<h1>Player Rankings</h1>
 			<template v-if="!picksStore.picksData.length">
-				<h2>Paste poolhost table html to view table</h2>
+				<v-alert
+					title="Poolhost Data Missing"
+					text="Please paste Poolhost picks data to view player rankings. Ensure the data format is correct. Possible mismatch between espn data and Poolhost picks data."
+					type="error"
+				></v-alert>
 			</template>
-			<template v-else-if="!gamesStore.gameData.length">
+			<template v-if="!gamesStore.gameData.length">
 				<h2>Load ESPN data to view table</h2>
 			</template>
 			<template v-else>

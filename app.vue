@@ -28,6 +28,29 @@ const pages = [
 	}
 ]
 const currentPage = computed(() => pages.find(page => page.path === route.path))
+
+const error = ref<Error | null>(null)
+onErrorCaptured((err: Error) => {
+	console.error('Application error:', err)
+	error.value = err
+	return true
+})
+
+const nuxtError = useError()
+watch(nuxtError, () => {
+	if (nuxtError.value) {
+		console.error('Nuxt error:', nuxtError.value)
+		error.value = nuxtError.value
+	}
+})
+
+function handleError(err: unknown) {
+	console.log('Error handled:', err)
+	error.value = err as Error
+	return true
+}
+
+const clearError = ref(null)
 </script>
 
 <template>
@@ -68,7 +91,13 @@ const currentPage = computed(() => pages.find(page => page.path === route.path))
 			<v-container fluid>
 				<v-row>
 					<v-col lg="11" class="mx-auto">
-						<NuxtPage />
+						<ErrorAlert :error="error" closable />
+						<NuxtErrorBoundary @error="handleError">
+							<NuxtPage />
+							<template #error="{ error, clearError }">
+								<v-btn @click="clearError">Clear Error</v-btn>
+							</template>
+						</NuxtErrorBoundary>
 					</v-col>
 				</v-row>
 			</v-container>

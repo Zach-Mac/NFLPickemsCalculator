@@ -2,7 +2,7 @@
 const picksStore = usePicksStore()
 const gamesStore = useGamesStore()
 const nfeloStore = useNfeloStore()
-const weekOutcomesStore = useWeekOutcomeStore()
+const weekOutcomesStore = useWeekOutcomesStore()
 
 const getNfeloWinChance = (gameIndex: number) => {
 	if (!picksStore.user) return 0
@@ -19,24 +19,60 @@ const getNfeloWinChanceMean = () => {
 	return total / picksStore.user.picks.length
 }
 
-const espnWinProbabilities = computed(() => {
-	return gamesStore.gameData.map(game => {
-		const userPickedHome = picksStore.user.picks.includes(game.home)
-
-		const probability = game.espn.situation?.lastPlay.probability
-		if (!probability) return null
-
-		const winProb = userPickedHome
-			? probability.homeWinPercentage
-			: probability.awayWinPercentage
-
-		return winProb ? winProb * 100 : null
-	})
+const manualEspnWinProbEditMode = ref(false)
+const { escape } = useMagicKeys()
+watch(escape, () => {
+	if (escape.value) manualEspnWinProbEditMode.value = false
 })
+
+const espnUserWinProbabilities = ref<(number | undefined)[]>(
+	gamesStore.gameData.map(() => undefined)
+)
+watch(
+	[() => picksStore.user, () => gamesStore.espnWinProbabilities, () => gamesStore.gameData],
+	() => {
+		if (!picksStore.user) {
+			espnUserWinProbabilities.value = gamesStore.gameData.map(() => undefined)
+			return
+		}
+		espnUserWinProbabilities.value = gamesStore.gameData.map((game, i) => {
+			if (!gamesStore.espnWinProbabilities[i]) return undefined
+
+			const pick = picksStore.user?.picks[i]
+			if (pick === game.home)
+				return round(gamesStore.espnWinProbabilities[i].homeWinPercentage * 100, 1)
+			if (pick === game.away)
+				return round(gamesStore.espnWinProbabilities[i].awayWinPercentage * 100, 1)
+			return undefined
+		})
+	},
+	{ immediate: true, deep: true }
+)
+watch(
+	espnUserWinProbabilities,
+	newProbs => {
+		newProbs.forEach((userWinnerPickProb, i) => {
+			if (userWinnerPickProb === undefined) return
+			const pick = picksStore.user?.picks[i]
+			const game = gamesStore.gameData[i]
+
+			const userLoserPickProb = 100 - userWinnerPickProb
+
+			if (pick === game.home) {
+				gamesStore.espnWinProbabilities[i].homeWinPercentage = userWinnerPickProb / 100
+				gamesStore.espnWinProbabilities[i].awayWinPercentage = userLoserPickProb / 100
+			} else if (pick === game.away) {
+				gamesStore.espnWinProbabilities[i].awayWinPercentage = userWinnerPickProb / 100
+				gamesStore.espnWinProbabilities[i].homeWinPercentage = userLoserPickProb / 100
+			}
+		})
+	},
+	{ deep: true }
+)
 const espnWinProbMean = computed(() => {
 	let numNull = 0
-	const total = espnWinProbabilities.value.reduce((acc, prob) => {
-		if (prob === null) {
+	const total = espnUserWinProbabilities.value.reduce((acc, prob) => {
+		if (!prob) {
 			numNull++
 			return acc || 0
 		}
@@ -45,10 +81,10 @@ const espnWinProbMean = computed(() => {
 
 	if (!total) return 0
 
-	return total / (espnWinProbabilities.value.length - numNull)
+	return total / (espnUserWinProbabilities.value.length - numNull)
 })
 
-function getImportanceColor(index: number) {
+function getWeekImportanceColor(index: number) {
 	const score = weekOutcomesStore.gamesImportanceScores[index]
 
 	let level = 5 - Math.round(score / 20) + 1
@@ -56,7 +92,6 @@ function getImportanceColor(index: number) {
 
 	return `bg-purple-lighten-${level}`
 }
-
 function evDiffColor(evDiff: number) {
 	// lighten as percentile of all ev diffs
 	const allValues = Object.values(picksStore.userGameEvRanges).filter(v => v !== 0)
@@ -125,7 +160,7 @@ const numHeadersNeeded = computed(() => {
 		<th
 			v-for="(game, index) in gamesStore.gameData"
 			class="text-center border-e"
-			:class="[game.state == 'finished' ? 'dimmed' : '', getImportanceColor(index)]"
+			:class="[game.state == 'finished' ? 'dimmed' : '', getWeekImportanceColor(index)]"
 		>
 			{{ round(weekOutcomesStore.gamesImportanceScores[index], 2) }}
 		</th>
@@ -157,19 +192,70 @@ const numHeadersNeeded = computed(() => {
 			ESPN Win Prob
 		</th>
 		<th
-			v-for="(prob, i) in espnWinProbabilities"
+			v-for="(prob, i) in espnUserWinProbabilities"
 			class="text-center border-e"
 			:class="[gamesStore.gameData[i].state == 'finished' ? 'dimmed' : '']"
 		>
-			{{ prob ? round(prob, 4) + '%' : '' }}
+			<template
+				v-if="manualEspnWinProbEditMode && gamesStore.gameData[i].state != 'finished'"
+			>
+				<v-number-input
+					class="hide-spin-buttons small-input mx-auto"
+					v-model="espnUserWinProbabilities[i]"
+					control-variant="stacked"
+					density="compact"
+					:step="0.1"
+					:min="0"
+					:max="100"
+					hide-spin-buttons
+					hide-details
+				/>
+			</template>
+			<template v-else>
+				{{ prob !== undefined ? round(prob, 4) + '%' : '' }}
+			</template>
 		</th>
-		<th :colspan="numHeadersNeeded" class="px-1">Mean: {{ round(espnWinProbMean, 3) }}%</th>
+		<th :colspan="numHeadersNeeded" class="px-1">
+			<div class="d-flex justify-space-between">
+				<span class="my-auto"> Mean: {{ round(espnWinProbMean, 3) }}% </span>
+				<v-tooltip text="Manually edit win probabilities" location="bottom">
+					<template v-slot:activator="{ props }">
+						<!-- :size="iconButtonSize" -->
+						<ToggleButton
+							v-bind="props"
+							class="ml-1"
+							:rounded="0"
+							density="compact"
+							v-model="manualEspnWinProbEditMode"
+							iconToggled="mdi-pencil"
+							iconUntoggled="mdi-pencil"
+						/>
+					</template>
+				</v-tooltip>
+				<div></div>
+			</div>
+		</th>
 	</tr>
 </template>
 
 <style scoped>
 th {
-	font-size: 1.2em !important;
-	height: 3em !important;
+	font-size: 0.85rem !important;
+	/* 11.76px */
+	height: 2.5rem !important;
+	/* 35.2833px */
+}
+</style>
+
+<style>
+.hide-spin-buttons .v-number-input__control {
+	display: none !important;
+}
+
+.small-input .v-field__input {
+	padding: 0 !important;
+	text-align: center !important;
+	font-size: 0.85rem !important;
+	min-height: 2.4rem !important;
 }
 </style>
