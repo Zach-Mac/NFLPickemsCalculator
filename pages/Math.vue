@@ -162,23 +162,22 @@ const { width } = useElementSize(button)
 	{{ answerString }}
 
 
-
     <!-- numeric keypad -->
     <v-container>
         <v-row v-for="i in [3,2,1]" no-gutters>
             <v-col v-for="j in 3" :key="j">
-                <v-btn variant="outlined" ref="button" @click="clickNum(3*(i-1)+j)" block :height="width">{{ 3*(i-1)+j }}</v-btn>
+                <button ref="button" @click="clickNum(3*(i-1)+j)" :style="{height: width + 'px'}" class="w-100">{{ 3*(i-1)+j }}</button>
             </v-col>
         </v-row>
         <v-row no-gutters>
             <v-col>
-                <v-btn variant="outlined" @click="clickNum(-1)" block :height="width">-</v-btn>
+                <button @click="clickNum(-1)" :style="{height: width + 'px'}" class="w-100">-</button>
             </v-col>
             <v-col>
-                <v-btn variant="outlined" @click="clickNum(0)" block :height="width">0</v-btn>
+                <button @click="clickNum(0)" :style="{height: width + 'px'}" class="w-100">0</button>
             </v-col>
             <v-col>
-                <v-btn variant="outlined" @click="clickNum(-2)" block :height="width">Del</v-btn>
+                <button @click="clickNum(-2)" :style="{height: width + 'px'}" class="w-100">Del</button>
             </v-col>
         </v-row>
         </v-container>
