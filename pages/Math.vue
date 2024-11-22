@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useStorage } from '@vueuse/core'
+import type { VNodeRef } from 'vue';
 // TODO: by digit
 
 const autoNextQuestion = ref(true)
@@ -13,7 +14,8 @@ const yRange = useStorage('yRange', [minRange, maxRange])
 const x = ref(xRange.value[0])
 const y = ref(yRange.value[0])
 
-const answer = ref()
+const answerString = ref('')
+const answerNum = computed(() => parseInt(answerString.value))
 
 function setRandomNums() {
 	x.value = Math.ceil(Math.random() * (xRange.value[1] - xRange.value[0] + 1) + xRange.value[0])
@@ -31,28 +33,40 @@ const evalFunction = computed(() => {
 })
 
 function checkCorrect() {
-	let output = false
+	let correct = false
 	try {
-		output = evalFunction.value(x.value, y.value, answer.value)
+		correct = evalFunction.value(x.value, y.value, answerNum.value)
 	} catch (e) {
 		console.error(e)
 	}
-	return output
+	return correct
 }
 
 async function genNewQuestion() {
-	answer.value = undefined
+	answerString.value = ''
     await nextTick()
 	setRandomNums()
 }
 
 // const correctAnswer = computed(() => checkCorrect())
 
-watch(answer, async () => {
+watch(answerString, async () => {
 	if (checkCorrect() && autoNextQuestion.value) {
 		await genNewQuestion()
 	}
 })
+
+function clickNum(num: number) {
+    if (num === -1) {}
+    else if (num === -2) 
+        answerString.value = answerString.value.slice(0, -1)
+    else
+        answerString.value = answerString.value + num
+}
+
+// get button width
+const button = ref(null as VNodeRef | null)
+const { width } = useElementSize(button)
 </script>
 
 <template>
@@ -143,7 +157,29 @@ watch(answer, async () => {
 		{{ y }}
 	</h2>
 
-	<v-text-field v-model="answer" label="Answer" type="number"></v-text-field>
-	<input v-model="answer" label="Answer" type="number"></input>
-	{{ answer }}
+	<v-text-field v-model="answerString" label="Answer" type="number"></v-text-field>
+	<input v-model="answerString" label="Answer" type="number"></input>
+	{{ answerString }}
+
+
+
+    <!-- numeric keypad -->
+    <v-container>
+        <v-row v-for="i in [3,2,1]" no-gutters>
+            <v-col v-for="j in 3" :key="j">
+                <v-btn variant="outlined" ref="button" @click="clickNum(3*(i-1)+j)" block :height="width">{{ 3*(i-1)+j }}</v-btn>
+            </v-col>
+        </v-row>
+        <v-row no-gutters>
+            <v-col>
+                <v-btn variant="outlined" @click="clickNum(-1)" block :height="width">-</v-btn>
+            </v-col>
+            <v-col>
+                <v-btn variant="outlined" @click="clickNum(0)" block :height="width">0</v-btn>
+            </v-col>
+            <v-col>
+                <v-btn variant="outlined" @click="clickNum(-2)" block :height="width">Del</v-btn>
+            </v-col>
+        </v-row>
+        </v-container>
 </template>
