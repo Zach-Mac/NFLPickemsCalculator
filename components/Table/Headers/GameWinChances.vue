@@ -4,9 +4,32 @@ const gamesStore = useGamesStore()
 const nfeloStore = useNfeloStore()
 const weekOutcomesStore = useWeekOutcomesStore()
 
+// Styling
+function getWeekImportanceColor(index: number) {
+	const score = weekOutcomesStore.gamesImportanceScores[index]
+
+	let level = 5 - Math.round(score / 20) + 1
+	if (level < 1) level = 1
+
+	return `bg-purple-lighten-${level}`
+}
+function evDiffColor(evDiff: number) {
+	// lighten as percentile of all ev diffs
+	const allValues = Object.values(picksStore.userGameEvRanges).filter(v => v !== 0)
+	const values = evDiff > 0 ? allValues.filter(v => v > 0) : allValues.filter(v => v < 0)
+	const percentile =
+		values.filter(v => (evDiff > 0 ? v <= evDiff : v >= evDiff)).length / values.length
+
+	const conversion = 1 + (1 - percentile) * 5
+
+	const brightnessLevel = Math.abs(Math.round(conversion))
+	const output = `bg-light-green-lighten-${brightnessLevel}`
+	return output
+}
+
+// nfelo
 const getNfeloWinChance = (gameIndex: number) => {
 	if (!picksStore.user) return 0
-
 	return nfeloStore.nfeloTeamsWinChance[picksStore.user.picks[gameIndex]] + '%'
 }
 const getNfeloWinChanceMean = () => {
@@ -18,7 +41,11 @@ const getNfeloWinChanceMean = () => {
 
 	return total / picksStore.user.picks.length
 }
+const nfeloChancesExist = computed(() => {
+	return nfeloStore.nfeloTeamsWinChance && Object.keys(nfeloStore.nfeloTeamsWinChance).length > 0
+})
 
+// espn
 const manualEspnWinProbEditMode = ref(false)
 const { escape } = useMagicKeys()
 watch(escape, () => {
@@ -28,6 +55,7 @@ watch(escape, () => {
 const espnUserWinProbabilities = ref<(number | undefined)[]>(
 	gamesStore.gameData.map(() => undefined)
 )
+// Getter
 watch(
 	[() => picksStore.user, () => gamesStore.espnWinProbabilities, () => gamesStore.gameData],
 	() => {
@@ -48,6 +76,7 @@ watch(
 	},
 	{ immediate: true, deep: true }
 )
+// Setter
 watch(
 	espnUserWinProbabilities,
 	newProbs => {
@@ -83,31 +112,12 @@ const espnWinProbMean = computed(() => {
 
 	return total / (espnUserWinProbabilities.value.length - numNull)
 })
-
-function getWeekImportanceColor(index: number) {
-	const score = weekOutcomesStore.gamesImportanceScores[index]
-
-	let level = 5 - Math.round(score / 20) + 1
-	if (level < 1) level = 1
-
-	return `bg-purple-lighten-${level}`
-}
-function evDiffColor(evDiff: number) {
-	// lighten as percentile of all ev diffs
-	const allValues = Object.values(picksStore.userGameEvRanges).filter(v => v !== 0)
-	const values = evDiff > 0 ? allValues.filter(v => v > 0) : allValues.filter(v => v < 0)
-	const percentile =
-		values.filter(v => (evDiff > 0 ? v <= evDiff : v >= evDiff)).length / values.length
-
-	const conversion = 1 + (1 - percentile) * 5
-
-	const brightnessLevel = Math.abs(Math.round(conversion))
-	const output = `bg-light-green-lighten-${brightnessLevel}`
-	return output
-}
-
-const nfeloChancesExist = computed(() => {
-	return nfeloStore.nfeloTeamsWinChance && Object.keys(nfeloStore.nfeloTeamsWinChance).length > 0
+const manualProbsString = computed({
+	get: () => espnUserWinProbabilities.value.map(v => v ?? '').join(' '),
+	set: (val: string) => {
+		const probs = val.split(' ').map(v => (v ? Number(v) : undefined))
+		espnUserWinProbabilities.value = probs
+	}
 })
 
 const numTotalHeaders = inject<Ref<number>>('numHeaders') ?? ref(0)
@@ -217,22 +227,61 @@ const numHeadersNeeded = computed(() => {
 		</th>
 		<th :colspan="numHeadersNeeded" class="px-1">
 			<div class="d-flex justify-space-between">
-				<span class="my-auto"> Mean: {{ round(espnWinProbMean, 3) }}% </span>
-				<v-tooltip text="Manually edit win probabilities" location="bottom">
-					<template v-slot:activator="{ props }">
-						<!-- :size="iconButtonSize" -->
-						<ToggleButton
-							v-bind="props"
-							class="ml-1"
-							:rounded="0"
-							density="compact"
-							v-model="manualEspnWinProbEditMode"
-							iconToggled="mdi-pencil"
-							iconUntoggled="mdi-pencil"
-						/>
-					</template>
-				</v-tooltip>
-				<div></div>
+				<span v-if="!manualEspnWinProbEditMode" class="my-auto">
+					Mean: {{ round(espnWinProbMean, 3) }}%
+				</span>
+				<div>
+					<v-tooltip text="Set default espn win probabilities" location="bottom">
+						<template v-slot:activator="{ props }">
+							<!-- :size="iconButtonSize" -->
+							<v-btn
+								v-bind="props"
+								class="mr-1"
+								:rounded="0"
+								density="compact"
+								@click="manualProbsString = defaultEspnWinProbsString"
+								icon="mdi-database-sync"
+							/>
+						</template>
+					</v-tooltip>
+					<v-tooltip text="Manually edit win probabilities" location="bottom">
+						<template v-slot:activator="{ props }">
+							<!-- :size="iconButtonSize" -->
+							<ToggleButton
+								v-bind="props"
+								class="mr-1"
+								:rounded="0"
+								density="compact"
+								v-model="manualEspnWinProbEditMode"
+								iconToggled="mdi-pencil"
+								iconUntoggled="mdi-pencil"
+							/>
+						</template>
+					</v-tooltip>
+				</div>
+
+				<template v-if="manualEspnWinProbEditMode">
+					<v-confirm-edit v-model="manualProbsString">
+						<template v-slot:default="{ model, actions }">
+							<v-card class="w-100">
+								<template v-slot:text>
+									<v-text-field
+										class="small-input mx-auto"
+										v-model="model.value"
+										density="compact"
+										hide-details
+									/>
+								</template>
+
+								<template v-slot:actions>
+									<v-spacer></v-spacer>
+
+									<component :is="actions"></component>
+								</template>
+							</v-card>
+						</template>
+					</v-confirm-edit>
+				</template>
 			</div>
 		</th>
 	</tr>
