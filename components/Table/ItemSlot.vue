@@ -218,10 +218,6 @@ function formatPercent(
 </template>
 
 <style scoped>
-.line-through {
-	text-decoration: line-through;
-}
-
 .v-skeleton-loader :deep(.v-skeleton-loader__bone) {
 	margin: 0 !important;
 }

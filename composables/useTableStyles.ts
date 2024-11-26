@@ -7,7 +7,7 @@ export const useTableStyles = () => {
 
 	const styleClasses = {
 		gameWon: 'bg-success-lighten-2 text-success-darken-2 font-weight-bold',
-		gameLost: 'bg-error-lighten-2 text-error line-through font-weight-bold',
+		gameLost: 'bg-error-lighten-2 text-error text-decoration-line-through font-weight-bold',
 		gameTied: 'bg-accent text-accent-darken-4 font-weight-bold'
 	}
 

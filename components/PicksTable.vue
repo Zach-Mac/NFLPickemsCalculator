@@ -1,7 +1,4 @@
 <script setup lang="ts">
-const gamesStore = useGamesStore()
-const picksStore = usePicksStore()
-const weekOutcomesStore = useWeekOutcomesStore()
 const tableStore = useTableStore()
 </script>
 

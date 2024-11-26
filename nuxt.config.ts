@@ -104,6 +104,9 @@ export default defineNuxtConfig({
 				VCombobox: {
 					variant: 'outlined'
 				},
+				VAutocomplete: {
+					variant: 'outlined'
+				},
 				VNumberInput: {
 					variant: 'outlined'
 				}

@@ -47,16 +47,19 @@ const espnUpdateText = computed(() => {
 	<v-row>
 		<v-col>
 			<h1>Player Rankings</h1>
-			<template v-if="!picksStore.picksData.length">
-				<v-alert
-					title="Poolhost Data Missing"
-					text="Please paste Poolhost picks data to view player rankings. Ensure the data format is correct. Possible mismatch between espn data and Poolhost picks data."
-					type="error"
-				></v-alert>
-			</template>
-			<template v-if="!gamesStore.gameData.length">
-				<h2>Load ESPN data to view table</h2>
-			</template>
+			<v-alert
+				v-if="!picksStore.picksData.length"
+				title="Poolhost Data Missing"
+				text="Please paste Poolhost picks data to view player rankings. Ensure the data format is correct. Possible mismatch between espn data and Poolhost picks data."
+				type="error"
+			/>
+			<v-alert
+				v-else-if="!picksStore.playerName"
+				title="Player Name Missing"
+				text="Please click on a player name in the table or type in the input field to set the player name."
+				type="warning"
+			/>
+			<h2 v-if="!gamesStore.gameData.length">Load ESPN data to view table</h2>
 			<template v-else>
 				<small>
 					Last ESPN update:
