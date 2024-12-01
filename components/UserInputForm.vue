@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
-const nfeloStore = useNfeloStore()
 
 const { smAndDown } = useDisplay()
 
@@ -23,7 +22,7 @@ watch([() => picksStore.picksTablePasteInput, () => picksStore.picksData], () =>
 const playerNameValid = computed(() => playerNameInput.value?.isValid)
 
 const loadEspnButtonColor = computed(() => {
-	if (!gamesStore.gameData.length) return 'primary'
+	if (!gamesStore.gameData.length || !gamesStore.espnScoreboard) return 'primary'
 	return undefined
 })
 </script>
@@ -33,20 +32,8 @@ const loadEspnButtonColor = computed(() => {
 		<v-col cols="12" md="6" lg="5">
 			<v-row>
 				<v-col cols="auto" class="px-1 px-md-1">
-					<v-combobox
-						v-model="gamesStore.selectedWeek"
-						:items="[...Array(18).keys()].map(i => i + 1)"
-						label="Week"
-						type="number"
-						min-width="9rem"
-						placeholder="auto"
-						persistent-placeholder
-						hideDetails
-					></v-combobox>
-				</v-col>
-				<v-col cols="auto" class="px-1 px-md-1">
 					<v-btn
-						@click="gamesStore.loadEspnScoreboard"
+						@click="gamesStore.reloadScoreboard"
 						:size="'large'"
 						:slim="smAndDown"
 						:color="loadEspnButtonColor"
@@ -66,7 +53,7 @@ const loadEspnButtonColor = computed(() => {
 				</v-col>
 			</v-row>
 		</v-col>
-		<v-col cols="12" md="6" lg="7">
+		<v-col cols="12" md="6">
 			<UploadButtons />
 		</v-col>
 	</v-row>

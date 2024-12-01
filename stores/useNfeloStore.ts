@@ -1,4 +1,4 @@
-import { useStorage } from '@vueuse/core'
+import { defaultNfeloPasteInputs } from '~/utils/defaults/defaultNfeloPastesWeeks/defaultNfeloPasteInputs'
 
 const blankNfeloGame = {
 	home: '',
@@ -12,10 +12,18 @@ export const useNfeloStore = defineStore('nfelo', () => {
 	const picksStore = usePicksStore()
 	const gamesStore = useGamesStore()
 	// State
-	const nfeloGamesInput = useStorage('nfeloPaste', '')
+	const nfeloGamesWeekInputs = toReactive(
+		useLocalStorage('nfeloGamesWeekInputs', defaultNfeloPasteInputs)
+	)
 	const nfeloGamesValidated = ref(false)
 
 	// Getters
+	const nfeloGamesInput = computed(() => nfeloGamesWeekInputs[gamesStore.selectedWeek - 1])
+
+	const nfeloGamesInputIsDefault = computed(
+		() => nfeloGamesInput.value == defaultNfeloPasteInputs[gamesStore.selectedWeek - 1]
+	)
+
 	const nfeloGames = computed(() => {
 		if (!nfeloGamesInput.value) return []
 		if (!picksStore.poolhostGameOrder.length) return []
@@ -27,7 +35,7 @@ export const useNfeloStore = defineStore('nfelo', () => {
 			.replaceAll(/\s+/g, ' ')
 
 		const split = sanitized
-			.split(' Market Line Model Line Win % EV ')
+			.split('Market Line Model Line Win % EV ')
 			.filter(str => str.length > 0)
 			.map(gameStr => gameStr.split(' '))
 
@@ -129,5 +137,29 @@ export const useNfeloStore = defineStore('nfelo', () => {
 		return teams
 	})
 
-	return { nfeloGamesInput, nfeloGamesValidated, nfeloGames, nfeloTeamsWinChance }
+	// Actions
+
+	function setNfeloGamesInput(paste: string) {
+		nfeloGamesWeekInputs[gamesStore.selectedWeek - 1] = paste
+	}
+	function resetNfeloGamesInput() {
+		nfeloGamesWeekInputs[gamesStore.selectedWeek - 1] =
+			defaultNfeloPasteInputs[gamesStore.selectedWeek - 1]
+	}
+	function resetNfeloGamesInputs() {
+		for (let i = 0; i < nfeloGamesWeekInputs.length; i++) {
+			nfeloGamesWeekInputs[i] = defaultNfeloPasteInputs[i]
+		}
+	}
+
+	return {
+		nfeloGamesInput,
+		nfeloGamesInputIsDefault,
+		nfeloGamesValidated,
+		nfeloGames,
+		nfeloTeamsWinChance,
+		setNfeloGamesInput,
+		resetNfeloGamesInput,
+		resetNfeloGamesInputs
+	}
 })

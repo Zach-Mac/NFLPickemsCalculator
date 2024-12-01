@@ -17,7 +17,7 @@ watch(tab, () => {
 const startIndex = computed(() => (page.value - 1) * itemsPerPage)
 const endIndex = computed(() => page.value * itemsPerPage)
 
-const panel = ref(0)
+const panel = ref()
 
 const checkboxLabel = 'Consider outcome with possible 2nd place finish as winning'
 const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
@@ -38,6 +38,7 @@ const checkboxColMinWidth = checkboxLabel.length / 3 + 'em'
 				<v-btn :value="GAME_FILTERS.ALL">All Games</v-btn>
 				<v-btn :value="GAME_FILTERS.UNFINISHED">Unfinished Only</v-btn>
 				<v-btn :value="GAME_FILTERS.NOTSTARTED">Not started Only</v-btn>
+				<v-btn :value="GAME_FILTERS.NOWINNERS">No Winners Only</v-btn>
 			</v-btn-toggle>
 		</v-col>
 		<v-col :style="`min-width: ${checkboxColMinWidth}`">

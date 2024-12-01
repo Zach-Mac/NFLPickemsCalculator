@@ -3,8 +3,8 @@ import { mergeProps } from 'vue'
 
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
-const weekOutcomesStore = useWeekOutcomesStore()
 const tableStore = useTableStore()
+
 const { smAndDown, mdAndDown } = useDisplay()
 
 const teamButtonSize = computed(() => (mdAndDown.value ? 'x-small' : 'small'))
@@ -28,9 +28,8 @@ function setUnfinishedToPlayerPicks() {
 	})
 }
 
-const lockFinishedGames = ref(false)
-
-const disableButton = (game: Game) => lockFinishedGames.value && game.state == 'finished'
+const disableButton = (game: Game) =>
+	tableStore.settings.lockFinishedGames && game.state == 'finished'
 
 const numTotalHeaders = inject<Ref<number>>('numHeaders') ?? ref(0)
 const headerRow = ref()
@@ -43,7 +42,7 @@ const numHeadersNeeded = computed(() => {
 <template>
 	<tr ref="headerRow" class="font-weight-bold">
 		<th colspan="2" class="text-center font-weight-bold border-e">
-			<v-btn @click="gamesStore.loadEspnScoreboard" :loading="gamesStore.apiLoading">
+			<v-btn @click="gamesStore.reloadScoreboard" :loading="gamesStore.apiLoading">
 				Refresh
 			</v-btn>
 		</th>
@@ -95,7 +94,18 @@ const numHeadersNeeded = computed(() => {
 						</v-btn>
 					</template>
 				</v-tooltip>
-				<v-tooltip text="Lock finished games" location="bottom">
+				<v-tooltip text="Clear game winners" location="bottom">
+					<template v-slot:activator="{ props }">
+						<v-btn
+							:size="iconButtonSize"
+							v-bind="props"
+							icon="mdi-eraser"
+							@click="gamesStore.clearGameWinners"
+						>
+						</v-btn>
+					</template>
+				</v-tooltip>
+				<!-- <v-tooltip text="Lock finished games" location="bottom">
 					<template v-slot:activator="{ props }">
 						<ToggleButton
 							v-bind="props"
@@ -106,7 +116,7 @@ const numHeadersNeeded = computed(() => {
 							iconUntoggled="mdi-lock-open"
 						/>
 					</template>
-				</v-tooltip>
+				</v-tooltip> -->
 				<v-tooltip text="Manually edit games" location="bottom">
 					<template v-slot:activator="{ props }">
 						<ToggleButton

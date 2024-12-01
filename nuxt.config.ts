@@ -11,7 +11,7 @@ export default defineNuxtConfig({
 			enabled: true
 		}
 	},
-	modules: ['vuetify-nuxt-module', '@vueuse/nuxt', '@pinia/nuxt', 'nuxt-workers'],
+	modules: ['vuetify-nuxt-module', '@vueuse/nuxt', '@pinia/nuxt', 'nuxt-workers', 'nuxt-lodash'],
 	vuetify: {
 		moduleOptions: {
 			/* module specific options */

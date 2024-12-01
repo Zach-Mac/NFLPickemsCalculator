@@ -85,12 +85,17 @@ const optionalHeadersItems: Header[] = [
 ]
 const headers = baseHeaders.concat(optionalHeadersItems)
 
-type SettingsValue = 'highlightTiedRows'
+type SettingsValue = 'highlightTiedRows' | 'lockFinishedGames'
 const settingsItems = [
 	{
 		title: 'Highlight tied rows',
 		subtitle: 'Highlight tied rows in the table',
 		value: 'highlightTiedRows' as SettingsValue
+	},
+	{
+		title: 'Lock finished games',
+		subtitle: 'Disable editing of games that have already finished',
+		value: 'lockFinishedGames' as SettingsValue
 	}
 ]
 

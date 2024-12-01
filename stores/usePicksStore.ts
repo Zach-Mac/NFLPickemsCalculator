@@ -1,5 +1,5 @@
-import { useStorage } from '@vueuse/core'
 import * as cheerio from 'cheerio'
+import { defaultPicksTablePasteWeekInputs } from '~/utils/defaults/defaultPicksTablesWeeks/defaultPicksTablesWeekInputs'
 
 const blankUser = {
 	name: '',
@@ -13,11 +13,23 @@ export const usePicksStore = defineStore('picks', () => {
 	const gamesStore = useGamesStore()
 
 	// State
-	const picksTablePasteInput = useStorage('paste', '')
-	const playerName = useStorage('playerName', '')
+
+	const picksTablePasteWeekInputs = toReactive(
+		useLocalStorage('picksTablePasteWeekInputs', defaultPicksTablePasteWeekInputs)
+	)
+	const playerName = useLocalStorage('playerName', '')
 	const picksDataValidated = ref(false)
 
 	// Getters
+	const picksTablePasteInput = computed(
+		() => picksTablePasteWeekInputs[gamesStore.selectedWeek - 1]
+	)
+	const picksTablePasteInputIsDefault = computed(
+		() =>
+			picksTablePasteInput.value ==
+			defaultPicksTablePasteWeekInputs[gamesStore.selectedWeek - 1]
+	)
+
 	const picksData_ = computed(() => {
 		const $ = cheerio.load(picksTablePasteInput.value)
 		return $('tbody tr')
@@ -118,8 +130,9 @@ export const usePicksStore = defineStore('picks', () => {
 		)
 	})
 	const numGamesLeftAfterWeek = computed(() => {
-		const weeksLeft = 18 - gamesStore.currentWeek
-		const seasonGamesLeft = weeksLeft * 15
+		const seasonGamesLeft =
+			NFL_GAMES_PER_WEEK.slice(gamesStore.currentWeek).reduce((acc, val) => acc + val, 0) ?? 0
+
 		const playoffGamesLeft = 13
 		const gamesLeftAfterWeek = seasonGamesLeft + playoffGamesLeft
 
@@ -135,13 +148,28 @@ export const usePicksStore = defineStore('picks', () => {
 	const gameEvRanges = ref({} as Record<string, number[]>)
 	const userGameEvRanges = computed(() => gameEvRanges.value[user.value.name] ?? [])
 	const gameEvRangesLoading = ref(false)
+	const gameEvRangesCalculated = ref(gamesStore.numGamesWithNoWinners > 0)
 	async function calcUserGameEvRanges() {
+		if (
+			!picksData.value ||
+			!picksData.value.length ||
+			!user.value.name ||
+			!user.value.picks.length ||
+			!seasonEvs.value
+		) {
+			console.warn(
+				'calcUserGameEvRanges: picksData.value or user.value is empty',
+				!picksData.value,
+				!picksData.value.length,
+				!user.value,
+				!seasonEvs.value
+			)
+			return
+		}
 		gameEvRangesLoading.value = true
 
 		const winProb = 0.6
 		const numSims = 10000
-
-		if (!seasonEvs.value) return []
 
 		// initialize gameEvRanges for all players
 		picksData.value.forEach(player => {
@@ -163,7 +191,9 @@ export const usePicksStore = defineStore('picks', () => {
 
 			// for each player
 			picksData.value.forEach(player => {
-				if (!seasonEvs.value || !seasonEvs.value[player.name]) return []
+				if (!seasonEvs.value || !seasonEvs.value[player.name])
+					throw new Error(`seasonEvs.value[${player.name}] is undefined`)
+
 				const ogUserEv = seasonEvs.value[player.name]
 
 				const highestUserEvChange = winEvs[player.name].money - ogUserEv.money
@@ -176,7 +206,16 @@ export const usePicksStore = defineStore('picks', () => {
 		}
 
 		gameEvRangesLoading.value = false
+		gameEvRangesCalculated.value = true
 	}
+	// reset gameEvRanges on week change
+	watch(
+		() => gamesStore.selectedWeek,
+		() => {
+			gameEvRanges.value = {}
+			gameEvRangesCalculated.value = false
+		}
+	)
 
 	const seasonEvsEvaluating = ref(false)
 	const seasonEvs = computedAsync(
@@ -210,6 +249,19 @@ export const usePicksStore = defineStore('picks', () => {
 	})
 
 	// Actions
+	function setPicksTablePasteInput(paste: string) {
+		picksTablePasteWeekInputs[gamesStore.selectedWeek - 1] = paste
+	}
+	function resetPicksTablePasteInput() {
+		picksTablePasteWeekInputs[gamesStore.selectedWeek - 1] =
+			defaultPicksTablePasteWeekInputs[gamesStore.selectedWeek - 1]
+	}
+	function resetPicksTablePasteWeekInputs() {
+		for (let i = 0; i < picksTablePasteWeekInputs.length; i++) {
+			picksTablePasteWeekInputs[i] = defaultPicksTablePasteWeekInputs[i]
+		}
+	}
+
 	function simulateSeasonTotalsAfterGame(gameIndex: number) {
 		const hypotheticalSeasonTotals = {
 			win: structuredClone(seasonTotals.value),
@@ -228,7 +280,6 @@ export const usePicksStore = defineStore('picks', () => {
 		})
 		return hypotheticalSeasonTotals
 	}
-
 	return {
 		// State
 		picksTablePasteInput,
@@ -236,8 +287,10 @@ export const usePicksStore = defineStore('picks', () => {
 		gameEvRanges,
 		userGameEvRanges,
 		gameEvRangesLoading,
+		gameEvRangesCalculated,
 		// Getters
 		picksData,
+		picksTablePasteInputIsDefault,
 		poolhostGameOrder,
 		picksDataValidated,
 		seasonEvs,
@@ -247,7 +300,10 @@ export const usePicksStore = defineStore('picks', () => {
 		playerTotals,
 		numGamesLeft,
 		// Actions
-		calcUserGameEvRanges
+		calcUserGameEvRanges,
+		setPicksTablePasteInput,
+		resetPicksTablePasteInput,
+		resetPicksTablePasteWeekInputs
 		// getSeasonEvs
 	}
 })

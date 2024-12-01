@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
+const nfeloStore = useNfeloStore()
 
 const weekNumText = computed(() => (gamesStore.currentWeek != 0 ? gamesStore.currentWeek : 'None'))
 
@@ -19,11 +20,41 @@ const espnUpdateText = computed(() => {
 	}
 	return 'None'
 })
+
+function resetPicksAndNfeloToDefault() {
+	picksStore.resetPicksTablePasteWeekInputs()
+	nfeloStore.resetNfeloGamesInputs()
+}
 </script>
 
 <template>
 	<v-row>
-		<v-col> ESPN week loaded: {{ weekNumText }} </v-col>
+		<v-col cols="auto">
+			<h2>Week</h2>
+		</v-col>
+
+		<v-col cols="auto">
+			<v-tabs v-model="gamesStore.selectedWeek" density="compact">
+				<v-tab class="d-none"></v-tab>
+				<v-tab
+					v-for="i in 18"
+					:key="i"
+					@click="gamesStore.selectedWeek = i"
+					color="primary-darken-1"
+					slim
+					min-width="3em"
+					variant="flat"
+					class="me-1 border-thin"
+				>
+					{{ i }}
+				</v-tab>
+			</v-tabs>
+		</v-col>
+		<v-col cols="auto">
+			<v-btn @click="resetPicksAndNfeloToDefault" variant="elevated">
+				Reset All Weeks to Default
+			</v-btn>
+		</v-col>
 	</v-row>
 	<UserInputForm />
 	<v-row>
@@ -104,12 +135,21 @@ const espnUpdateText = computed(() => {
 				</v-expansion-panel-title>
 				<v-expansion-panel-text>
 					<v-row class="ga-3" no-gutters>
-						<ObjectCard v-for="game in gamesStore.gameData" :obj="game" />
+						<ObjectCard
+							v-for="game in gamesStore.gameData"
+							:obj="game"
+							class="text-no-wrap overflow-x-auto"
+							:style="{ maxWidth: '13em' }"
+						/>
 					</v-row>
 				</v-expansion-panel-text>
 			</v-expansion-panel>
 		</v-expansion-panels>
+
+		Number of games left season + playoffs: {{ picksStore.numGamesLeft }}
 	</template>
+	<!-- </v-tabs-window-item>
+	</v-tabs-window> -->
 </template>
 
 <style>

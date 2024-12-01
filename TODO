@@ -4,20 +4,19 @@ HIGHEST:
 
 HIGH:
 
+    BUG: first open site error gotta click load espn
+
     TODO: fix things really slow when pick game winner
 
-    TODO: multiple weeks saved
-
-
-    TODO: automatically fetch espn pre game win probs data button
+    TODO: weekEv
 
     TODO: store stats for each player so don't need to recalculate all the time (and for each filteroption)
 
 LOW:
 
-    TODO: automatically fetch nfelo data button
+    BUG: game time at 12:30pm shows 0:30pm
 
-    TODO: validate player name
+    TODO: automatically fetch nfelo data button
 
     TODO: highlight alternate rows such that user is always grey
 

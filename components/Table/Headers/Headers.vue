@@ -119,6 +119,7 @@ provide('numHeaders', numHeaders)
 			class="cursor-pointer text-center font-weight-bold border-e"
 			:class="[
 				game.state == 'finished' ? 'dimmed' : '',
+				game.espn?.situation?.isRedZone ? 'bg-error-lighten-4' : '',
 				tableStore.editGamesMode ? 'bg-primary-lighten-4' : ''
 			]"
 			@click="onGameClick(game, index)"
@@ -155,12 +156,16 @@ provide('numHeaders', numHeaders)
 				Click to edit game
 			</v-tooltip>
 			<v-tooltip
-				v-else-if="game.espn.situation && game.espn.situation.lastPlay"
+				v-else-if="
+					game.espn.situation &&
+					(game.espn.situation.lastPlay?.text || game.espn.situation.downDistanceText)
+				"
 				activator="parent"
 				location="top"
 			>
-				{{ game.espn.situation?.lastPlay?.text }}
-				Click to see Gamecast
+				{{ game.espn.situation.downDistanceText }}
+				<br />
+				{{ game.espn.situation.lastPlay?.text }}
 			</v-tooltip>
 		</th>
 		<th>

@@ -35,10 +35,11 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 	const picksStore = usePicksStore()
 	const gamesStore = useGamesStore()
 	const nfeloStore = useNfeloStore()
+	const espnAnalyticsStore = useEspnAnalyticsStore()
 
 	// State
 	const secondPlaceIsWinning = ref(false)
-	const filterGames = ref(GAME_FILTERS.ALL)
+	const filterGames = ref(GAME_FILTERS.UNFINISHED)
 	const maxGamesToSimLive = ref(16)
 	const loadingCalculations = ref(false)
 	// filterGames.value = GAME_FILTERS.ALL
@@ -51,6 +52,8 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 				if (gamesStore.gameData[i].state != 'upcoming') ignoredGames.push(i)
 			} else if (filterGames.value == GAME_FILTERS.UNFINISHED) {
 				if (gamesStore.gameData[i].state == 'finished') ignoredGames.push(i)
+			} else if (filterGames.value == GAME_FILTERS.NOWINNERS) {
+				if (gamesStore.gameData[i].winner) ignoredGames.push(i)
 			} else return []
 		}
 		return ignoredGames
@@ -92,7 +95,7 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 			idealOutcome.value,
 			worstOutcome.value,
 			nfeloStore.nfeloTeamsWinChance,
-			gamesStore.espnTeamsWinChances,
+			espnAnalyticsStore.espnTeamsWinChances,
 			secondPlaceIsWinning.value
 		)
 
@@ -107,7 +110,7 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 		}, 100)
 
 		mustWinsWinChances.value.espn = mustWins.value.reduce((acc, team) => {
-			return (acc * gamesStore.espnTeamsWinChances[team]) / 100
+			return (acc * espnAnalyticsStore.espnTeamsWinChances[team]) / 100
 		}, 100)
 
 		end = performance.now()
@@ -164,7 +167,7 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 			deepToRaw(pickedGames),
 			deepToRaw(gamesStore.gameData),
 			deepToRaw(nfeloStore.nfeloTeamsWinChance),
-			deepToRaw(gamesStore.espnTeamsWinChances)
+			deepToRaw(espnAnalyticsStore.espnTeamsWinChances)
 		)
 		loadingCalculations.value = false
 

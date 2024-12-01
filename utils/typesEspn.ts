@@ -75,7 +75,7 @@ export const ProbabilitySchema = z.object({
 	tiePercentage: z.number(),
 	homeWinPercentage: z.number(),
 	awayWinPercentage: z.number(),
-	secondsLeft: z.number()
+	secondsLeft: z.number().optional()
 })
 export type Probability = z.infer<typeof ProbabilitySchema>
 
