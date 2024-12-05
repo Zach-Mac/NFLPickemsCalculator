@@ -230,11 +230,15 @@ const sortBy: Ref<SortItem[]> = ref([])
 							<template v-slot:expanded-row="{ columns, item }">
 								<tr>
 									<td :colspan="columns.length">
+										<!-- :items-per-page="-1"
+                                        :hide-default-footer="true" -->
 										<v-data-table
 											:headers="subProcessesHeaders"
 											:items="item.subProcesses"
-											:hide-default-footer="true"
 											:sort-by="sortBy"
+											:hide-default-footer="
+												(item.subProcesses?.length || 0) <= 10
+											"
 											hover
 											density="compact"
 											sort-asc-icon="$sortDesc"
