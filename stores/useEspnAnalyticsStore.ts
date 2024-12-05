@@ -122,3 +122,7 @@ export const useEspnAnalyticsStore = defineStore('espnAnalytics', () => {
 		espnTeamsWinChances
 	}
 })
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(useEspnAnalyticsStore, import.meta.hot))
+}

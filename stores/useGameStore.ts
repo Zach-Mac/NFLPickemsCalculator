@@ -324,3 +324,7 @@ export const useGamesStore = defineStore('games', () => {
 		loadEspnScoreboardForWeek
 	}
 })
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(useGamesStore, import.meta.hot))
+}

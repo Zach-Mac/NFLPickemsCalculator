@@ -207,3 +207,7 @@ export const useTableStore = defineStore('table', () => {
 		sortBy
 	}
 })
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(useTableStore, import.meta.hot))
+}

@@ -163,3 +163,7 @@ export const useNfeloStore = defineStore('nfelo', () => {
 		resetNfeloGamesInputs
 	}
 })
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(useNfeloStore, import.meta.hot))
+}

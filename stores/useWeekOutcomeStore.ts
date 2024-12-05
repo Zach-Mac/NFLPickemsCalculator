@@ -200,3 +200,7 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 		liveStatsComputed
 	}
 })
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(useWeekOutcomesStore, import.meta.hot))
+}

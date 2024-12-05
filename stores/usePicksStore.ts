@@ -307,3 +307,7 @@ export const usePicksStore = defineStore('picks', () => {
 		// getSeasonEvs
 	}
 })
+
+if (import.meta.hot) {
+	import.meta.hot.accept(acceptHMRUpdate(usePicksStore, import.meta.hot))
+}
