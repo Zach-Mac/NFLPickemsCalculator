@@ -833,7 +833,71 @@ Browns
 Broncos
 	Broncos	-5.5	-6.0	69%	-1.1%`
 
-export const defaultNfeloPasteInput14 = ``
+export const defaultNfeloPasteInput14 = `		Market Line	Model Line	Win %	EV
+Packers
+	Packers			38%	-4.5%
+Lions
+	Lions	-3.5	-3.5	63%	-4.5%
+		Market Line	Model Line	Win %	EV
+Jets
+	Jets			29%	-4.5%
+Dolphins
+	Dolphins	-6.5	-6.5	71%	-4.5%
+		Market Line	Model Line	Win %	EV
+Falcons
+	Falcons			32%	-4.5%
+Vikings
+	Vikings	-5.5	-5.5	68%	-4.5%
+		Market Line	Model Line	Win %	EV
+Saints
+	Saints	-5	-2.5	57%	-27.8%
+Giants
+	Giants			43%	18.8%
+		Market Line	Model Line	Win %	EV
+Panthers
+	Panthers			12%	-28.7%
+Eagles
+	Eagles	-12.0	-14.5	88%	19.7%
+		Market Line	Model Line	Win %	EV
+Browns
+	Browns			26%	-21.3%
+Steelers
+	Steelers	-6.5	-7.5	74%	12.3%
+		Market Line	Model Line	Win %	EV
+Raiders
+	Raiders			29%	-4.5%
+Buccaneers
+	Buccaneers	-6.5	-6.5	71%	-4.5%
+		Market Line	Model Line	Win %	EV
+Jaguars
+	Jaguars			43%	11.0%
+Titans
+	Titans	-3.5	-2.5	57%	-20.1%
+		Market Line	Model Line	Win %	EV
+Seahawks
+	Seahawks			44%	-4.5%
+Cardinals
+	Cardinals	-2.5	-2.5	56%	-4.5%
+		Market Line	Model Line	Win %	EV
+Bills
+	Bills	-4.5	-4.5	67%	-4.5%
+Rams
+	Rams			33%	-4.5%
+		Market Line	Model Line	Win %	EV
+Bears
+	Bears			35%	-4.4%
+49ers
+	49ers	-4.0	-4.0	65%	-4.4%
+		Market Line	Model Line	Win %	EV
+Chargers
+	Chargers			35%	-4.4%
+Chiefs
+	Chiefs	-4.0	-4.0	65%	-4.4%
+		Market Line	Model Line	Win %	EV
+Bengals
+	Bengals	-5.5	-4	65%	-9.9%
+Cowboys
+	Cowboys			35%	0.8%`
 
 export const defaultNfeloPasteInput15 = ``
 

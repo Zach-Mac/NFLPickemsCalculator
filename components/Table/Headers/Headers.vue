@@ -163,9 +163,9 @@ provide('numHeaders', numHeaders)
 				activator="parent"
 				location="top"
 			>
-				{{ game.espn.situation.downDistanceText }}
-				<br />
 				{{ game.espn.situation.lastPlay?.text }}
+				<br />
+				{{ game.espn.situation.downDistanceText }}
 			</v-tooltip>
 		</th>
 		<th>

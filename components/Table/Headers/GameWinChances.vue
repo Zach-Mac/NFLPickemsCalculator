@@ -31,7 +31,7 @@ function evDiffColor(evDiff: number) {
 
 // nfelo
 const getNfeloWinChance = (gameIndex: number) => {
-	if (!picksStore.user) return 0
+	if (!picksStore.user || !picksStore.user.picks.length) return 0
 	return nfeloStore.nfeloTeamsWinChance[picksStore.user.picks[gameIndex]] + '%'
 }
 const getNfeloWinChanceMean = () => {
