@@ -85,7 +85,8 @@ const numHeadersNeeded = computed(() => {
 				evDiffColor(picksStore.userGameEvRanges[index])
 			]"
 		>
-			{{ game.state == 'finished' ? '-' : picksStore.userGameEvRanges[index] }}
+			<!-- {{ game.state == 'finished' ? '-' : picksStore.userGameEvRanges[index] }} -->
+			{{ picksStore.userGameEvRanges[index] }}
 		</th>
 		<th :colspan="numHeadersNeeded" class="px-1">
 			<v-btn
@@ -114,11 +115,12 @@ const numHeadersNeeded = computed(() => {
 			class="text-center border-e"
 			:class="[game.state == 'finished' ? 'dimmed' : '', getWeekImportanceColor(index)]"
 		>
-			{{
+			<!-- {{
 				game.state == 'finished'
 					? '-'
 					: round(weekOutcomesStore.gamesImportanceScores[index], 2)
-			}}
+			}} -->
+			{{ round(weekOutcomesStore.gamesImportanceScores[index], 2) }}
 		</th>
 		<th :colspan="numHeadersNeeded" class="px-1"></th>
 	</tr>

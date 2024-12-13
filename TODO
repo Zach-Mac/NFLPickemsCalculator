@@ -4,8 +4,6 @@ HIGHEST:
 
 HIGH:
 
-    BUG: first open site error gotta click load espn
-
     TODO: fix things really slow when pick game winner
 
     TODO: weekEv
@@ -15,6 +13,7 @@ HIGH:
 LOW:
 
     BUG: game time at 12:30pm shows 0:30pm
+    BUG: first open site error gotta click load espn
 
     TODO: automatically fetch nfelo data button
 
