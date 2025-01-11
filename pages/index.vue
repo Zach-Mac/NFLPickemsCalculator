@@ -3,7 +3,9 @@ const gamesStore = useGamesStore()
 const picksStore = usePicksStore()
 const nfeloStore = useNfeloStore()
 
-const weekNumText = computed(() => (gamesStore.currentWeek != 0 ? gamesStore.currentWeek : 'None'))
+const weekNumText = computed(() =>
+	gamesStore.currentWeek != 0 ? gamesStore.currentWeek : 'None'
+)
 
 const espnUpdateText = computed(() => {
 	if (gamesStore.lastEspnUpdate) {
@@ -16,7 +18,10 @@ const espnUpdateText = computed(() => {
 			minute: 'numeric',
 			second: 'numeric'
 		}
-		return new Date(gamesStore.lastEspnUpdate).toLocaleString('en-us', options)
+		return new Date(gamesStore.lastEspnUpdate).toLocaleString(
+			'en-us',
+			options
+		)
 	}
 	return 'None'
 })
@@ -25,6 +30,15 @@ function resetPicksAndNfeloToDefault() {
 	picksStore.resetPicksTablePasteWeekInputs()
 	nfeloStore.resetNfeloGamesInputs()
 }
+
+const tabTexts = computed(() => {
+	const texts = []
+	for (let i = 1; i <= 18; i++) {
+		texts.push(i.toString())
+	}
+	texts.push('WC', 'DIV', 'CONF', 'SB')
+	return texts
+})
 </script>
 
 <template>
@@ -37,7 +51,7 @@ function resetPicksAndNfeloToDefault() {
 			<v-tabs v-model="gamesStore.selectedWeek" density="compact">
 				<v-tab class="d-none"></v-tab>
 				<v-tab
-					v-for="i in 18"
+					v-for="i in 22"
 					:key="i"
 					@click="gamesStore.selectedWeek = i"
 					color="primary-darken-1"
@@ -46,7 +60,7 @@ function resetPicksAndNfeloToDefault() {
 					variant="flat"
 					class="me-1 border-thin"
 				>
-					{{ i }}
+					{{ tabTexts[i - 1] }}
 				</v-tab>
 			</v-tabs>
 		</v-col>
@@ -90,7 +104,9 @@ function resetPicksAndNfeloToDefault() {
 				text="Please click on a player name in the table or type in the input field to set the player name."
 				type="warning"
 			/>
-			<h2 v-if="!gamesStore.gameData.length">Load ESPN data to view table</h2>
+			<h2 v-if="!gamesStore.gameData.length">
+				Load ESPN data to view table
+			</h2>
 			<template v-else>
 				<small>
 					Last ESPN update:
@@ -99,7 +115,10 @@ function resetPicksAndNfeloToDefault() {
 					</b>
 				</small>
 				<PicksTable class="mb-5" />
-				<v-dialog v-model="gamesStore.showEditGamesDialog" max-width="500">
+				<v-dialog
+					v-model="gamesStore.showEditGamesDialog"
+					max-width="500"
+				>
 					<v-card>
 						<v-card-title> Edit Game </v-card-title>
 						<v-card-text>
@@ -107,13 +126,23 @@ function resetPicksAndNfeloToDefault() {
 								<v-row>
 									<v-col>
 										<ObjectCard
-											:obj="gamesStore.gameData[gamesStore.editGameIndex]"
+											:obj="
+												gamesStore.gameData[
+													gamesStore.editGameIndex
+												]
+											"
 										/>
 										<v-divider class="my-5"></v-divider>
 
 										<EditObjectForm
-											v-model="gamesStore.gameData[gamesStore.editGameIndex]"
-											:options="gamesStore.editGameOptions"
+											v-model="
+												gamesStore.gameData[
+													gamesStore.editGameIndex
+												]
+											"
+											:options="
+												gamesStore.editGameOptions
+											"
 										/>
 									</v-col>
 								</v-row>

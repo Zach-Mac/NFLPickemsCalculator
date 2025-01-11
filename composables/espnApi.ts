@@ -14,8 +14,21 @@ api.interceptors.response.use(response => {
 })
 
 async function getScoreboard(week?: number) {
-	const weekParam = week ? `?week=${week}` : ''
-	const url = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard${weekParam}`
+	let weekParam = ''
+	let seasontypeParam = ''
+
+	if (week) {
+		let week_ = week
+
+		if (week > 18) {
+			week_ = week % 18
+			seasontypeParam = `&seasontype=3`
+		}
+
+		weekParam = `?week=${week_}`
+	}
+
+	const url = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard${weekParam}${seasontypeParam}`
 	const response = await api.get(url)
 	return response.data as Scoreboard
 }

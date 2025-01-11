@@ -16,7 +16,11 @@ import {
 	defaultNfeloPasteInput15,
 	defaultNfeloPasteInput16,
 	defaultNfeloPasteInput17,
-	defaultNfeloPasteInput18
+	defaultNfeloPasteInput18,
+	defaultNfeloPasteInput19,
+	defaultNfeloPasteInput20,
+	defaultNfeloPasteInput21,
+	defaultNfeloPasteInput22
 } from '~/utils/defaults/defaultNfeloPastesWeeks/weeks'
 
 export const defaultNfeloPasteInputs = [
@@ -37,5 +41,9 @@ export const defaultNfeloPasteInputs = [
 	defaultNfeloPasteInput15,
 	defaultNfeloPasteInput16,
 	defaultNfeloPasteInput17,
-	defaultNfeloPasteInput18
+	defaultNfeloPasteInput18,
+	defaultNfeloPasteInput19,
+	defaultNfeloPasteInput20,
+	defaultNfeloPasteInput21,
+	defaultNfeloPasteInput22
 ]
