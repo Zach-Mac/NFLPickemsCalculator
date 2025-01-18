@@ -1254,7 +1254,26 @@ Vikings
 Rams
 	Rams			46%	-4.5%`
 
-export const defaultNfeloPasteInput20 = ``
+export const defaultNfeloPasteInput20 = `		Market Line	Model Line	Win %	EV
+Texans
+	Texans			31%	12.7%
+Chiefs
+	Chiefs	-7.5	-6.0	69%	-21.8%
+		Market Line	Model Line	Win %	EV
+Rams
+	Rams			29%	-8.5%
+Eagles
+	Eagles	-6.0	-6.5	71%	-0.2%
+		Market Line	Model Line	Win %	EV
+Commanders
+	Commanders			21%	-4.5%
+Lions
+	Lions	-9.5	-9.5	79%	-4.5%
+		Market Line	Model Line	Win %	EV
+Ravens
+	Ravens	-1.5	-1.5	54%	-4.5%
+Bills
+	Bills			46%	-4.5%`
 
 export const defaultNfeloPasteInput21 = ``
 
