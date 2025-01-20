@@ -115,8 +115,10 @@ export const POOLHOST_TO_ESPN_ABBREVIATION = {
 	TEN: 'TEN',
 	WAS: 'WSH'
 }
-export type PoolhostTeamAbbreviation = keyof typeof POOLHOST_TO_ESPN_ABBREVIATION
+export type PoolhostTeamAbbreviation =
+	keyof typeof POOLHOST_TO_ESPN_ABBREVIATION
 
 export const NFL_GAMES_PER_WEEK = [
-	16, 16, 16, 16, 14, 14, 15, 16, 15, 14, 14, 13, 16, 13, 16, 16, 16, 16
+	16, 16, 16, 16, 14, 14, 15, 16, 15, 14, 14, 13, 16, 13, 16, 16, 16, 16, 6,
+	4, 2, 1
 ]
