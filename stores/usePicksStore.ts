@@ -15,7 +15,10 @@ export const usePicksStore = defineStore('picks', () => {
 	// State
 
 	const picksTablePasteWeekInputs = toReactive(
-		useLocalStorage('picksTablePasteWeekInputs', defaultPicksTablePasteWeekInputs)
+		useLocalStorage(
+			'picksTablePasteWeekInputs',
+			defaultPicksTablePasteWeekInputs
+		)
 	)
 	const playerName = useLocalStorage('playerName', '')
 	const picksDataValidated = ref(false)
@@ -41,8 +44,13 @@ export const usePicksStore = defineStore('picks', () => {
 					.slice(3, -3)
 					.toArray()
 					.map(td => {
-						const abbreviation = $(td).text() as PoolhostTeamAbbreviation
-						return POOLHOST_TO_ESPN_ABBREVIATION[abbreviation] ?? abbreviation
+						const abbreviation = $(
+							td
+						).text() as PoolhostTeamAbbreviation
+						return (
+							POOLHOST_TO_ESPN_ABBREVIATION[abbreviation] ??
+							abbreviation
+						)
 					})
 
 				const weekTotal = Number(tds.eq(-3).text())
@@ -69,7 +77,9 @@ export const usePicksStore = defineStore('picks', () => {
 				const home = splitText[2]
 
 				const abbreviation = home as PoolhostTeamAbbreviation
-				return POOLHOST_TO_ESPN_ABBREVIATION[abbreviation] ?? abbreviation
+				return (
+					POOLHOST_TO_ESPN_ABBREVIATION[abbreviation] ?? abbreviation
+				)
 			})
 	})
 	const picksData = computed(() => {
@@ -93,14 +103,23 @@ export const usePicksStore = defineStore('picks', () => {
 	})
 
 	const user = computed(() => {
-		return picksData.value.find(player => player.name === playerName.value) ?? blankUser
+		return (
+			picksData.value.find(player => player.name === playerName.value) ??
+			blankUser
+		)
 	})
 
 	const playerTotals = computed(() => {
-		const totals: Record<string, { weekTotal: number; seasonTotal: number }> = {}
+		const totals: Record<
+			string,
+			{ weekTotal: number; seasonTotal: number }
+		> = {}
 		picksData.value.forEach(player => {
 			if (!totals[player.name]) {
-				totals[player.name] = { weekTotal: 0, seasonTotal: player.originalSeasonTotal }
+				totals[player.name] = {
+					weekTotal: 0,
+					seasonTotal: player.originalSeasonTotal
+				}
 			}
 			player.picks.forEach((pick, i) => {
 				if (
@@ -118,25 +137,34 @@ export const usePicksStore = defineStore('picks', () => {
 
 	const seasonTotals = computed(() => {
 		return Object.fromEntries(
-			Object.entries(playerTotals.value).map(([name, { seasonTotal }]) => [name, seasonTotal])
+			Object.entries(playerTotals.value).map(
+				([name, { seasonTotal }]) => [name, seasonTotal]
+			)
 		)
 	})
 	const prevSeasonTotals = computed(() => {
 		return Object.fromEntries(
-			Object.entries(picksData.value).map(([index, { name, originalSeasonTotal }]) => [
-				name,
-				originalSeasonTotal
-			])
+			Object.entries(picksData.value).map(
+				([index, { name, originalSeasonTotal }]) => [
+					name,
+					originalSeasonTotal
+				]
+			)
 		)
 	})
 	const numGamesLeftAfterWeek = computed(() => {
-		const seasonGamesLeft =
-			NFL_GAMES_PER_WEEK.slice(gamesStore.currentWeek).reduce((acc, val) => acc + val, 0) ?? 0
+		// const seasonGamesLeft =
+		return (
+			NFL_GAMES_PER_WEEK.slice(gamesStore.currentWeek).reduce(
+				(acc, val) => acc + val,
+				0
+			) ?? 0
+		)
 
-		const playoffGamesLeft = 13
-		const gamesLeftAfterWeek = seasonGamesLeft + playoffGamesLeft
+		// const playoffGamesLeft = 13
+		// const gamesLeftAfterWeek = seasonGamesLeft + playoffGamesLeft
 
-		return gamesLeftAfterWeek
+		// return gamesLeftAfterWeek
 	})
 	const numGamesLeft = computed(() => {
 		return numGamesLeftAfterWeek.value + gamesStore.numGamesWithNoWinners
@@ -146,7 +174,9 @@ export const usePicksStore = defineStore('picks', () => {
 	})
 
 	const gameEvRanges = ref({} as Record<string, number[]>)
-	const userGameEvRanges = computed(() => gameEvRanges.value[user.value.name] ?? [])
+	const userGameEvRanges = computed(
+		() => gameEvRanges.value[user.value.name] ?? []
+	)
 	const gameEvRangesLoading = ref(false)
 	const gameEvRangesCalculated = ref(gamesStore.numGamesWithNoWinners > 0)
 	async function calcUserGameEvRanges() {
@@ -177,7 +207,10 @@ export const usePicksStore = defineStore('picks', () => {
 		})
 
 		for (let i = 0; i < gamesStore.gameData.length; i++) {
-			if (gamesStore.gameData[i].winner && gamesStore.gameData[i].winner !== '') {
+			if (
+				gamesStore.gameData[i].winner &&
+				gamesStore.gameData[i].winner !== ''
+			) {
 				picksData.value.forEach(player => {
 					gameEvRanges.value[player.name].push(0)
 				})
@@ -186,20 +219,35 @@ export const usePicksStore = defineStore('picks', () => {
 
 			const totals = simulateSeasonTotalsAfterGame(i)
 
-			const winEvs = await runSim(totals.win, numGamesLeft.value, winProb, numSims)
-			const lossEvs = await runSim(totals.loss, numGamesLeft.value, winProb, numSims)
+			const winEvs = await runSim(
+				totals.win,
+				numGamesLeft.value,
+				winProb,
+				numSims
+			)
+			const lossEvs = await runSim(
+				totals.loss,
+				numGamesLeft.value,
+				winProb,
+				numSims
+			)
 
 			// for each player
 			picksData.value.forEach(player => {
 				if (!seasonEvs.value || !seasonEvs.value[player.name])
-					throw new Error(`seasonEvs.value[${player.name}] is undefined`)
+					throw new Error(
+						`seasonEvs.value[${player.name}] is undefined`
+					)
 
 				const ogUserEv = seasonEvs.value[player.name]
 
-				const highestUserEvChange = winEvs[player.name].money - ogUserEv.money
-				const lowestUserEvChange = lossEvs[player.name].money - ogUserEv.money
+				const highestUserEvChange =
+					winEvs[player.name].money - ogUserEv.money
+				const lowestUserEvChange =
+					lossEvs[player.name].money - ogUserEv.money
 
-				const evDiff = Math.abs(highestUserEvChange) + Math.abs(lowestUserEvChange)
+				const evDiff =
+					Math.abs(highestUserEvChange) + Math.abs(lowestUserEvChange)
 
 				gameEvRanges.value[player.name].push(evDiff)
 			})
@@ -223,7 +271,12 @@ export const usePicksStore = defineStore('picks', () => {
 			const winProb = 0.6
 			const numSims = 10000
 
-			const evs = await runSim(seasonTotals.value, numGamesLeft.value, winProb, numSims)
+			const evs = await runSim(
+				seasonTotals.value,
+				numGamesLeft.value,
+				winProb,
+				numSims
+			)
 			return evs
 		},
 		undefined,
@@ -233,7 +286,12 @@ export const usePicksStore = defineStore('picks', () => {
 		const winProb = 0.6
 		const numSims = 10000
 
-		const evs = await runSim(prevSeasonTotals.value, prevNumGamesLeft.value, winProb, numSims)
+		const evs = await runSim(
+			prevSeasonTotals.value,
+			prevNumGamesLeft.value,
+			winProb,
+			numSims
+		)
 		return evs
 	})
 	const seasonEvsChange = computed(() => {
@@ -274,7 +332,8 @@ export const usePicksStore = defineStore('picks', () => {
 		picksData.value.forEach(player => {
 			const pick = player.picks[gameIndex]
 			if (pick) {
-				if (pick === winningTeam) hypotheticalSeasonTotals.win[player.name]++
+				if (pick === winningTeam)
+					hypotheticalSeasonTotals.win[player.name]++
 				else hypotheticalSeasonTotals.loss[player.name]++
 			}
 		})
