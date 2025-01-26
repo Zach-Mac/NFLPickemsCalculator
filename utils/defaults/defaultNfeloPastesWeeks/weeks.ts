@@ -1275,6 +1275,15 @@ Ravens
 Bills
 	Bills			46%	-4.5%`
 
-export const defaultNfeloPasteInput21 = ``
+export const defaultNfeloPasteInput21 = `Market Line	Model Line	Win %	EV
+Commanders
+	Commanders			33%	-0.7%
+Eagles
+	Eagles	-6.0	-5.0	67%	-8.2%
+		Market Line	Model Line	Win %	EV
+Bills
+	Bills		-1	52%	-2.0%
+Chiefs
+	Chiefs	-1.5		48%	-7.1%`
 
 export const defaultNfeloPasteInput22 = ``
