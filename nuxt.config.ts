@@ -4,6 +4,7 @@ import { defineNuxtConfig } from 'nuxt/config'
 export default defineNuxtConfig({
 	ssr: false,
 	compatibilityDate: '2024-04-03',
+	css: ['v-network-graph/lib/style.css'],
 	devtools: {
 		enabled: true,
 
@@ -11,7 +12,13 @@ export default defineNuxtConfig({
 			enabled: true
 		}
 	},
-	modules: ['vuetify-nuxt-module', '@vueuse/nuxt', '@pinia/nuxt', 'nuxt-workers', 'nuxt-lodash'],
+	modules: [
+		'vuetify-nuxt-module',
+		'@vueuse/nuxt',
+		'@pinia/nuxt',
+		'nuxt-workers',
+		'nuxt-lodash'
+	],
 	vuetify: {
 		moduleOptions: {
 			/* module specific options */
