@@ -1,4 +1,4 @@
-export const defaultSelectedWeek = 21
+export const defaultSelectedWeek = 22
 
 export const defaultEspnWinProbsString =
 	'100 48.4 66.3 76.3 48.4 51 64.4 58.5 61.4 53.6 66.3 68.7 48.0 58.4 61.3 51.8'
