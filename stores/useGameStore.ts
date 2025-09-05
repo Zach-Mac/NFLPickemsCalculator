@@ -70,10 +70,7 @@ const getGameState = (state: string): GameState => {
 
 export const useGamesStore = defineStore('games', () => {
 	// State
-	const scoreboardCache = useLocalStorage(
-		'scoreboardCache',
-		{} as Record<number, Scoreboard>
-	)
+	const scoreboardCache = useLocalStorage('scoreboardCache', {} as Record<number, Scoreboard>)
 	const espnScoreboard = ref<Scoreboard | undefined>()
 	const gameData = useLocalStorage('gameData', [] as Game[])
 	const lastEspnUpdate = useLocalStorage('lastEspnUpdate', 0)
@@ -102,8 +99,7 @@ export const useGamesStore = defineStore('games', () => {
 
 	// Getters
 	const numGamesWithNoWinners = computed(() => {
-		return gameData.value.filter(game => !game.winner || game.winner === '')
-			.length
+		return gameData.value.filter(game => !game.winner || game.winner === '').length
 	})
 
 	// Actions
@@ -120,12 +116,8 @@ export const useGamesStore = defineStore('games', () => {
 		const games: Game[] = []
 		events.forEach(event => {
 			const competition = event.competitions[0]
-			const homeTeam = competition.competitors.find(
-				comp => comp.homeAway === 'home'
-			)!
-			const awayTeam = competition.competitors.find(
-				comp => comp.homeAway === 'away'
-			)!
+			const homeTeam = competition.competitors.find(comp => comp.homeAway === 'home')!
+			const awayTeam = competition.competitors.find(comp => comp.homeAway === 'away')!
 			const scoreHome = Number(homeTeam.score) || 0
 			const scoreAway = Number(awayTeam.score) || 0
 
@@ -136,9 +128,7 @@ export const useGamesStore = defineStore('games', () => {
 			let winner = ''
 
 			if (state === 'finished') {
-				winner =
-					competition.competitors.find(comp => comp.winner)?.team
-						.abbreviation || ''
+				winner = competition.competitors.find(comp => comp.winner)?.team.abbreviation || ''
 			} else if (state === 'active') {
 				if (scoreHome > scoreAway) {
 					winner = homeTeam.team.abbreviation
@@ -164,9 +154,7 @@ export const useGamesStore = defineStore('games', () => {
 				espn: {
 					situation: situation,
 					gamecastLink:
-						event.links.find(link =>
-							link.text?.includes('Gamecast')
-						)?.href || ''
+						event.links.find(link => link.text?.includes('Gamecast'))?.href || ''
 				}
 			})
 		})
@@ -182,9 +170,7 @@ export const useGamesStore = defineStore('games', () => {
 
 		if (allGamesFound) {
 			gameData.value = picksStore.poolhostGameOrder.map(team => {
-				const espnGame = games.find(
-					g => g.home === team || g.away === team
-				)!
+				const espnGame = games.find(g => g.home === team || g.away === team)!
 				return espnGame
 			})
 		} else {
@@ -228,10 +214,7 @@ export const useGamesStore = defineStore('games', () => {
 		}
 	}
 
-	const loadEspnScoreboardForWeek = async (
-		week: number,
-		forceReload = false
-	) => {
+	const loadEspnScoreboardForWeek = async (week: number, forceReload = false) => {
 		apiLoading.value = true
 		loadingScoreboard.value = true
 		try {
@@ -295,9 +278,7 @@ export const useGamesStore = defineStore('games', () => {
 	const getGameWithTeam = (team: string): Game | undefined => {
 		if (!gameData.value || gameData.value.length === 0) return undefined
 
-		const game = gameData.value.find(
-			game => game && (game.home === team || game.away === team)
-		)
+		const game = gameData.value.find(game => game && (game.home === team || game.away === team))
 		if (!game) console.warn(`Game with team "${team}" not found.`)
 
 		return game
@@ -309,9 +290,7 @@ export const useGamesStore = defineStore('games', () => {
 	const teamLost = (team: string): boolean => {
 		const game = getGameWithTeam(team)
 		if (!game) {
-			console.warn(
-				`Cannot determine if team "${team}" lost because the game was not found.`
-			)
+			console.warn(`Cannot determine if team "${team}" lost because the game was not found.`)
 			return false
 		}
 		if (game.state === 'upcoming') return false

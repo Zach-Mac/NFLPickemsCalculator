@@ -47,38 +47,38 @@ export const NFL_TEAM_NAMES = [
 ]
 
 export const NFL_TEAMS = [
-	{ name: '49ers', poohostAbbrev: 'SF', espnAbbrev: 'SF' },
-	{ name: 'Bears', poohostAbbrev: 'CHI', espnAbbrev: 'CHI' },
-	{ name: 'Bengals', poohostAbbrev: 'CIN', espnAbbrev: 'CIN' },
-	{ name: 'Bills', poohostAbbrev: 'BUF', espnAbbrev: 'BUF' },
-	{ name: 'Broncos', poohostAbbrev: 'DEN', espnAbbrev: 'DEN' },
-	{ name: 'Browns', poohostAbbrev: 'CLE', espnAbbrev: 'CLE' },
-	{ name: 'Buccaneers', poohostAbbrev: 'TB', espnAbbrev: 'TB' },
-	{ name: 'Cardinals', poohostAbbrev: 'AZ', espnAbbrev: 'ARI' },
-	{ name: 'Chargers', poohostAbbrev: 'LAC', espnAbbrev: 'LAC' },
-	{ name: 'Chiefs', poohostAbbrev: 'KC', espnAbbrev: 'KC' },
-	{ name: 'Colts', poohostAbbrev: 'IND', espnAbbrev: 'IND' },
-	{ name: 'Commanders', poohostAbbrev: 'WAS', espnAbbrev: 'WSH' },
-	{ name: 'Cowboys', poohostAbbrev: 'DAL', espnAbbrev: 'DAL' },
-	{ name: 'Dolphins', poohostAbbrev: 'MIA', espnAbbrev: 'MIA' },
-	{ name: 'Eagles', poohostAbbrev: 'PHI', espnAbbrev: 'PHI' },
-	{ name: 'Falcons', poohostAbbrev: 'ATL', espnAbbrev: 'ATL' },
-	{ name: 'Giants', poohostAbbrev: 'NYG', espnAbbrev: 'NYG' },
-	{ name: 'Jaguars', poohostAbbrev: 'JAC', espnAbbrev: 'JAX' },
-	{ name: 'Jets', poohostAbbrev: 'NYJ', espnAbbrev: 'NYJ' },
-	{ name: 'Lions', poohostAbbrev: 'DET', espnAbbrev: 'DET' },
-	{ name: 'Packers', poohostAbbrev: 'GB', espnAbbrev: 'GB' },
-	{ name: 'Panthers', poohostAbbrev: 'CAR', espnAbbrev: 'CAR' },
-	{ name: 'Patriots', poohostAbbrev: 'NE', espnAbbrev: 'NE' },
-	{ name: 'Raiders', poohostAbbrev: 'LV', espnAbbrev: 'LV' },
-	{ name: 'Rams', poohostAbbrev: 'LAR', espnAbbrev: 'LAR' },
-	{ name: 'Ravens', poohostAbbrev: 'BAL', espnAbbrev: 'BAL' },
-	{ name: 'Saints', poohostAbbrev: 'NO', espnAbbrev: 'NO' },
-	{ name: 'Seahawks', poohostAbbrev: 'SEA', espnAbbrev: 'SEA' },
-	{ name: 'Steelers', poohostAbbrev: 'PIT', espnAbbrev: 'PIT' },
-	{ name: 'Texans', poohostAbbrev: 'HOU', espnAbbrev: 'HOU' },
-	{ name: 'Titans', poohostAbbrev: 'TEN', espnAbbrev: 'TEN' },
-	{ name: 'Vikings', poohostAbbrev: 'MIN', espnAbbrev: 'MIN' }
+	{ name: '49ers', poolhostAbbrev: 'SF', espnAbbrev: 'SF', nfeloAbbrev: 'SF' },
+	{ name: 'Bears', poolhostAbbrev: 'CHI', espnAbbrev: 'CHI', nfeloAbbrev: 'CHI' },
+	{ name: 'Bengals', poolhostAbbrev: 'CIN', espnAbbrev: 'CIN', nfeloAbbrev: 'CIN' },
+	{ name: 'Bills', poolhostAbbrev: 'BUF', espnAbbrev: 'BUF', nfeloAbbrev: 'BUF' },
+	{ name: 'Broncos', poolhostAbbrev: 'DEN', espnAbbrev: 'DEN', nfeloAbbrev: 'DEN' },
+	{ name: 'Browns', poolhostAbbrev: 'CLE', espnAbbrev: 'CLE', nfeloAbbrev: 'CLE' },
+	{ name: 'Buccaneers', poolhostAbbrev: 'TB', espnAbbrev: 'TB', nfeloAbbrev: 'TB' },
+	{ name: 'Cardinals', poolhostAbbrev: 'AZ', espnAbbrev: 'ARI', nfeloAbbrev: 'ARI' },
+	{ name: 'Chargers', poolhostAbbrev: 'LAC', espnAbbrev: 'LAC', nfeloAbbrev: 'LAC' },
+	{ name: 'Chiefs', poolhostAbbrev: 'KC', espnAbbrev: 'KC', nfeloAbbrev: 'KC' },
+	{ name: 'Colts', poolhostAbbrev: 'IND', espnAbbrev: 'IND', nfeloAbbrev: 'IND' },
+	{ name: 'Commanders', poolhostAbbrev: 'WAS', espnAbbrev: 'WSH', nfeloAbbrev: 'WAS' },
+	{ name: 'Cowboys', poolhostAbbrev: 'DAL', espnAbbrev: 'DAL', nfeloAbbrev: 'DAL' },
+	{ name: 'Dolphins', poolhostAbbrev: 'MIA', espnAbbrev: 'MIA', nfeloAbbrev: 'MIA' },
+	{ name: 'Eagles', poolhostAbbrev: 'PHI', espnAbbrev: 'PHI', nfeloAbbrev: 'PHI' },
+	{ name: 'Falcons', poolhostAbbrev: 'ATL', espnAbbrev: 'ATL', nfeloAbbrev: 'ATL' },
+	{ name: 'Giants', poolhostAbbrev: 'NYG', espnAbbrev: 'NYG', nfeloAbbrev: 'NYG' },
+	{ name: 'Jaguars', poolhostAbbrev: 'JAC', espnAbbrev: 'JAX', nfeloAbbrev: 'JAX' },
+	{ name: 'Jets', poolhostAbbrev: 'NYJ', espnAbbrev: 'NYJ', nfeloAbbrev: 'NYJ' },
+	{ name: 'Lions', poolhostAbbrev: 'DET', espnAbbrev: 'DET', nfeloAbbrev: 'DET' },
+	{ name: 'Packers', poolhostAbbrev: 'GB', espnAbbrev: 'GB', nfeloAbbrev: 'GB' },
+	{ name: 'Panthers', poolhostAbbrev: 'CAR', espnAbbrev: 'CAR', nfeloAbbrev: 'CAR' },
+	{ name: 'Patriots', poolhostAbbrev: 'NE', espnAbbrev: 'NE', nfeloAbbrev: 'NE' },
+	{ name: 'Raiders', poolhostAbbrev: 'LV', espnAbbrev: 'LV', nfeloAbbrev: 'LV' },
+	{ name: 'Rams', poolhostAbbrev: 'LAR', espnAbbrev: 'LAR', nfeloAbbrev: 'LAR' },
+	{ name: 'Ravens', poolhostAbbrev: 'BAL', espnAbbrev: 'BAL', nfeloAbbrev: 'BAL' },
+	{ name: 'Saints', poolhostAbbrev: 'NO', espnAbbrev: 'NO', nfeloAbbrev: 'NO' },
+	{ name: 'Seahawks', poolhostAbbrev: 'SEA', espnAbbrev: 'SEA', nfeloAbbrev: 'SEA' },
+	{ name: 'Steelers', poolhostAbbrev: 'PIT', espnAbbrev: 'PIT', nfeloAbbrev: 'PIT' },
+	{ name: 'Texans', poolhostAbbrev: 'HOU', espnAbbrev: 'HOU', nfeloAbbrev: 'HOU' },
+	{ name: 'Titans', poolhostAbbrev: 'TEN', espnAbbrev: 'TEN', nfeloAbbrev: 'TEN' },
+	{ name: 'Vikings', poolhostAbbrev: 'MIN', espnAbbrev: 'MIN', nfeloAbbrev: 'MIN' }
 ]
 
 export const POOLHOST_TO_ESPN_ABBREVIATION = {
@@ -115,10 +115,8 @@ export const POOLHOST_TO_ESPN_ABBREVIATION = {
 	TEN: 'TEN',
 	WAS: 'WSH'
 }
-export type PoolhostTeamAbbreviation =
-	keyof typeof POOLHOST_TO_ESPN_ABBREVIATION
+export type PoolhostTeamAbbreviation = keyof typeof POOLHOST_TO_ESPN_ABBREVIATION
 
 export const NFL_GAMES_PER_WEEK = [
-	16, 16, 16, 16, 14, 14, 15, 16, 15, 14, 14, 13, 16, 13, 16, 16, 16, 16, 6,
-	4, 2, 1
+	16, 16, 16, 16, 14, 14, 15, 16, 15, 14, 14, 13, 16, 13, 16, 16, 16, 16, 6, 4, 2, 1
 ]

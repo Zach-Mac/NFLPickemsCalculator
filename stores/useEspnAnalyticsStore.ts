@@ -82,6 +82,7 @@ export const useEspnAnalyticsStore = defineStore('espnAnalytics', () => {
 
 		const data = await $fetch(`/api/espn?url=${encodeURIComponent(gamecastUrl)}`)
 
+		console.log('getEspnWinChance')
 		const $ = cheerio.load(data)
 
 		const winChances = $('.matchupPredictor').text()

@@ -29,51 +29,81 @@ export const useNfeloStore = defineStore('nfelo', () => {
 		if (!picksStore.poolhostGameOrder.length) return []
 		if (!gamesStore.gameData.length) return []
 
-		const sanitized = nfeloGamesInput.value
-			.replaceAll('\t', ' ')
-			.replaceAll('\n', ' ')
-			.replaceAll(/\s+/g, ' ')
+		// New: CSV parsing path. Expecting a header like: home_team,away_team,nfelo_projected_home_spread,nfelo_projected_home_win_probability,projected_winner,projected_winner_probability
+		let parsedGames: NfeloGame[] = []
+		const raw = nfeloGamesInput.value.trim()
 
-		const split = sanitized
-			.split('Market Line Model Line Win % EV ')
-			.filter(str => str.length > 0)
-			.map(gameStr => gameStr.split(' '))
-
-		const nfeloGames: NfeloGame[] = split.map(gameStrSplit => {
-			const awayName = gameStrSplit[0]
-			const homeName = gameStrSplit.find(
-				str => NFL_TEAM_NAMES.includes(str) && str != awayName
-			)
-
-			if (!homeName) {
-				console.error('Home team not found for game:', gameStrSplit.join(' '))
-				nfeloGamesValidated.value = false
+		if (raw.toLowerCase().startsWith('home_team,away_team')) {
+			const lines = raw.split(/\r?\n/).filter(l => l.trim().length > 0)
+			// remove header
+			lines.shift()
+			for (const line of lines) {
+				// Simple CSV split (fields not expected to be quoted). If quoting becomes necessary, replace with a proper CSV parser (e.g., Papa Parse).
+				const cols = line.split(',').map(c => c.trim())
+				if (cols.length < 4) continue
+				const homeAbbrev = cols[0]
+				const awayAbbrev = cols[1]
+				const homeProbRaw = parseFloat(cols[3]) // nfelo_projected_home_win_probability (0-1)
+				const homeWinPercent = isFinite(homeProbRaw) ? homeProbRaw * 100 : 0
+				const awayWinPercent = 100 - homeWinPercent
+				parsedGames.push({
+					home: NFL_TEAMS.find(team => team.nfeloAbbrev == homeAbbrev)?.espnAbbrev ?? '',
+					away: NFL_TEAMS.find(team => team.nfeloAbbrev == awayAbbrev)?.espnAbbrev ?? '',
+					homeWinPercent,
+					awayWinPercent
+				})
 			}
+		} else {
+			console.warn('Using legacy free-form paste parsing for nfeloGamesInput.')
 
-			const awayWinPercent = Number(gameStrSplit.find(str => str.includes('%'))?.slice(0, -1))
-			const homeWinPercent = 100 - awayWinPercent
+			// Legacy fallback: original free-form paste parsing
+			const sanitized = raw
+				.replaceAll('\t', ' ')
+				.replaceAll('\n', ' ')
+				.replaceAll(/\s+/g, ' ')
 
-			return {
-				home: NFL_TEAMS.find(team => team.name == homeName)?.espnAbbrev ?? '',
-				away: NFL_TEAMS.find(team => team.name == awayName)?.espnAbbrev ?? '',
-				homeWinPercent,
-				awayWinPercent
-			}
-		})
+			const split = sanitized
+				.split('Market Line Model Line Win % EV ')
+				.filter(str => str.length > 0)
+				.map(gameStr => gameStr.split(' '))
+
+			parsedGames = split.map(gameStrSplit => {
+				const awayName = gameStrSplit[0]
+				const homeName = gameStrSplit.find(
+					str => NFL_TEAM_NAMES.includes(str) && str != awayName
+				)
+
+				if (!homeName) {
+					console.error('Home team not found for game:', gameStrSplit.join(' '))
+					nfeloGamesValidated.value = false
+				}
+
+				const awayWinPercent = Number(
+					gameStrSplit.find(str => str.includes('%'))?.slice(0, -1)
+				)
+				const homeWinPercent = 100 - awayWinPercent
+
+				return {
+					home: NFL_TEAMS.find(team => team.name == homeName)?.espnAbbrev ?? '',
+					away: NFL_TEAMS.find(team => team.name == awayName)?.espnAbbrev ?? '',
+					homeWinPercent,
+					awayWinPercent
+				}
+			})
+		}
 
 		// sort to match the order of the games in the poolhost
 		const sorted = picksStore.poolhostGameOrder.map(team => {
-			const nfeloGame = nfeloGames.find(g => g.home === team || g.away === team)
+			const nfeloGame = parsedGames.find(g => g.home === team || g.away === team)
 			if (!nfeloGame) {
-				console.error(`No game found for team "${team}". nfeloGames:`, nfeloGames)
-				// return blankNfeloGame
+				console.error(`No game found for team "${team}". nfeloGames:`, parsedGames)
 			}
 			return nfeloGame
 		})
 
 		// check to make sure all games are accounted for
-		if (sorted.length != nfeloGames.length) {
-			console.error('Not all games accounted for in nfeloGames')
+		if (sorted.filter(Boolean).length !== parsedGames.length) {
+			console.error('Not all games accounted for in nfeloGames (parsed vs sorted mismatch).')
 		}
 
 		return sorted

@@ -7,7 +7,7 @@ interface SimOutput {
 	[player: string]: PlayerStats
 }
 
-const prizeMoney = [750, 500, 300, 150]
+const prizeMoney = [800, 500, 350, 200, 100]
 const totalPrizeMoney = prizeMoney.reduce((sum, prize) => sum + prize, 0)
 
 class SeasonSimulator {
