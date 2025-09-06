@@ -82,12 +82,11 @@ export const useEspnAnalyticsStore = defineStore('espnAnalytics', () => {
 
 		const data = await $fetch(`/api/espn?url=${encodeURIComponent(gamecastUrl)}`)
 
-		console.log('getEspnWinChance')
 		const $ = cheerio.load(data)
 
 		const winChances = $('.matchupPredictor').text()
 
-		const split = winChances.split('%')
+		const split = winChances.split('%').map(s => s.replace(/[^\d.-]/g, ''))
 		const awayWinPercentage = parseFloat(split[0]) / 100
 		const homeWinPercentage = parseFloat(split[1]) / 100
 		const tiePercentage = 1 - homeWinPercentage - awayWinPercentage
