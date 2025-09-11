@@ -121,35 +121,20 @@ function formatPercent(
 		</td>
 		<td class="border-e">{{ playerPicks.tieBreaker }}</td>
 		<td class="border-e text-center" v-if="tableStore.optionalColumns.nfeloWinChance">
-			<v-skeleton-loader
-				v-if="weekOutcomesStore.loadingCalculations"
-				class="ma-0 pa-0 mx-auto text-center"
-				type="text"
-				width="3em"
-			/>
+			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
 			<template v-else>
 				{{ formatPercent(playerPicks.nfeloWinChance, { hideZero: true }) }}
 			</template>
 		</td>
 		<td class="border-e text-center" v-if="tableStore.optionalColumns.espnWinChance">
-			<v-skeleton-loader
-				v-if="weekOutcomesStore.loadingCalculations"
-				class="ma-0 pa-0 mx-auto text-center"
-				type="text"
-				width="3em"
-			/>
+			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
 			<template v-else>
 				{{ formatPercent(playerPicks.espnWinChance, { hideZero: true }) }}
 			</template>
 		</td>
 
 		<td class="border-e text-center" v-if="tableStore.optionalColumns.winningOutcomesPercent">
-			<v-skeleton-loader
-				v-if="weekOutcomesStore.loadingCalculations"
-				class="ma-0 pa-0 mx-auto text-center"
-				type="text"
-				width="3em"
-			/>
+			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
 			<template v-else>
 				{{ formatPercent(playerPicks.winningOutcomesPercent, { hideZero: true }) }}
 			</template>
@@ -159,12 +144,7 @@ function formatPercent(
 			:class="getEvTdStyle(playerPicks.name)"
 			v-if="tableStore.optionalColumns.seasonPrizeChance"
 		>
-			<v-skeleton-loader
-				v-if="picksStore.seasonEvsEvaluating"
-				class="ma-0 pa-0 mx-auto text-center"
-				type="text"
-				width="3em"
-			/>
+			<TableSkeletonLoader v-if="picksStore.seasonEvsEvaluating" />
 			<template v-else>
 				{{ formatPercent(playerPicks.seasonPrizeChance) }}
 			</template>
@@ -174,12 +154,7 @@ function formatPercent(
 			:class="getEvTdStyle(playerPicks.name)"
 			v-if="tableStore.optionalColumns.chanceMake100"
 		>
-			<v-skeleton-loader
-				v-if="picksStore.seasonEvsEvaluating"
-				class="ma-0 pa-0 mx-auto text-center"
-				type="text"
-				width="3em"
-			/>
+			<TableSkeletonLoader v-if="picksStore.seasonEvsEvaluating" />
 			<template v-else>
 				{{ formatPercent(playerPicks.chanceMake100) }}
 			</template>
@@ -189,12 +164,7 @@ function formatPercent(
 			:class="getEvTdStyle(playerPicks.name)"
 			v-if="tableStore.optionalColumns.seasonEv"
 		>
-			<v-skeleton-loader
-				v-if="picksStore.seasonEvsEvaluating"
-				class="ma-0 pa-0 mx-auto text-center"
-				type="text"
-				width="3em"
-			/>
+			<TableSkeletonLoader v-if="picksStore.seasonEvsEvaluating" />
 			<template v-else>
 				{{ playerPicks.seasonEv ?? '-' }}
 			</template>
@@ -204,12 +174,7 @@ function formatPercent(
 			:class="getEvChangeTdStyle(playerPicks.name)"
 			v-if="tableStore.optionalColumns.evChange"
 		>
-			<v-skeleton-loader
-				v-if="picksStore.seasonEvsEvaluating"
-				class="ma-0 pa-0 mx-auto text-center"
-				type="text"
-				width="3em"
-			/>
+			<TableSkeletonLoader v-if="picksStore.seasonEvsEvaluating" />
 			<template v-else>
 				{{ playerPicks.evChange ?? '-' }}
 			</template>
@@ -218,10 +183,6 @@ function formatPercent(
 </template>
 
 <style scoped>
-.v-skeleton-loader :deep(.v-skeleton-loader__bone) {
-	margin: 0 !important;
-}
-
 .py-05 {
 	padding-block: 2px;
 }
