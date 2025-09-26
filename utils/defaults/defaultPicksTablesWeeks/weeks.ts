@@ -2513,7 +2513,840 @@ DET<br>
                         
                     </tr></tbody>
         </table>`
-export const defaultPicksTablePasteWeekInput4 = ``
+export const defaultPicksTablePasteWeekInput4 = `<table class="table table-bordered table-striped table-condensed table-scroll flip-content ph-table all-picks-table">
+            <thead>
+                <tr>
+                    <th class="table-header fixed" style="vertical-align:bottom !important;width:3px !important;">Rank</th>
+                    <th class="fixed" style="vertical-align:bottom !important;width:3px !important;"></th>
+                    <th style="text-align:right !important;width:66px !important;" class="fixed">
+                        Score:<br>
+                        Home:<br>
+                        Away:<br>Score:<br>Status:<br>
+                        <div class="table-header">Player Name</div>
+                    </th>
+<th class="week-header ">
+3<br>
+AZ<br>
+
+SEA<br>
+14<br>
+Half<br></th><th class="week-header ">
+<br>
+PIT<br>
+
+MIN<br>
+<br>
+</th><th class="week-header ">
+<br>
+ATL<br>
+
+WAS<br>
+<br>
+</th><th class="week-header ">
+<br>
+BUF<br>
+
+NO<br>
+<br>
+</th><th class="week-header ">
+<br>
+DET<br>
+
+CLE<br>
+<br>
+</th><th class="week-header ">
+<br>
+HOU<br>
+
+TEN<br>
+<br>
+</th><th class="week-header ">
+<br>
+NE<br>
+
+CAR<br>
+<br>
+</th><th class="week-header ">
+<br>
+NYG<br>
+
+LAC<br>
+<br>
+</th><th class="week-header ">
+<br>
+TB<br>
+
+PHI<br>
+<br>
+</th><th class="week-header ">
+<br>
+LAR<br>
+
+IND<br>
+<br>
+</th><th class="week-header ">
+<br>
+SF<br>
+
+JAC<br>
+<br>
+</th><th class="week-header ">
+<br>
+KC<br>
+
+BAL<br>
+<br>
+</th><th class="week-header ">
+<br>
+LV<br>
+
+CHI<br>
+<br>
+</th><th class="week-header ">
+<br>
+DAL<br>
+
+GB<br>
+<br>
+</th><th class="week-header ">
+<br>
+MIA<br>
+
+NYJ<br>
+<br>
+</th><th class="week-header ">
+<br>
+DEN<br>
+
+CIN<br>
+<br>
+</th>
+                                <th class="table-header sort" style="vertical-align: bottom !important; text-align: center">Week</th>
+                                <th class="table-header sort" style="vertical-align: bottom !important; text-align: center"><a onclick="PickemAllPicks.sortAllPicks(0)">Total</a></th>
+                                <th class="table-header" style="vertical-align: bottom !important; text-align: center"><b><u>DEN/CIN<br>Total<br> (TBD)</u></b></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                    <tr class=" mem_1849258">
+                        <td class="fixed" style="text-align:left;font-weight:600;">1.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;LiamMacd:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 12:36:54 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1849258">LiamMacd</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">32</td>
+                                <td style="text-align:center">31</td>
+                        
+                    </tr>
+                    <tr class=" mem_1782734">
+                        <td class="fixed" style="text-align:left;font-weight:600;">2.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Jpg1134:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 06:24:52 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1782734">Jpg1134</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">34</td>
+                                <td style="text-align:center">36</td>
+                        
+                    </tr>
+                    <tr class=" mem_1860877">
+                        <td class="fixed" style="text-align:left;font-weight:600;">3.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;PeteV:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 11:14:17 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1860877">PeteV</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">36</td>
+                                <td style="text-align:center">38</td>
+                        
+                    </tr>
+                    <tr class=" mem_1843189">
+                        <td class="fixed" style="text-align:left;font-weight:600;">4.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Stepburrowimstuck69:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 06:35:01 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1843189">Stepburrowimstuck69</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">35</td>
+                                <td style="text-align:center">38</td>
+                        
+                    </tr>
+                    <tr class=" mem_1893790">
+                        <td class="fixed" style="text-align:left;font-weight:600;">5.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Grimshm:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 09:30:31 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1893790">Grimshm</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">38</td>
+                                <td style="text-align:center">38</td>
+                        
+                    </tr>
+                    <tr class=" mem_1787252">
+                        <td class="fixed" style="text-align:left;font-weight:600;">6.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lewisville:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 06:06:10 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1787252">Lewisville</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">36</td>
+                                <td style="text-align:center">39</td>
+                        
+                    </tr>
+                    <tr class=" mem_1893179">
+                        <td class="fixed" style="text-align:left;font-weight:600;">7.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;TylerKelly:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 03:49:53 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1893179">TylerKelly</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">34</td>
+                                <td style="text-align:center">40</td>
+                        
+                    </tr>
+                    <tr class=" mem_1795705">
+                        <td class="fixed" style="text-align:left;font-weight:600;">8.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;milksgonebad:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 07:47:14 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1795705">milksgonebad</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">36</td>
+                                <td style="text-align:center">40</td>
+                        
+                    </tr>
+                    <tr class=" mem_1791345">
+                        <td class="fixed" style="text-align:left;font-weight:600;">9.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;JeffVarey:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 04:58:43 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1791345">JeffVarey</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">CLE</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">NYG</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">DAL</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">31</td>
+                                <td style="text-align:center">41</td>
+                        
+                    </tr>
+                    <tr class=" mem_1786306">
+                        <td class="fixed" style="text-align:left;font-weight:600;">10.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;WheelerRacing:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 06:40:25 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1786306">WheelerRacing</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">39</td>
+                                <td style="text-align:center">42</td>
+                        
+                    </tr>
+                    <tr class=" mem_1850124">
+                        <td class="fixed" style="text-align:left;font-weight:600;">11.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;bernys76:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 11:33:51 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1850124">bernys76</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">29</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr>
+                    <tr class=" mem_1871350">
+                        <td class="fixed" style="text-align:left;font-weight:600;">12.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Bernys2009:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 12:01:29 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1871350">Bernys2009</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">36</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr>
+                    <tr class=" mem_1780907">
+                        <td class="fixed" style="text-align:left;font-weight:600;">13.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;BillsMafiaBossJA17:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 10:17:02 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1780907">BillsMafiaBossJA17</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">41</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr>
+                    <tr class=" mem_1779446">
+                        <td class="fixed" style="text-align:left;font-weight:600;">14.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;AndrewAttwood:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 04:09:02 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1779446">AndrewAttwood</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">35</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr>
+                    <tr class=" mem_1847974">
+                        <td class="fixed" style="text-align:left;font-weight:600;">15.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;ParkB:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 06:40:30 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1847974">ParkB</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">37</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1821882">
+                        <td class="fixed" style="text-align:left;font-weight:600;">16.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;SterlingBrough:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 09:13:32 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1821882">SterlingBrough</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">36</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class="mem_1848844 my-record">
+                        <td class="fixed" style="text-align:left;font-weight:600;">17.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;ZachMac21:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 07:18:25 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848844">ZachMac21</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">39</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1886691">
+                        <td class="fixed" style="text-align:left;font-weight:600;">18.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lazer77:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 11:19:47 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1886691">Lazer77</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">35</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1881257">
+                        <td class="fixed" style="text-align:left;font-weight:600;">19.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Chachi16:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 01:19:04 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1881257">Chachi16</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">34</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1831105">
+                        <td class="fixed" style="text-align:left;font-weight:600;">20.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Alecha49:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 06:10:40 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1831105">Alecha49</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">26</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1803478">
+                        <td class="fixed" style="text-align:left;font-weight:600;">21.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;NicoleB85:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 06:23:50 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1803478">NicoleB85</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">32</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1888081">
+                        <td class="fixed" style="text-align:left;font-weight:600;">22.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Edski1:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 09:42:17 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1888081">Edski1</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">DAL</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">CIN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">34</td>
+                                <td style="text-align:center">45</td>
+                        
+                    </tr>
+                    <tr class=" mem_1843039">
+                        <td class="fixed" style="text-align:left;font-weight:600;">23.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lunestar:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 12:33:21 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1843039">Lunestar</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">34</td>
+                                <td style="text-align:center">45</td>
+                        
+                    </tr>
+                    <tr class=" mem_1809864">
+                        <td class="fixed" style="text-align:left;font-weight:600;">24.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;06mcgruderm:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 08:08:35 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1809864">06mcgruderm</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">DAL</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">32</td>
+                                <td style="text-align:center">45</td>
+                        
+                    </tr>
+                    <tr class=" mem_1826555">
+                        <td class="fixed" style="text-align:left;font-weight:600;">25.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Sandra87:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 08:34:05 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1826555">Sandra87</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">CIN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">36</td>
+                                <td style="text-align:center">46</td>
+                        
+                    </tr>
+                    <tr class=" mem_1823298">
+                        <td class="fixed" style="text-align:left;font-weight:600;">26.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;totash63:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 07:06:57 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1823298">totash63</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">35</td>
+                                <td style="text-align:center">46</td>
+                        
+                    </tr>
+                    <tr class=" mem_1783295">
+                        <td class="fixed" style="text-align:left;font-weight:600;">27.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;WilliePicks:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 07:26:10 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1783295">WilliePicks</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">37</td>
+                                <td style="text-align:center">47</td>
+                        
+                    </tr>
+                    <tr class=" mem_1799759">
+                        <td class="fixed" style="text-align:left;font-weight:600;">28.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;SonyaV:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 06:44:54 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1799759">SonyaV</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">CIN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">34</td>
+                                <td style="text-align:center">47</td>
+                        
+                    </tr>
+                    <tr class=" mem_1895199">
+                        <td class="fixed" style="text-align:left;font-weight:600;">29.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Rudeiculous41:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 01:55:00 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1895199">Rudeiculous41</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">36</td>
+                                <td style="text-align:center">47</td>
+                        
+                    </tr>
+                    <tr class=" mem_1781030">
+                        <td class="fixed" style="text-align:left;font-weight:600;">30.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Kellyob:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 06:39:43 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1781030">Kellyob</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">37</td>
+                                <td style="text-align:center">48</td>
+                        
+                    </tr>
+                    <tr class=" mem_1821125">
+                        <td class="fixed" style="text-align:left;font-weight:600;">31.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Robbcapo:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 04:56:03 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1821125">Robbcapo</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">31</td>
+                                <td style="text-align:center">48</td>
+                        
+                    </tr>
+                    <tr class=" mem_1779356">
+                        <td class="fixed" style="text-align:left;font-weight:600;">32.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;chadlanaus:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 07:38:38 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1779356">chadlanaus</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">DAL</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">CIN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">34</td>
+                                <td style="text-align:center">50</td>
+                        
+                    </tr>
+                    <tr class=" mem_1879707">
+                        <td class="fixed" style="text-align:left;font-weight:600;">33.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;rlanaus:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 05:18:00 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1879707">rlanaus</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">37</td>
+                                <td style="text-align:center">50</td>
+                        
+                    </tr>
+                    <tr class=" mem_1828423">
+                        <td class="fixed" style="text-align:left;font-weight:600;">34.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;neskin:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 10:08:53 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1828423">neskin</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">33</td>
+                                <td style="text-align:center">51</td>
+                        
+                    </tr>
+                    <tr class=" mem_1855921">
+                        <td class="fixed" style="text-align:left;font-weight:600;">35.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;TrevorSquires:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 03:53:17 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1855921">TrevorSquires</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">37</td>
+                                <td style="text-align:center">51</td>
+                        
+                    </tr>
+                    <tr class=" mem_1881859">
+                        <td class="fixed" style="text-align:left;font-weight:600;">36.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;themc11:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 09:36:30 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1881859">themc11</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">35</td>
+                                <td style="text-align:center">52</td>
+                        
+                    </tr>
+                    <tr class=" mem_1808378">
+                        <td class="fixed" style="text-align:left;font-weight:600;">37.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;CoffeeMan58:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 10:55:48 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1808378">CoffeeMan58</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">35</td>
+                                <td style="text-align:center">54</td>
+                        
+                    </tr>
+                    <tr class=" mem_1779889">
+                        <td class="fixed" style="text-align:left;font-weight:600;">38.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;coachmejia6:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 04:37:57 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1779889">coachmejia6</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">35</td>
+                                <td style="text-align:center">55</td>
+                        
+                    </tr>
+                    <tr class=" mem_1841623">
+                        <td class="fixed" style="text-align:left;font-weight:600;">39.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;AttySmith14:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 05:02:46 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1841623">AttySmith14</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">CIN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">27</td>
+                                <td style="text-align:center">35</td>
+                        
+                    </tr>
+                    <tr class=" mem_1825321">
+                        <td class="fixed" style="text-align:left;font-weight:600;">40.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lukaa81:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 06:41:50 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1825321">Lukaa81</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">30</td>
+                                <td style="text-align:center">36</td>
+                        
+                    </tr>
+
+            <tr class=" mem_1848271">
+                        <td class="fixed" style="text-align:left;font-weight:600;">41.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;AndrewFoust:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 08:36:08 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848271">AndrewFoust</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">NYG</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">29</td>
+                                <td style="text-align:center">38</td>
+                        
+                    </tr><tr class=" mem_1855747">
+                        <td class="fixed" style="text-align:left;font-weight:600;">42.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Bob17:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 01:12:14 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1855747">Bob17</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">35</td>
+                                <td style="text-align:center">38</td>
+                        
+                    </tr><tr class=" mem_1841600">
+                        <td class="fixed" style="text-align:left;font-weight:600;">43.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Smitty2point0:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 06:36:44 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1841600">Smitty2point0</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">32</td>
+                                <td style="text-align:center">39</td>
+                        
+                    </tr><tr class=" mem_1848530">
+                        <td class="fixed" style="text-align:left;font-weight:600;">44.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Softail:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 09:25:35 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848530">Softail</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">NYJ</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">26</td>
+                                <td style="text-align:center">41</td>
+                        
+                    </tr><tr class=" mem_1885399">
+                        <td class="fixed" style="text-align:left;font-weight:600;">45.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Huzul:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/24/2025 08:47:31 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1885399">Huzul</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">36</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr><tr class=" mem_1817065">
+                        <td class="fixed" style="text-align:left;font-weight:600;">46.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Shabbs:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 07:36:12 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1817065">Shabbs</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">31</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr><tr class=" mem_1848697">
+                        <td class="fixed" style="text-align:left;font-weight:600;">47.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;DeanGia:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 07:56:55 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848697">DeanGia</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">DAL</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">27</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr><tr class=" mem_1782693">
+                        <td class="fixed" style="text-align:left;font-weight:600;">48.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;johnnymac attack:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 10:15:19 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1782693">johnnymac attack</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">IND</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">27</td>
+                                <td style="text-align:center">46</td>
+                        
+                    </tr><tr class=" mem_1790437">
+                        <td class="fixed" style="text-align:left;font-weight:600;">49.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lurganguy:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/25/2025 04:56:57 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1790437">Lurganguy</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">LV</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">32</td>
+                                <td style="text-align:center">48</td>
+                        
+                    </tr><tr class=" mem_1885663">
+                        <td class="fixed" style="text-align:left;font-weight:600;">50.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;rhammy:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 07:22:10 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1885663">rhammy</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">38</td>
+                                <td style="text-align:center">49</td>
+                        
+                    </tr><tr class=" mem_1848963">
+                        <td class="fixed" style="text-align:left;font-weight:600;">51.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;TeamFergie:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;09/23/2025 02:43:33 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848963">TeamFergie</a>
+                        </td>
+
+
+<td class="text-center game-lost">AZ</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">NE</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">DEN</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">32</td>
+                                <td style="text-align:center">53</td>
+                        
+                    </tr><tr class=" mem_1819860">
+                        <td class="fixed" style="text-align:left;font-weight:600;">52.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1819860">CjRosengarten</a>
+                        </td>
+
+
+<td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">31</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr></tbody>
+        </table>`
 export const defaultPicksTablePasteWeekInput5 = ``
 export const defaultPicksTablePasteWeekInput6 = ``
 export const defaultPicksTablePasteWeekInput7 = ``

@@ -1,1 +1,1 @@
-export const defaultSelectedWeek = 3
+export const defaultSelectedWeek = 4
