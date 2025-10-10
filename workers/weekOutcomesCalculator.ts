@@ -4,7 +4,9 @@ const blankPositionStats = {
 	numWinningOutcomes: 0,
 	winningOutcomesPercent: 0,
 	nfeloChance: 0,
-	espnChance: 0
+	espnChance: 0,
+	nfeloEv: 0,
+	espnEv: 0
 }
 
 // TODO: stats output too big for many games
@@ -96,11 +98,17 @@ export function getAllUsersStats(
 				stats.firstPlace[name].numWinningOutcomes++
 				stats.firstPlace[name].nfeloChance += userOutcome.nfeloChance
 				stats.firstPlace[name].espnChance += userOutcome.espnChance
+
+				stats.firstPlace[name].nfeloEv += (userOutcome.nfeloChance * userOutcome.ev) / 100
+				stats.firstPlace[name].espnEv += (userOutcome.espnChance * userOutcome.ev) / 100
 			}
 			if (userOutcome.contenderForTop2) {
 				stats.top2[name].numWinningOutcomes++
 				stats.top2[name].nfeloChance += userOutcome.nfeloChance
 				stats.top2[name].espnChance += userOutcome.espnChance
+
+				stats.top2[name].nfeloEv += (userOutcome.nfeloChance * userOutcome.ev) / 100
+				stats.top2[name].espnEv += (userOutcome.espnChance * userOutcome.ev) / 100
 			}
 		}
 	}

@@ -61,6 +61,8 @@ export function getSingleUsersStats(
 		winningOutcomesPercent: 0,
 		nfeloChance: 0,
 		espnChance: 0,
+		nfeloEv: 0,
+		espnEv: 0,
 		winningOutcomes: []
 	}
 	const ideal = Array(numGames).fill(true)
@@ -241,6 +243,8 @@ export function getUserOutcome(
 		}
 	}
 
+	const ev = getWeekEv(player.name, playerRankings)
+
 	return {
 		contenderForFirst,
 		contenderForTop2,
@@ -250,6 +254,64 @@ export function getUserOutcome(
 		pointsAwayFromTopScore,
 		missedWins,
 		nfeloChance,
-		espnChance
+		espnChance,
+		ev
 	}
+}
+
+const PRIZE_MONEY = [100, 50, 25] // 1st, 2nd, 3rd place prize money
+
+// TODO: tie breaker values should actually matter. Maybe monte carlo?
+// export function getWeekEv(playerRankings: PlayerRanking[], playerName: string): number {
+//     const playerPrizes = {}
+//
+//     for (const prize of PRIZE_MONEY) {
+//
+//     }
+//
+// 	return 0
+// }
+
+export function getWeekEvs(players: PlayerRanking[], roundToCents = true): Record<string, number> {
+	const sorted = [...players].sort((a, b) => b.score - a.score)
+	const payout: Record<string, number> = Object.fromEntries(players.map(p => [p.name, 0]))
+
+	let rankStart = 1 // 1-based rank pointer into prizes
+
+	for (let i = 0; i < sorted.length && rankStart <= PRIZE_MONEY.length; ) {
+		// collect a same-score group
+		const s = sorted[i].score
+		const group: PlayerRanking[] = []
+		let j = i
+		while (j < sorted.length && sorted[j].score === s) {
+			group.push(sorted[j])
+			j++
+		}
+
+		// this tied group occupies ranks [rankStart .. rankStart + group.length - 1]
+		const posStart = rankStart
+		const posEnd = rankStart + group.length - 1
+
+		// sum the prizes for the occupied positions that exist
+		let pool = 0
+		for (let pos = posStart; pos <= posEnd; pos++) {
+			if (pos >= 1 && pos <= PRIZE_MONEY.length) pool += PRIZE_MONEY[pos - 1]
+		}
+		const share = pool / group.length
+
+		for (const p of group) payout[p.name] += share
+
+		rankStart += group.length
+		i = j
+	}
+
+	if (roundToCents) {
+		for (const k of Object.keys(payout)) payout[k] = Math.round(payout[k] * 100) / 100
+	}
+	return payout
+}
+
+export function getWeekEv(targetName: string, players: PlayerRanking[]): number {
+	const pay = getWeekEvs(players)
+	return pay[targetName] ?? 0
 }

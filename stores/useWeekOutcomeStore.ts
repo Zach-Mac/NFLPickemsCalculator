@@ -8,6 +8,8 @@ export interface UserOutcome {
 	espnChance: number
 	position: number
 	numTiedForFirst: number
+	// EV because of tie-breaker score
+	ev: number
 }
 
 interface UserPositionStats {
@@ -15,6 +17,8 @@ interface UserPositionStats {
 	winningOutcomesPercent: number
 	nfeloChance: number
 	espnChance: number
+	nfeloEv: number
+	espnEv: number
 }
 
 export interface UserStats {
@@ -74,6 +78,8 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 		winningOutcomesPercent: 0,
 		nfeloChance: 0,
 		espnChance: 0,
+		nfeloEv: 0,
+		espnEv: 0,
 		winningOutcomes: []
 	} as SingleUsersStats)
 	const mustWins = ref([] as string[])
@@ -141,13 +147,17 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 			numWinningOutcomes: 0,
 			winningOutcomesPercent: 0,
 			nfeloChance: 0,
-			espnChance: 0
+			espnChance: 0,
+			nfeloEv: 0,
+			espnEv: 0
 		}
 		liveStats.value.top2[player.name] = {
 			numWinningOutcomes: 0,
 			winningOutcomesPercent: 0,
 			nfeloChance: 0,
-			espnChance: 0
+			espnChance: 0,
+			nfeloEv: 0,
+			espnEv: 0
 		}
 	})
 	const calcLiveStats = async () => {

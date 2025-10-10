@@ -8,7 +8,9 @@ export interface PlayerItem {
 	seasonTotal: number
 	tieBreaker: number
 	nfeloWinChance: number
+	nfeloWeekEv: number
 	espnWinChance: number
+	espnWeekEv: number
 	winningOutcomesPercent: number
 	seasonPrizeChance: number
 	chanceMake100: number
@@ -34,6 +36,13 @@ const baseHeaders: Header[] = [
 ]
 const optionalHeadersItems: Header[] = [
 	{
+		key: 'winningOutcomesPercent',
+		value: 'winningOutcomesPercent',
+		title: 'Win Outcomes %',
+		subtitle: 'Percentage of winning outcomes with selected game winners',
+		sortable: true
+	},
+	{
 		key: 'nfeloWinChance',
 		value: 'nfeloWinChance',
 		title: 'nfelo Win %',
@@ -48,10 +57,19 @@ const optionalHeadersItems: Header[] = [
 		sortable: true
 	},
 	{
-		key: 'winningOutcomesPercent',
-		value: 'winningOutcomesPercent',
-		title: 'Win Outcomes %',
-		subtitle: 'Percentage of winning outcomes with selected game winners',
+		key: 'nfeloWeekEv',
+		value: 'nfeloWeekEv',
+		title: 'nfelo EV',
+		subtitle:
+			'Expected winnings for week based on selected winners and nfelo predictions (in $)',
+		sortable: true
+	},
+	{
+		key: 'espnWeekEv',
+		value: 'espnWeekEv',
+		title: 'ESPN EV',
+		subtitle:
+			'Expected winnings for week based on selected winners and ESPN predictions (in $)',
 		sortable: true
 	},
 	{
@@ -109,6 +127,7 @@ export const useTableStore = defineStore('table', () => {
 		'nfeloWinChance',
 		'espnWinChance',
 		'winningOutcomesPercent',
+		'weekEv',
 		'seasonPrizeChance',
 		'chanceMake100',
 		'seasonEv',
@@ -157,6 +176,8 @@ export const useTableStore = defineStore('table', () => {
 		name: [{ key: 'name', order: 'asc' }],
 		nfeloWinChance: [{ key: 'nfeloWinChance', order: 'desc' }],
 		espnWinChance: [{ key: 'espnWinChance', order: 'desc' }],
+		nfeloWeekEv: [{ key: 'nfeloWeekEv', order: 'desc' }],
+		espnWeekEv: [{ key: 'espnWeekEv', order: 'desc' }],
 		winningOutcomesPercent: [{ key: 'winningOutcomesPercent', order: 'desc' }],
 		seasonPrizeChance: [{ key: 'seasonPrizeChance', order: 'desc' }],
 		chanceMake100: [{ key: 'chanceMake100', order: 'desc' }],
@@ -180,6 +201,8 @@ export const useTableStore = defineStore('table', () => {
 					weekOutcomesStore.liveStatsComputed[playerPicks.name]?.nfeloChance || 0,
 				espnWinChance:
 					weekOutcomesStore.liveStatsComputed[playerPicks.name]?.espnChance || 0,
+				nfeloWeekEv: weekOutcomesStore.liveStatsComputed[playerPicks.name]?.nfeloEv || 0,
+				espnWeekEv: weekOutcomesStore.liveStatsComputed[playerPicks.name]?.espnEv || 0,
 				winningOutcomesPercent:
 					weekOutcomesStore.liveStatsComputed[playerPicks.name]?.winningOutcomesPercent ||
 					0,
