@@ -191,8 +191,6 @@ class SeasonSimulator {
 	}
 }
 
-// Usage
-
 export async function runSim(
 	scores: Record<string, number>,
 	gamesLeft: number,

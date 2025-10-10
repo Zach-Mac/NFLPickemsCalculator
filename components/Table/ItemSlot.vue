@@ -76,6 +76,10 @@ const rowStyle = computed(() => {
 	return colorRow.map(color => (color ? 'bg-grey-lighten-4' : ''))
 })
 
+function formatEv(value: number): string {
+	return `${value.toFixed(2) ?? '-'}`
+}
+
 function formatPercent(
 	value?: number,
 	options: Partial<{ hideZero: boolean; precision: number }> = {}
@@ -120,6 +124,13 @@ function formatPercent(
 			{{ playerPicks.seasonTotal }}
 		</td>
 		<td class="border-e">{{ playerPicks.tieBreaker }}</td>
+
+		<td class="border-e text-center" v-if="tableStore.optionalColumns.winningOutcomesPercent">
+			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
+			<template v-else>
+				{{ formatPercent(playerPicks.winningOutcomesPercent, { hideZero: true }) }}
+			</template>
+		</td>
 		<td class="border-e text-center" v-if="tableStore.optionalColumns.nfeloWinChance">
 			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
 			<template v-else>
@@ -133,10 +144,16 @@ function formatPercent(
 			</template>
 		</td>
 
-		<td class="border-e text-center" v-if="tableStore.optionalColumns.winningOutcomesPercent">
+		<td class="border-e" v-if="tableStore.optionalColumns.nfeloWeekEv">
 			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
 			<template v-else>
-				{{ formatPercent(playerPicks.winningOutcomesPercent, { hideZero: true }) }}
+				{{ formatEv(playerPicks.nfeloWeekEv) }}
+			</template>
+		</td>
+		<td class="border-e" v-if="tableStore.optionalColumns.espnWeekEv">
+			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
+			<template v-else>
+				{{ formatEv(playerPicks.espnWeekEv) }}
 			</template>
 		</td>
 		<td
