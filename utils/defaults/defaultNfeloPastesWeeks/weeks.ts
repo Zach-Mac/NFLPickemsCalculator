@@ -119,7 +119,6 @@ DAL,WAS,2.0,0.453,WAS,0.547
 SF,ATL,-2.0,0.542,SF,0.542
 LAC,IND,-1.5,0.532,LAC,0.532
 CLE,MIA,0.0,0.497,MIA,0.503`
->>>>>>> Stashed changes
 
 export const defaultNfeloPasteInput8 = ``
 
