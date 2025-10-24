@@ -116,7 +116,7 @@ const items = computed(() => {
 						<v-progress-linear indeterminate></v-progress-linear>
 					</template>
 
-					<v-data-table :items="items" :items-per-page="50"> </v-data-table>
+					<v-data-table :items="items" :items-per-page="100"> </v-data-table>
 				</v-col>
 			</v-row>
 		</v-col>

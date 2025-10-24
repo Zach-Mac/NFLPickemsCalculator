@@ -7,7 +7,7 @@ const tableStore = useTableStore()
 		v-bind="$attrs"
 		:items="tableStore.items"
 		:headers="tableStore.headers"
-		:items-per-page="50"
+		:items-per-page="100"
 		density="compact"
 		hover
 		class="border"
