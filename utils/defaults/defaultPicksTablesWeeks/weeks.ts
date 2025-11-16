@@ -8297,18 +8297,18 @@ export const defaultPicksTablePasteWeekInput11 = `<table class="table table-bord
                         <div class="table-header">Player Name</div>
                     </th>
 <th class="week-header ">
-0<br>
-<span class="ball-possn team-pos nfl-view" onclick="PickemAllPicks.gameStatus(198);">NE</span><br>
+27<br>
+NE<br>
 
 NYJ<br>
-7<br>
-5:40<br>1st</th><th class="week-header ">
-<br>
-MIA<br>
+14<br>
+Final<br></th><th class="week-header ">
+3<br>
+<span class="ball-possn team-pos nfl-view" onclick="PickemAllPicks.gameStatus(199);">MIA</span><br>
 
 WAS<br>
-<br>
-</th><th class="week-header ">
+0<br>
+10:35<br>1st</th><th class="week-header ">
 <br>
 ATL<br>
 
@@ -8403,27 +8403,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">NYG</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">91</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">NYG</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">93</td>
                                 <td style="text-align:center">28</td>
                         
                     </tr>
-                    <tr class=" mem_1819860">
-                        <td class="fixed" style="text-align:left;font-weight:600;">2.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;CjRosengarten:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 09:04:22 PM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1819860">CjRosengarten</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">75</td>
-                                <td style="text-align:center">32</td>
-                        
-                    </tr>
                     <tr class=" mem_1848271">
-                        <td class="fixed" style="text-align:left;font-weight:600;">3.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">2.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;AndrewFoust:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 05:08:18 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8431,13 +8417,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">79</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">81</td>
                                 <td style="text-align:center">34</td>
                         
                     </tr>
                     <tr class=" mem_1799759">
-                        <td class="fixed" style="text-align:left;font-weight:600;">4.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">3.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;SonyaV:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 12:41:21 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8445,13 +8431,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">96</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">98</td>
                                 <td style="text-align:center">35</td>
                         
                     </tr>
                     <tr class=" mem_1817065">
-                        <td class="fixed" style="text-align:left;font-weight:600;">5.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">4.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Shabbs:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 09:15:03 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8459,13 +8445,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">90</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">92</td>
                                 <td style="text-align:center">37</td>
                         
                     </tr>
                     <tr class=" mem_1841600">
-                        <td class="fixed" style="text-align:left;font-weight:600;">6.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">5.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Smitty2point0:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 01:07:24 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8473,13 +8459,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">91</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">93</td>
                                 <td style="text-align:center">41</td>
                         
                     </tr>
                     <tr class=" mem_1808378">
-                        <td class="fixed" style="text-align:left;font-weight:600;">7.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">6.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;CoffeeMan58:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 10:35:04 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8487,41 +8473,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">93</td>
-                                <td style="text-align:center">42</td>
-                        
-                    </tr>
-                    <tr class=" mem_1841623">
-                        <td class="fixed" style="text-align:left;font-weight:600;">8.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;AttySmith14:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 07:13:47 PM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1841623">AttySmith14</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">NYG</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">80</td>
-                                <td style="text-align:center">42</td>
-                        
-                    </tr>
-                    <tr class=" mem_1860877">
-                        <td class="fixed" style="text-align:left;font-weight:600;">9.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;PeteV:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 10:56:02 PM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1860877">PeteV</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">94</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">95</td>
                                 <td style="text-align:center">42</td>
                         
                     </tr>
                     <tr class=" mem_1893179">
-                        <td class="fixed" style="text-align:left;font-weight:600;">10.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">7.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;TylerKelly:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 06:09:04 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8529,13 +8487,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">95</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">97</td>
                                 <td style="text-align:center">42</td>
                         
                     </tr>
                     <tr class=" mem_1825321">
-                        <td class="fixed" style="text-align:left;font-weight:600;">11.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">8.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lukaa81:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 08:49:36 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8543,13 +8501,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">91</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">93</td>
                                 <td style="text-align:center">42</td>
                         
                     </tr>
                     <tr class=" mem_1823298">
-                        <td class="fixed" style="text-align:left;font-weight:600;">12.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">9.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;totash63:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 08:24:29 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8557,55 +8515,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">98</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">100</td>
                                 <td style="text-align:center">42</td>
-                        
-                    </tr>
-                    <tr class=" mem_1826555">
-                        <td class="fixed" style="text-align:left;font-weight:600;">13.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Sandra87:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 08:50:19 AM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1826555">Sandra87</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">CLE</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">99</td>
-                                <td style="text-align:center">42</td>
-                        
-                    </tr>
-                    <tr class=" mem_1786306">
-                        <td class="fixed" style="text-align:left;font-weight:600;">14.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;WheelerRacing:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 07:34:07 PM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1786306">WheelerRacing</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">99</td>
-                                <td style="text-align:center">42</td>
-                        
-                    </tr>
-                    <tr class=" mem_1886691">
-                        <td class="fixed" style="text-align:left;font-weight:600;">15.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lazer77:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 10:24:14 AM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1886691">Lazer77</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">91</td>
-                                <td style="text-align:center">43</td>
                         
                     </tr>
                     <tr class=" mem_1850124">
-                        <td class="fixed" style="text-align:left;font-weight:600;">16.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">10.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;bernys76:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 07:24:34 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8613,27 +8529,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">95</td>
-                                <td style="text-align:center">43</td>
-                        
-                    </tr>
-                    <tr class=" mem_1871350">
-                        <td class="fixed" style="text-align:left;font-weight:600;">17.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Bernys2009:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 07:27:46 PM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1871350">Bernys2009</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">92</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">97</td>
                                 <td style="text-align:center">43</td>
                         
                     </tr>
                     <tr class=" mem_1881257">
-                        <td class="fixed" style="text-align:left;font-weight:600;">18.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">11.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Chachi16:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 11:55:21 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8641,13 +8543,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">97</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">99</td>
                                 <td style="text-align:center">44</td>
                         
                     </tr>
                     <tr class=" mem_1791345">
-                        <td class="fixed" style="text-align:left;font-weight:600;">19.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">12.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;JeffVarey:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 07:44:56 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8655,13 +8557,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">91</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">93</td>
                                 <td style="text-align:center">44</td>
                         
                     </tr>
                     <tr class=" mem_1893790">
-                        <td class="fixed" style="text-align:left;font-weight:600;">20.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">13.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Grimshm:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 09:20:12 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8669,41 +8571,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">101</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">103</td>
                                 <td style="text-align:center">44</td>
                         
                     </tr>
-                    <tr class=" mem_1809864">
-                        <td class="fixed" style="text-align:left;font-weight:600;">21.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;06mcgruderm:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 10:18:20 AM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1809864">06mcgruderm</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">88</td>
-                                <td style="text-align:center">45</td>
-                        
-                    </tr>
-                    <tr class=" mem_1803478">
-                        <td class="fixed" style="text-align:left;font-weight:600;">22.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;NicoleB85:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/06/2025 05:13:11 PM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1803478">NicoleB85</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">94</td>
-                                <td style="text-align:center">46</td>
-                        
-                    </tr>
                     <tr class=" mem_1780907">
-                        <td class="fixed" style="text-align:left;font-weight:600;">23.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">14.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;BillsMafiaBossJA17:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 01:18:41 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8711,13 +8585,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">106</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">108</td>
                                 <td style="text-align:center">47</td>
                         
                     </tr>
                     <tr class=" mem_1848530">
-                        <td class="fixed" style="text-align:left;font-weight:600;">24.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">15.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Softail:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 05:05:13 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8725,13 +8599,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">NYG</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">CLE</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">81</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">NYG</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">CLE</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">83</td>
                                 <td style="text-align:center">47</td>
                         
                     </tr>
                     <tr class=" mem_1821882">
-                        <td class="fixed" style="text-align:left;font-weight:600;">25.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">16.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;SterlingBrough:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 09:01:24 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8739,13 +8613,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">101</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">103</td>
                                 <td style="text-align:center">48</td>
                         
                     </tr>
                     <tr class=" mem_1781030">
-                        <td class="fixed" style="text-align:left;font-weight:600;">26.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">17.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Kellyob:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 07:30:19 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8753,13 +8627,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">103</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">105</td>
                                 <td style="text-align:center">48</td>
                         
                     </tr>
                     <tr class=" mem_1847974">
-                        <td class="fixed" style="text-align:left;font-weight:600;">27.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">18.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;ParkB:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 09:40:23 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8767,13 +8641,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">99</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">101</td>
                                 <td style="text-align:center">49</td>
                         
                     </tr>
                     <tr class=" mem_1787252">
-                        <td class="fixed" style="text-align:left;font-weight:600;">28.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">19.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lewisville:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 10:54:14 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8781,13 +8655,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">98</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">100</td>
                                 <td style="text-align:center">49</td>
                         
                     </tr>
                     <tr class=" mem_1821125">
-                        <td class="fixed" style="text-align:left;font-weight:600;">29.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">20.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Robbcapo:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 09:09:20 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8795,13 +8669,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">82</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">84</td>
                                 <td style="text-align:center">49</td>
                         
                     </tr>
                     <tr class=" mem_1879707">
-                        <td class="fixed" style="text-align:left;font-weight:600;">30.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">21.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;rlanaus:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 03:38:16 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8809,27 +8683,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">103</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">105</td>
                                 <td style="text-align:center">49</td>
                         
                     </tr>
-                    <tr class=" mem_1779356">
-                        <td class="fixed" style="text-align:left;font-weight:600;">31.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;chadlanaus:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 10:19:52 AM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1779356">chadlanaus</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">96</td>
-                                <td style="text-align:center">50</td>
-                        
-                    </tr>
                     <tr class="mem_1848844 my-record">
-                        <td class="fixed" style="text-align:left;font-weight:600;">32.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">22.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;ZachMac21:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 08:07:15 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8837,13 +8697,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">99</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">101</td>
                                 <td style="text-align:center">50</td>
                         
                     </tr>
                     <tr class=" mem_1848697">
-                        <td class="fixed" style="text-align:left;font-weight:600;">33.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">23.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;DeanGia:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 07:13:08 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8851,13 +8711,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">CLE</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">85</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">CLE</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">87</td>
                                 <td style="text-align:center">50</td>
                         
                     </tr>
                     <tr class=" mem_1885399">
-                        <td class="fixed" style="text-align:left;font-weight:600;">34.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">24.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Huzul:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 07:35:00 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8865,13 +8725,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">101</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">103</td>
                                 <td style="text-align:center">51</td>
                         
                     </tr>
                     <tr class=" mem_1855921">
-                        <td class="fixed" style="text-align:left;font-weight:600;">35.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">25.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;TrevorSquires:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 08:49:35 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8879,13 +8739,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">102</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">104</td>
                                 <td style="text-align:center">51</td>
                         
                     </tr>
                     <tr class=" mem_1888081">
-                        <td class="fixed" style="text-align:left;font-weight:600;">36.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">26.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Edski1:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 06:28:38 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8893,13 +8753,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">93</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">95</td>
                                 <td style="text-align:center">52</td>
                         
                     </tr>
                     <tr class=" mem_1881859">
-                        <td class="fixed" style="text-align:left;font-weight:600;">37.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">27.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;themc11:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 09:16:00 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8907,13 +8767,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">96</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">98</td>
                                 <td style="text-align:center">52</td>
                         
                     </tr>
                     <tr class=" mem_1783295">
-                        <td class="fixed" style="text-align:left;font-weight:600;">38.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">28.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;WilliePicks:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 10:21:13 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8921,27 +8781,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">101</td>
-                                <td style="text-align:center">53</td>
-                        
-                    </tr>
-                    <tr class=" mem_1843189">
-                        <td class="fixed" style="text-align:left;font-weight:600;">39.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Stepburrowimstuck69:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 10:11:14 PM&lt;/b&gt;.')"></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1843189">Stepburrowimstuck69</a>
-                        </td>
-
-
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">73</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">103</td>
                                 <td style="text-align:center">53</td>
                         
                     </tr>
                     <tr class=" mem_1779889">
-                        <td class="fixed" style="text-align:left;font-weight:600;">40.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">29.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;coachmejia6:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 09:12:16 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8949,14 +8795,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">90</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">92</td>
                                 <td style="text-align:center">55</td>
                         
                     </tr>
-
-            <tr class=" mem_1855747">
-                        <td class="fixed" style="text-align:left;font-weight:600;">41.</td>
+                    <tr class=" mem_1855747">
+                        <td class="fixed" style="text-align:left;font-weight:600;">30.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Bob17:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 01:36:35 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8964,12 +8809,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">96</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">98</td>
                                 <td style="text-align:center">56</td>
                         
-                    </tr><tr class=" mem_1843039">
-                        <td class="fixed" style="text-align:left;font-weight:600;">42.</td>
+                    </tr>
+                    <tr class=" mem_1843039">
+                        <td class="fixed" style="text-align:left;font-weight:600;">31.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lunestar:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 07:54:58 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8977,12 +8823,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">92</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">94</td>
                                 <td style="text-align:center">56</td>
                         
-                    </tr><tr class=" mem_1795705">
-                        <td class="fixed" style="text-align:left;font-weight:600;">43.</td>
+                    </tr>
+                    <tr class=" mem_1795705">
+                        <td class="fixed" style="text-align:left;font-weight:600;">32.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;milksgonebad:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 05:32:41 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -8990,12 +8837,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">100</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">102</td>
                                 <td style="text-align:center">58</td>
                         
-                    </tr><tr class=" mem_1848963">
-                        <td class="fixed" style="text-align:left;font-weight:600;">44.</td>
+                    </tr>
+                    <tr class=" mem_1848963">
+                        <td class="fixed" style="text-align:left;font-weight:600;">33.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;TeamFergie:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 01:06:48 AM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -9003,12 +8851,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">93</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">95</td>
                                 <td style="text-align:center">58</td>
                         
-                    </tr><tr class=" mem_1790437">
-                        <td class="fixed" style="text-align:left;font-weight:600;">45.</td>
+                    </tr>
+                    <tr class=" mem_1790437">
+                        <td class="fixed" style="text-align:left;font-weight:600;">34.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lurganguy:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 05:56:28 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -9016,12 +8865,13 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">94</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">96</td>
                                 <td style="text-align:center">58</td>
                         
-                    </tr><tr class=" mem_1828423">
-                        <td class="fixed" style="text-align:left;font-weight:600;">46.</td>
+                    </tr>
+                    <tr class=" mem_1828423">
+                        <td class="fixed" style="text-align:left;font-weight:600;">35.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;neskin:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 02:48:50 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -9029,12 +8879,188 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">91</td>
+<td class="text-center game-won">NE</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">2</td>
+                                <td style="text-align:center">93</td>
                                 <td style="text-align:center">62</td>
                         
-                    </tr><tr class=" mem_1782693">
+                    </tr>
+                    <tr class=" mem_1779446">
+                        <td class="fixed" style="text-align:left;font-weight:600;">36.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle yellow-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;AndrewAttwood:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/14/2025 08:41:08 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1779446">AndrewAttwood</a>
+                        </td>
+
+
+<td class="text-center game-lost">NYJ</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">100</td>
+                                <td style="text-align:center">1</td>
+                        
+                    </tr>
+                    <tr class=" mem_1895199">
+                        <td class="fixed" style="text-align:left;font-weight:600;">37.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle yellow-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Rudeiculous41:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/15/2025 05:00:04 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1895199">Rudeiculous41</a>
+                        </td>
+
+
+<td class="text-center game-lost">NYJ</td><td class="text-center game-won">MIA</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">98</td>
+                                <td style="text-align:center">1</td>
+                        
+                    </tr>
+                    <tr class=" mem_1819860">
+                        <td class="fixed" style="text-align:left;font-weight:600;">38.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;CjRosengarten:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 09:04:22 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1819860">CjRosengarten</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">76</td>
+                                <td style="text-align:center">32</td>
+                        
+                    </tr>
+                    <tr class=" mem_1841623">
+                        <td class="fixed" style="text-align:left;font-weight:600;">39.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;AttySmith14:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 07:13:47 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1841623">AttySmith14</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">NYG</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">81</td>
+                                <td style="text-align:center">42</td>
+                        
+                    </tr>
+                    <tr class=" mem_1860877">
+                        <td class="fixed" style="text-align:left;font-weight:600;">40.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;PeteV:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 10:56:02 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1860877">PeteV</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">95</td>
+                                <td style="text-align:center">42</td>
+                        
+                    </tr>
+
+            <tr class=" mem_1826555">
+                        <td class="fixed" style="text-align:left;font-weight:600;">41.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Sandra87:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 08:50:19 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1826555">Sandra87</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">CLE</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">100</td>
+                                <td style="text-align:center">42</td>
+                        
+                    </tr><tr class=" mem_1786306">
+                        <td class="fixed" style="text-align:left;font-weight:600;">42.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;WheelerRacing:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 07:34:07 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1786306">WheelerRacing</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">100</td>
+                                <td style="text-align:center">42</td>
+                        
+                    </tr><tr class=" mem_1886691">
+                        <td class="fixed" style="text-align:left;font-weight:600;">43.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lazer77:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 10:24:14 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1886691">Lazer77</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">TB</td><td class="text-center game-not-played">JAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">KC</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">92</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr><tr class=" mem_1871350">
+                        <td class="fixed" style="text-align:left;font-weight:600;">44.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Bernys2009:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/13/2025 07:27:46 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1871350">Bernys2009</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">CAR</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">CIN</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">93</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr><tr class=" mem_1809864">
+                        <td class="fixed" style="text-align:left;font-weight:600;">45.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;06mcgruderm:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 10:18:20 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1809864">06mcgruderm</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">89</td>
+                                <td style="text-align:center">45</td>
+                        
+                    </tr><tr class=" mem_1803478">
+                        <td class="fixed" style="text-align:left;font-weight:600;">46.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;NicoleB85:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/06/2025 05:13:11 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1803478">NicoleB85</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">95</td>
+                                <td style="text-align:center">46</td>
+                        
+                    </tr><tr class=" mem_1779356">
                         <td class="fixed" style="text-align:left;font-weight:600;">47.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;chadlanaus:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 10:19:52 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1779356">chadlanaus</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">TEN</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">LV</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">97</td>
+                                <td style="text-align:center">50</td>
+                        
+                    </tr><tr class=" mem_1843189">
+                        <td class="fixed" style="text-align:left;font-weight:600;">48.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Stepburrowimstuck69:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/12/2025 10:11:14 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1843189">Stepburrowimstuck69</a>
+                        </td>
+
+
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">CHI</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">SF</td><td class="text-center game-not-played">LAR</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">DET</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">74</td>
+                                <td style="text-align:center">53</td>
+                        
+                    </tr><tr class=" mem_1782693">
+                        <td class="fixed" style="text-align:left;font-weight:600;">49.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;johnnymac attack:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;11/11/2025 07:08:59 PM&lt;/b&gt;.')"></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -9042,25 +9068,12 @@ DAL<br>
                         </td>
 
 
-<td class="text-center game-lost">NE</td><td class="text-center game-not-played">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">80</td>
+<td class="text-center game-won">NE</td><td class="text-center game-lost">WAS</td><td class="text-center game-not-played">ATL</td><td class="text-center game-not-played">BUF</td><td class="text-center game-not-played">LAC</td><td class="text-center game-not-played">MIN</td><td class="text-center game-not-played">GB</td><td class="text-center game-not-played">PIT</td><td class="text-center game-not-played">HOU</td><td class="text-center game-not-played">AZ</td><td class="text-center game-not-played">SEA</td><td class="text-center game-not-played">BAL</td><td class="text-center game-not-played">DEN</td><td class="text-center game-not-played">PHI</td><td class="text-center game-not-played">DAL</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">81</td>
                                 <td style="text-align:center">66</td>
                         
-                    </tr><tr class=" mem_1779446">
-                        <td class="fixed" style="text-align:left;font-weight:600;">48.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1779446">AndrewAttwood</a>
-                        </td>
-
-
-<td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">99</td>
-                                <td style="text-align:center"></td>
-                        
                     </tr><tr class=" mem_1831105">
-                        <td class="fixed" style="text-align:left;font-weight:600;">49.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">50.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -9073,7 +9086,7 @@ DAL<br>
                                 <td style="text-align:center"></td>
                         
                     </tr><tr class=" mem_1849258">
-                        <td class="fixed" style="text-align:left;font-weight:600;">50.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">51.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -9086,7 +9099,7 @@ DAL<br>
                                 <td style="text-align:center"></td>
                         
                     </tr><tr class=" mem_1885663">
-                        <td class="fixed" style="text-align:left;font-weight:600;">51.</td>
+                        <td class="fixed" style="text-align:left;font-weight:600;">52.</td>
                         <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
 
                         <td class="fixed" style="font-weight:600 !important;">
@@ -9096,19 +9109,6 @@ DAL<br>
 
 <td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td>                                <td style="text-align:center">0</td>
                                 <td style="text-align:center">90</td>
-                                <td style="text-align:center"></td>
-                        
-                    </tr><tr class=" mem_1895199">
-                        <td class="fixed" style="text-align:left;font-weight:600;">52.</td>
-                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
-
-                        <td class="fixed" style="font-weight:600 !important;">
-                                <a class="ajaxify" href="/profootball/playerstats/1895199">Rudeiculous41</a>
-                        </td>
-
-
-<td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td><td class="text-center "></td>                                <td style="text-align:center">0</td>
-                                <td style="text-align:center">97</td>
                                 <td style="text-align:center"></td>
                         
                     </tr></tbody>
