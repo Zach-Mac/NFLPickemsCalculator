@@ -1,0 +1,207 @@
+use std::{
+    collections::HashMap,
+    ops::{Add, AddAssign},
+};
+
+mod teams;
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum Outcome {
+    Win,
+    Loss,
+    Tie,
+}
+
+fn all_combos(n: u32) -> Vec<Vec<Outcome>> {
+    let tot = 3usize.pow(n); // 3^n combos (note: pow expects u32)
+    dbg!(tot);
+    let mut out = Vec::with_capacity(tot);
+
+    for i in 0..tot {
+        let mut x = i;
+        let mut combo = Vec::with_capacity(n as usize);
+        for _ in 0..n {
+            combo.push(match x % 3 {
+                0 => Outcome::Win,
+                1 => Outcome::Loss,
+                2 => Outcome::Tie,
+                _ => unreachable!(),
+            });
+            x /= 3;
+        }
+        combo.reverse(); // digits were pushed least-significant first
+        out.push(combo);
+    }
+
+    out
+}
+
+fn main() {
+    let combos = all_combos(3);
+    println!("count = {}", combos.len()); // 27
+    println!("{:?}", combos);
+}
+
+const NUM_GAMES: usize = 16;
+
+const PRIZES: [u32; 3] = [100, 50, 25];
+
+// #[derive(Debug, PartialEq, Eq, Clone)]
+// struct Player {
+//     name: String,
+// }
+
+type Player = String;
+
+struct AllPicks(Vec<PlayerPicks>);
+impl AllPicks {
+    fn get_all_players(&self) -> Vec<Player> {
+        self.0.iter().map(|p| p.player.clone()).collect()
+    }
+}
+
+struct WeekData {
+    player_picks: AllPicks,
+    games: [Game; NUM_GAMES],
+}
+
+struct PlayerPicks {
+    player: Player,
+    picks: Picks,
+    tie_breaker: u32,
+}
+
+enum Team {
+    HOME,
+    AWAY,
+}
+
+/// Games are sorted by schedued start time, then by home team.
+struct Picks([Team; NUM_GAMES]);
+
+/// Games are sorted by schedued start time, then by home team.
+struct GameWinners([Team; NUM_GAMES]);
+
+struct Game {
+    home_team: String,
+    away_team: String,
+    home_score: u32,
+    away_score: u32,
+    winner: u32,
+    state: GameState,
+    /// Odds of home team winning
+    odds: Odds,
+}
+
+enum GameState {
+    NotStarted,
+    InProgress,
+    Finished,
+}
+
+// hashmap of player name to weekly evs
+// struct WeeklyEvs(HashMap<Player, Ev>);
+// impl WeeklyEvs {
+//     fn new(players: Vec<Player>) -> WeeklyEvs {
+//         let mut weekly_evs = HashMap::new();
+//         for player in players {
+//             weekly_evs.insert(player, Ev::default());
+//         }
+//         WeeklyEvs(weekly_evs)
+//     }
+// }
+
+type WeeklyEvs = HashMap<Player, Ev>;
+
+/// Odds of home team winning
+/// INVARIANT: odds are between 0 and 1
+struct Odds {
+    nfelo: f64,
+    espn: f64,
+}
+
+#[derive(Debug, Default)]
+struct Ev {
+    nfelo: f64,
+    espn: f64,
+}
+impl AddAssign for Ev {
+    fn add_assign(&mut self, other: Ev) {
+        self.nfelo += other.nfelo;
+        self.espn += other.espn;
+    }
+}
+
+fn get_weekly_evs(week_data: WeekData) -> WeeklyEvs {
+    // given:
+    // all the picks for all the players
+    // the tie breakers
+    // all the games
+    // which games are done or not
+    // the scores of those games
+    // the nfelo and espn odds
+    // the weekly prizes
+
+    // let mut evs = HashMap::new();
+    // no, init for all players at 0
+    let all_players = week_data.player_picks.get_all_players();
+    // let mut evs = WeeklyEvs::new(all_players);
+    let mut evs = WeeklyEvs::default();
+
+    let outcomes = get_weekly_outcomes(week_data);
+
+    for outcome in outcomes {
+        for player_outcome in outcome.final_leaderboard {
+            let player_name = player_outcome.player_name;
+            evs[&player_name] += player_outcome.ev;
+        }
+    }
+    // += evs for all players
+
+    // for every possible outcome,
+    // get the chance of that outcome
+    // get the EV for all the players
+    //
+    // sum the EVs for all players for all outcomes
+
+    evs
+
+    // return the weekly nfelo and espn evs for all players
+}
+
+// fn get_player_outcome_ev(outcome: WeeklyOutcome, player_pick: PlayerPicks) -> Ev {
+//     let mut evs = Ev {
+//         nfelo: 0.0,
+//         espn: 0.0,
+//     };
+//     // for  in player_pick.picks {
+//     //
+//     // }
+//     evs
+// }
+
+struct PlayerOutcome {
+    player_name: String,
+    ev: Ev,
+}
+
+struct WeeklyOutcome {
+    game_winners: GameWinners,
+    odds: Odds,
+    final_leaderboard: Vec<PlayerOutcome>,
+    // final_scores: {player_name: String, score: u32},
+}
+
+fn get_outcome(game: Game) -> WeeklyOutcome {
+    let mut final_leaderboard = Vec::new();
+}
+
+fn get_weekly_outcomes(week_data: WeekData) -> Vec<WeeklyOutcome> {
+    let mut outcomes = Vec::new();
+    for game in week_data.games {
+        let outcome = get_outcome(game);
+        outcomes.push(outcome);
+    }
+    // outcomes
+    todo!()
+}

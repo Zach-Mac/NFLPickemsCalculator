@@ -1,0 +1,5 @@
+main goal:
+given data from app, get the EV value for all games for all players
+
+sub:
+given current week data, get the weekly expected value for all players
