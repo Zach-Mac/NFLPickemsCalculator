@@ -252,7 +252,23 @@ NO,CAR,2.5,0.434,CAR,0.566
 NYG,WAS,-2.5,0.561,NYG,0.561
 NE,BUF,1.5,0.464,BUF,0.536`
 
-export const defaultNfeloPasteInput16 = ``
+export const defaultNfeloPasteInput16 = `home_team,away_team,nfelo_projected_home_spread,nfelo_projected_home_win_probability,projected_winner,projected_winner_probability
+HOU,LV,-14.5,0.879,HOU,0.879
+CLE,BUF,10.5,0.187,BUF,0.813
+WAS,PHI,7.0,0.268,PHI,0.732
+DET,PIT,-7.0,0.728,DET,0.728
+NO,NYJ,-5.5,0.68,NO,0.68
+TEN,KC,4.0,0.353,KC,0.647
+DEN,JAX,-3.0,0.593,DEN,0.593
+BAL,NE,-3.0,0.593,BAL,0.593
+IND,SF,3.0,0.415,SF,0.585
+CAR,TB,3.0,0.417,TB,0.583
+MIA,CIN,3.0,0.419,CIN,0.581
+NYG,MIN,2.5,0.446,MIN,0.554
+DAL,LAC,-2.0,0.542,DAL,0.542
+CHI,GB,1.5,0.461,GB,0.539
+SEA,LAR,-1.5,0.532,SEA,0.532
+ARI,ATL,1.0,0.471,ATL,0.529`
 
 export const defaultNfeloPasteInput17 = ``
 
