@@ -314,7 +314,11 @@ PHI,SF,-3.0,0.593,PHI,0.593
 CHI,GB,-2.5,0.57,CHI,0.57
 JAX,BUF,-1.0,0.522,JAX,0.522`
 
-export const defaultNfeloPasteInput20 = ``
+export const defaultNfeloPasteInput20 = `home_team,away_team,nfelo_projected_home_spread,nfelo_projected_home_win_probability,projected_winner,projected_winner_probability
+SEA,SF,-7.0,0.728,SEA,0.728
+CHI,LAR,4.0,0.348,LAR,0.652
+NE,HOU,-3.0,0.593,NE,0.593
+DEN,BUF,-2.5,0.554,DEN,0.554`
 
 export const defaultNfeloPasteInput21 = ``
 
