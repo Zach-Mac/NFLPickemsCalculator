@@ -324,4 +324,5 @@ export const defaultNfeloPasteInput21 = `home_team,away_team,nfelo_projected_hom
 DEN,NE,3.5,0.371,NE,0.629
 SEA,LAR,-2.5,0.561,SEA,0.561`
 
-export const defaultNfeloPasteInput22 = ``
+export const defaultNfeloPasteInput22 = `home_team,away_team,nfelo_projected_home_spread,nfelo_projected_home_win_probability,projected_winner,projected_winner_probability
+NE,SEA,4.5,0.334,SEA,0.666`
