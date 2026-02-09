@@ -17213,4 +17213,747 @@ LAR<br>
                         
                     </tr></tbody>
         </table>`
-export const defaultPicksTablePasteWeekInput22 = ``
+export const defaultPicksTablePasteWeekInput22 = `<table class="table table-bordered table-striped table-condensed table-scroll flip-content ph-table all-picks-table">
+            <thead>
+                <tr>
+                    <th class="table-header fixed" style="vertical-align:bottom !important;width:3px !important;">Rank</th>
+                    <th class="fixed" style="vertical-align:bottom !important;width:3px !important;"></th>
+                    <th style="text-align:right !important;width:66px !important;" class="fixed">
+                        Score:<br>
+                        Home:<br>
+                        Away:<br>Score:<br>Status:<br>
+                        <div class="table-header">Player Name</div>
+                    </th>
+<th class="week-header ">
+13<br>
+NE<br>
+
+SEA<br>
+29<br>
+Final<br></th>
+                                <th class="table-header sort" style="vertical-align: bottom !important; text-align: center">Week</th>
+                                <th class="table-header sort" style="vertical-align: bottom !important; text-align: center"><a onclick="PickemAllPicks.sortAllPicks(0)">Total</a></th>
+                                <th class="table-header" style="vertical-align: bottom !important; text-align: center"><b><u>NE/SEA<br>Total<br> (42)</u></b></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                    <tr class=" mem_1881859">
+                        <td class="fixed" style="text-align:left;font-weight:600;">1.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;themc11:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/29/2026 02:33:59 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1881859">themc11</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">186</td>
+                                <td style="text-align:center">42</td>
+                        
+                    </tr>
+                    <tr class=" mem_1799759">
+                        <td class="fixed" style="text-align:left;font-weight:600;">2.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;SonyaV:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;02/03/2026 11:11:33 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1799759">SonyaV</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">170</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr>
+                    <tr class=" mem_1855921">
+                        <td class="fixed" style="text-align:left;font-weight:600;">3.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;TrevorSquires:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;02/07/2026 04:16:10 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1855921">TrevorSquires</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">188</td>
+                                <td style="text-align:center">43</td>
+                        
+                    </tr>
+                    <tr class=" mem_1782693">
+                        <td class="fixed" style="text-align:left;font-weight:600;">4.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;johnnymac attack:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/27/2026 03:22:23 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1782693">johnnymac attack</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">156</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1879707">
+                        <td class="fixed" style="text-align:left;font-weight:600;">5.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;rlanaus:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/28/2026 12:48:57 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1879707">rlanaus</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">194</td>
+                                <td style="text-align:center">40</td>
+                        
+                    </tr>
+                    <tr class=" mem_1787252">
+                        <td class="fixed" style="text-align:left;font-weight:600;">6.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Lewisville:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/28/2026 06:36:47 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1787252">Lewisville</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">186</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1885399">
+                        <td class="fixed" style="text-align:left;font-weight:600;">7.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Huzul:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/28/2026 08:50:26 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1885399">Huzul</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">183</td>
+                                <td style="text-align:center">39</td>
+                        
+                    </tr>
+                    <tr class=" mem_1823298">
+                        <td class="fixed" style="text-align:left;font-weight:600;">8.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;totash63:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/30/2026 02:16:57 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1823298">totash63</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">181</td>
+                                <td style="text-align:center">46</td>
+                        
+                    </tr>
+                    <tr class="mem_1848844 my-record">
+                        <td class="fixed" style="text-align:left;font-weight:600;">9.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;ZachMac21:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;02/08/2026 02:31:51 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848844">ZachMac21</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">190</td>
+                                <td style="text-align:center">47</td>
+                        
+                    </tr>
+                    <tr class=" mem_1781030">
+                        <td class="fixed" style="text-align:left;font-weight:600;">10.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Kellyob:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/31/2026 10:20:51 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1781030">Kellyob</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">180</td>
+                                <td style="text-align:center">48</td>
+                        
+                    </tr>
+                    <tr class=" mem_1780907">
+                        <td class="fixed" style="text-align:left;font-weight:600;">11.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;BillsMafiaBossJA17:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/27/2026 12:21:08 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1780907">BillsMafiaBossJA17</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">186</td>
+                                <td style="text-align:center">49</td>
+                        
+                    </tr>
+                    <tr class=" mem_1786306">
+                        <td class="fixed" style="text-align:left;font-weight:600;">12.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;WheelerRacing:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;02/08/2026 05:23:44 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1786306">WheelerRacing</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">191</td>
+                                <td style="text-align:center">50</td>
+                        
+                    </tr>
+                    <tr class=" mem_1782734">
+                        <td class="fixed" style="text-align:left;font-weight:600;">13.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Jpg1134:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/28/2026 09:53:04 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1782734">Jpg1134</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">181</td>
+                                <td style="text-align:center">32</td>
+                        
+                    </tr>
+                    <tr class=" mem_1795705">
+                        <td class="fixed" style="text-align:left;font-weight:600;">14.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;milksgonebad:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;02/08/2026 03:09:03 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1795705">milksgonebad</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">182</td>
+                                <td style="text-align:center">52</td>
+                        
+                    </tr>
+                    <tr class=" mem_1860877">
+                        <td class="fixed" style="text-align:left;font-weight:600;">15.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;PeteV:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;02/03/2026 09:00:34 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1860877">PeteV</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">175</td>
+                                <td style="text-align:center">54</td>
+                        
+                    </tr>
+                    <tr class=" mem_1826555">
+                        <td class="fixed" style="text-align:left;font-weight:600;">16.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Sandra87:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;02/03/2026 07:46:35 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1826555">Sandra87</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">188</td>
+                                <td style="text-align:center">55</td>
+                        
+                    </tr>
+                    <tr class=" mem_1848530">
+                        <td class="fixed" style="text-align:left;font-weight:600;">17.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Softail:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/26/2026 05:17:42 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848530">Softail</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">153</td>
+                                <td style="text-align:center">57</td>
+                        
+                    </tr>
+                    <tr class=" mem_1848963">
+                        <td class="fixed" style="text-align:left;font-weight:600;">18.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;TeamFergie:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/31/2026 06:08:58 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848963">TeamFergie</a>
+                        </td>
+
+
+<td class="text-center game-won">SEA</td>                                <td style="text-align:center">1</td>
+                                <td style="text-align:center">176</td>
+                                <td style="text-align:center">58</td>
+                        
+                    </tr>
+                    <tr class=" mem_1881257">
+                        <td class="fixed" style="text-align:left;font-weight:600;">19.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Chachi16:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/28/2026 09:50:52 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1881257">Chachi16</a>
+                        </td>
+
+
+<td class="text-center game-lost">NE</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">175</td>
+                                <td style="text-align:center">44</td>
+                        
+                    </tr>
+                    <tr class=" mem_1895199">
+                        <td class="fixed" style="text-align:left;font-weight:600;">20.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;Rudeiculous41:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/28/2026 07:54:18 PM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1895199">Rudeiculous41</a>
+                        </td>
+
+
+<td class="text-center game-lost">NE</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">186</td>
+                                <td style="text-align:center">49</td>
+                        
+                    </tr>
+                    <tr class=" mem_1779356">
+                        <td class="fixed" style="text-align:left;font-weight:600;">21.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle green-circle " onclick="PickemAllPicks.pickInfo('&lt;b&gt;chadlanaus:&lt;/b&gt; &lt;br/&gt; &lt;b&gt;01/27/2026 09:25:29 AM&lt;/b&gt;.')"></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1779356">chadlanaus</a>
+                        </td>
+
+
+<td class="text-center game-lost">NE</td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">189</td>
+                                <td style="text-align:center">50</td>
+                        
+                    </tr>
+                    <tr class=" mem_1779446">
+                        <td class="fixed" style="text-align:left;font-weight:600;">22.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1779446">AndrewAttwood</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">175</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1779889">
+                        <td class="fixed" style="text-align:left;font-weight:600;">23.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1779889">coachmejia6</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">155</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1783295">
+                        <td class="fixed" style="text-align:left;font-weight:600;">24.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1783295">WilliePicks</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">183</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1790437">
+                        <td class="fixed" style="text-align:left;font-weight:600;">25.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1790437">Lurganguy</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">181</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1791345">
+                        <td class="fixed" style="text-align:left;font-weight:600;">26.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1791345">JeffVarey</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">170</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1803478">
+                        <td class="fixed" style="text-align:left;font-weight:600;">27.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1803478">NicoleB85</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">166</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1808378">
+                        <td class="fixed" style="text-align:left;font-weight:600;">28.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1808378">CoffeeMan58</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">179</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1809864">
+                        <td class="fixed" style="text-align:left;font-weight:600;">29.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1809864">06mcgruderm</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">156</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1817065">
+                        <td class="fixed" style="text-align:left;font-weight:600;">30.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1817065">Shabbs</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">174</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1819860">
+                        <td class="fixed" style="text-align:left;font-weight:600;">31.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1819860">CjRosengarten</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">125</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1821125">
+                        <td class="fixed" style="text-align:left;font-weight:600;">32.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1821125">Robbcapo</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">141</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1821882">
+                        <td class="fixed" style="text-align:left;font-weight:600;">33.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1821882">SterlingBrough</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">175</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1825321">
+                        <td class="fixed" style="text-align:left;font-weight:600;">34.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1825321">Lukaa81</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">123</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1828423">
+                        <td class="fixed" style="text-align:left;font-weight:600;">35.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1828423">neskin</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">169</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1831105">
+                        <td class="fixed" style="text-align:left;font-weight:600;">36.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1831105">Alecha49</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">97</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1841600">
+                        <td class="fixed" style="text-align:left;font-weight:600;">37.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1841600">Smitty2point0</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">173</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1841623">
+                        <td class="fixed" style="text-align:left;font-weight:600;">38.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1841623">AttySmith14</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">150</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1843039">
+                        <td class="fixed" style="text-align:left;font-weight:600;">39.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1843039">Lunestar</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">169</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+                    <tr class=" mem_1843189">
+                        <td class="fixed" style="text-align:left;font-weight:600;">40.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1843189">Stepburrowimstuck69</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">97</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr>
+
+            <tr class=" mem_1847974">
+                        <td class="fixed" style="text-align:left;font-weight:600;">41.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1847974">ParkB</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">174</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1848271">
+                        <td class="fixed" style="text-align:left;font-weight:600;">42.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848271">AndrewFoust</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">111</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1848697">
+                        <td class="fixed" style="text-align:left;font-weight:600;">43.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1848697">DeanGia</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">135</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1849258">
+                        <td class="fixed" style="text-align:left;font-weight:600;">44.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1849258">LiamMacd</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">148</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1850124">
+                        <td class="fixed" style="text-align:left;font-weight:600;">45.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1850124">bernys76</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">181</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1855747">
+                        <td class="fixed" style="text-align:left;font-weight:600;">46.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1855747">Bob17</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">176</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1871350">
+                        <td class="fixed" style="text-align:left;font-weight:600;">47.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1871350">Bernys2009</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">168</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1885663">
+                        <td class="fixed" style="text-align:left;font-weight:600;">48.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1885663">rhammy</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">101</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1886691">
+                        <td class="fixed" style="text-align:left;font-weight:600;">49.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1886691">Lazer77</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">126</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1888081">
+                        <td class="fixed" style="text-align:left;font-weight:600;">50.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1888081">Edski1</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">173</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1893179">
+                        <td class="fixed" style="text-align:left;font-weight:600;">51.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1893179">TylerKelly</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">182</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr><tr class=" mem_1893790">
+                        <td class="fixed" style="text-align:left;font-weight:600;">52.</td>
+                        <td class="fixed" style="text-align:center;"><i class="fa fa-circle red-circle "></i></td>
+
+                        <td class="fixed" style="font-weight:600 !important;">
+                                <a class="ajaxify" href="/profootball/playerstats/1893790">Grimshm</a>
+                        </td>
+
+
+<td class="text-center "></td>                                <td style="text-align:center">0</td>
+                                <td style="text-align:center">169</td>
+                                <td style="text-align:center"></td>
+                        
+                    </tr></tbody>
+        </table>`
