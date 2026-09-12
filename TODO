@@ -1,6 +1,7 @@
 HIGHEST:
 
-    TODO: create tutorial / demo
+    use prediction endpoint
+
 
 HIGH:
 
@@ -11,6 +12,8 @@ HIGH:
     TODO: store stats for each player so don't need to recalculate all the time (and for each filteroption)
 
 LOW:
+
+    TODO: create tutorial / demo
 
     BUG: game time at 12:30pm shows 0:30pm
     BUG: first open site error gotta click load espn
