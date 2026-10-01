@@ -49,33 +49,6 @@ function getTeamNameTdStyle(pick: string, gameNumber: number) {
 	return pick === game.winner ? styleClasses.gameWon : styleClasses.gameLost
 }
 
-const rowStyle = computed(() => {
-	if (!tableStore.settings.highlightTiedRows) return Array(tableStore.items.length).fill('')
-
-	const colorRow = [false]
-
-	const sortedItems = tableStore.items.sort((a, b) => {
-		if (a[tableStore.sortBy[0].key] < b[tableStore.sortBy[0].key])
-			return tableStore.sortBy[0].order == 'asc' ? -1 : 1
-		if (a[tableStore.sortBy[0].key] > b[tableStore.sortBy[0].key])
-			return tableStore.sortBy[0].order == 'asc' ? 1 : -1
-		return 0
-	})
-
-	for (let i = 1; i < sortedItems.length; i++) {
-		const rowSortValue = sortedItems[i][tableStore.sortBy[0].key]
-		const prevRowSortValue = sortedItems[i - 1][tableStore.sortBy[0].key]
-
-		if (rowSortValue == prevRowSortValue) {
-			colorRow.push(colorRow[i - 1])
-		} else {
-			colorRow.push(!colorRow[i - 1])
-		}
-	}
-
-	return colorRow.map(color => (color ? 'bg-grey-lighten-4' : ''))
-})
-
 function formatPercent(
 	value?: number,
 	options: Partial<{ hideZero: boolean; precision: number }> = {}
@@ -98,7 +71,10 @@ function formatPercent(
 </script>
 
 <template>
-	<tr class="text-center" :class="[rowStyle[index], isCurrentPlayer ? 'bg-accent' : '']">
+	<tr
+		class="text-center"
+		:class="[tableStore.tiedRowClasses[index], isCurrentPlayer ? 'bg-accent' : '']"
+	>
 		<td class="font-weight-bold text-left border-e">{{ index + 1 }}.</td>
 		<td
 			class="font-weight-bold text-left cursor-pointer px-1 text-no-wrap border-e"

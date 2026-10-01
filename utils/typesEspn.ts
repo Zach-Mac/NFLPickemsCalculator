@@ -29,6 +29,15 @@ export interface EspnEvent {
 	status: EventStatus
 }
 
+export interface EspnPredictor {
+	homeTeam: EspnPredictorTeam
+	awayTeam: EspnPredictorTeam
+}
+
+interface EspnPredictorTeam {
+	statistics: { name: string; value: number }[]
+}
+
 interface SeasonDetails extends Season {
 	slug: string
 }

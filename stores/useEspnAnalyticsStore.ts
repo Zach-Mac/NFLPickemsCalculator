@@ -1,4 +1,3 @@
-import * as cheerio from 'cheerio'
 import { z } from 'zod'
 
 function getProbabilityOfFinished(game: Game): Probability {
@@ -78,23 +77,15 @@ export const useEspnAnalyticsStore = defineStore('espnAnalytics', () => {
 	}
 
 	async function getEspnWinChance(game: Game): Promise<Probability> {
-		const gamecastUrl = game.espn.gamecastLink
+		const predictor = await espnApi.getPredictor(game.espn.eventId, game.espn.competitionId)
 
-		const data = await $fetch(`/api/espn?url=${encodeURIComponent(gamecastUrl)}`)
-
-		const $ = cheerio.load(data)
-
-		const winChances = $('.matchupPredictor').text()
-
-		const split = winChances.split('%').map(s => s.replace(/[^\d.-]/g, ''))
-		const awayWinPercentage = parseFloat(split[0]) / 100
-		const homeWinPercentage = parseFloat(split[1]) / 100
-		const tiePercentage = 1 - homeWinPercentage - awayWinPercentage
+		const percentage = (side: 'homeTeam' | 'awayTeam', statName: string) =>
+			(predictor[side].statistics.find(stat => stat.name === statName)?.value ?? NaN) / 100
 
 		return {
-			tiePercentage,
-			homeWinPercentage,
-			awayWinPercentage
+			tiePercentage: percentage('homeTeam', 'teamChanceTie'),
+			homeWinPercentage: percentage('homeTeam', 'gameProjection'),
+			awayWinPercentage: percentage('awayTeam', 'gameProjection')
 		}
 	}
 

@@ -33,6 +33,13 @@ async function getScoreboard(week?: number) {
 	return response.data as Scoreboard
 }
 
+async function getPredictor(eventId: string, competitionId: string) {
+	const url = `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/${eventId}/competitions/${competitionId}/predictor`
+	const response = await api.get(url)
+	return response.data as EspnPredictor
+}
+
 export const espnApi = {
-	getScoreboard
+	getScoreboard,
+	getPredictor
 }

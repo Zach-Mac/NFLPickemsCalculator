@@ -191,6 +191,27 @@ export const useTableStore = defineStore('table', () => {
 		})
 	})
 
+	const tiedRowClasses = computed(() => {
+		if (!settings.value.highlightTiedRows) return Array(items.value.length).fill('')
+
+		const { key, order } = sortBy.value[0]
+		const sortedValues = items.value
+			.map(item => item[key])
+			.sort((a, b) => {
+				if (a < b) return order == 'asc' ? -1 : 1
+				if (a > b) return order == 'asc' ? 1 : -1
+				return 0
+			})
+
+		const colorRow = [false]
+		for (let i = 1; i < sortedValues.length; i++) {
+			const tiedWithPrevRow = sortedValues[i] == sortedValues[i - 1]
+			colorRow.push(tiedWithPrevRow ? colorRow[i - 1] : !colorRow[i - 1])
+		}
+
+		return colorRow.map(color => (color ? 'bg-grey-lighten-4' : ''))
+	})
+
 	return {
 		settings,
 		settingsSelection,
@@ -199,6 +220,7 @@ export const useTableStore = defineStore('table', () => {
 		optionalColumnsSelection,
 		optionalHeadersItems,
 		items,
+		tiedRowClasses,
 		headers,
 		editGamesMode,
 		getHeaderTitle,

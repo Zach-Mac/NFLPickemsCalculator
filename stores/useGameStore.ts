@@ -20,6 +20,8 @@ const gameSchema = z.object({
 	ot: z.boolean(),
 	winner: z.string().optional(),
 	espn: z.object({
+		eventId: z.string(),
+		competitionId: z.string(),
 		situation: SituationSchema.optional(),
 		gamecastLink: z.string()
 	})
@@ -152,6 +154,8 @@ export const useGamesStore = defineStore('games', () => {
 				possession,
 				ot: event.status.period > 4,
 				espn: {
+					eventId: event.id,
+					competitionId: competition.id,
 					situation: situation,
 					gamecastLink:
 						event.links.find(link => link.text?.includes('Gamecast'))?.href || ''
