@@ -1,6 +1,5 @@
 import { countBits } from '@/utils/bits'
 import { createPrizeSplitter } from '@/utils/prizes'
-import { weeklyPrizes } from '~/utils/defaults/defaultInputs'
 
 // TODO: stats output too big for many games
 
@@ -19,12 +18,38 @@ function addOutcome(tally: Tally, player: number, nfeloChance: number, espnChanc
 	tally.espnChance[player] += espnChance
 }
 
+function newPrizeByGameResult(numPlayers: number, numGames: number) {
+	return {
+		chanceHomeWon: new Float64Array(numGames),
+		chanceAwayWon: new Float64Array(numGames),
+		prizeIfHomeWon: new Float64Array(numPlayers * numGames),
+		prizeIfAwayWon: new Float64Array(numPlayers * numGames)
+	}
+}
+type PrizeByGameResult = ReturnType<typeof newPrizeByGameResult>
+
+function addOutcomeChance(tally: PrizeByGameResult, homeWins: number, chance: number) {
+	for (let bit = 0; bit < tally.chanceHomeWon.length; bit++) {
+		if (homeWins & (1 << bit)) tally.chanceHomeWon[bit] += chance
+		else tally.chanceAwayWon[bit] += chance
+	}
+}
+
+function addPrize(tally: PrizeByGameResult, player: number, homeWins: number, chance: number, prize: number) {
+	const numGames = tally.chanceHomeWon.length
+	for (let bit = 0; bit < numGames; bit++) {
+		if (homeWins & (1 << bit)) tally.prizeIfHomeWon[player * numGames + bit] += chance * prize
+		else tally.prizeIfAwayWon[player * numGames + bit] += chance * prize
+	}
+}
+
 export function getAllUsersStats(
 	picksData: any[],
 	ignoredGamesIndexes: number[],
 	gameData: Game[],
 	nfeloTeamsWinChances: Record<string, number>,
 	espnTeamsWinChances: Record<string, number>,
+	weeklyPrizes: readonly number[],
 	tiebreakerProbabilityByTotal?: ProbabilityByTotal
 ): UserStats {
 	const startTime = performance.now()
@@ -61,6 +86,8 @@ export function getAllUsersStats(
 	const top2 = newTally(players.length)
 	const nfeloWeekEv = new Float64Array(players.length)
 	const espnWeekEv = new Float64Array(players.length)
+	const nfeloPrizeByGameResult = newPrizeByGameResult(players.length, openGameIndexes.length)
+	const espnPrizeByGameResult = newPrizeByGameResult(players.length, openGameIndexes.length)
 	const scores = new Uint16Array(players.length)
 	const splitPrizes = createPrizeSplitter(picksData, tiebreakerProbabilityByTotal, weeklyPrizes)
 	const prizePerPlayer = new Float64Array(players.length)
@@ -75,6 +102,8 @@ export function getAllUsersStats(
 			nfeloChance *= homeWon ? nfeloOdds[bit].home : nfeloOdds[bit].away
 			espnChance *= homeWon ? espnOdds[bit].home : espnOdds[bit].away
 		}
+		addOutcomeChance(nfeloPrizeByGameResult, homeWins, nfeloChance)
+		addOutcomeChance(espnPrizeByGameResult, homeWins, espnChance)
 
 		let topScore = -1
 		let numAtTopScore = 0
@@ -109,6 +138,8 @@ export function getAllUsersStats(
 			if (prize) {
 				nfeloWeekEv[p] += (nfeloChance / 100) * prize
 				espnWeekEv[p] += (espnChance / 100) * prize
+				addPrize(nfeloPrizeByGameResult, p, homeWins, nfeloChance, prize)
+				addPrize(espnPrizeByGameResult, p, homeWins, espnChance, prize)
 			}
 		}
 	}
@@ -132,5 +163,29 @@ export function getAllUsersStats(
 		picksData.map((player, p) => [player.name, { nfelo: nfeloWeekEv[p], espn: espnWeekEv[p] }])
 	)
 
-	return { firstPlace: toPositionStats(firstPlace), top2: toPositionStats(top2), weekEv }
+	const pickSwings = (tally: PrizeByGameResult, player: number) =>
+		gameData.map((game, gameIndex) => {
+			const bit = openGameIndexes.indexOf(gameIndex)
+			if (bit === -1) return NaN
+			const i = player * openGameIndexes.length + bit
+			const ifHomeWon = tally.prizeIfHomeWon[i] / tally.chanceHomeWon[bit]
+			const ifAwayWon = tally.prizeIfAwayWon[i] / tally.chanceAwayWon[bit]
+			const pick = picksData[player].picks[gameIndex]
+			if (pick === game.home) return ifHomeWon - ifAwayWon
+			if (pick === game.away) return ifAwayWon - ifHomeWon
+			return NaN
+		})
+	const weekEvPickSwings = Object.fromEntries(
+		picksData.map((player, p) => [
+			player.name,
+			{ nfelo: pickSwings(nfeloPrizeByGameResult, p), espn: pickSwings(espnPrizeByGameResult, p) }
+		])
+	)
+
+	return {
+		firstPlace: toPositionStats(firstPlace),
+		top2: toPositionStats(top2),
+		weekEv,
+		weekEvPickSwings
+	}
 }

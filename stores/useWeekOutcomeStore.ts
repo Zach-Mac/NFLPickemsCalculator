@@ -1,3 +1,5 @@
+import { lastWeekWithWeeklyPrizes, weeklyPrizes } from '~/utils/defaults/defaultInputs'
+
 export interface UserOutcome {
 	contenderForFirst: boolean
 	contenderForTop2: boolean
@@ -21,6 +23,7 @@ export interface UserStats {
 	firstPlace: Record<string, UserPositionStats>
 	top2: Record<string, UserPositionStats>
 	weekEv: Record<string, { nfelo: number; espn: number }>
+	weekEvPickSwings: Record<string, { nfelo: number[]; espn: number[] }>
 }
 
 export interface WinningOutcome {
@@ -137,8 +140,12 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 	const liveStats = ref<UserStats>({
 		firstPlace: {} as Record<string, UserPositionStats>,
 		top2: {} as Record<string, UserPositionStats>,
-		weekEv: {}
+		weekEv: {},
+		weekEvPickSwings: {}
 	})
+	const weeklyPrizesThisWeek = computed(() =>
+		gamesStore.selectedWeek <= lastWeekWithWeeklyPrizes ? weeklyPrizes : []
+	)
 	picksStore.picksData.forEach(player => {
 		liveStats.value.firstPlace[player.name] = {
 			numWinningOutcomes: 0,
@@ -170,6 +177,7 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 			deepToRaw(gamesStore.gameData),
 			deepToRaw(nfeloStore.nfeloTeamsWinChance),
 			deepToRaw(espnAnalyticsStore.espnTeamsWinChances),
+			weeklyPrizesThisWeek.value,
 			toRaw(tiebreakerStore.probabilityByTotal)
 		)
 	}
@@ -179,6 +187,7 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 			picksStore.picksData,
 			nfeloStore.nfeloTeamsWinChance,
 			espnAnalyticsStore.espnTeamsWinChances,
+			weeklyPrizesThisWeek.value,
 			tiebreakerStore.probabilityByTotal
 		],
 		async (_sources, _oldSources, onCleanup) => {
@@ -199,6 +208,9 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 		return liveStats.value.firstPlace
 	})
 	const weekEv = computed(() => liveStats.value.weekEv)
+	const userWeekEvPickSwings = computed(
+		() => liveStats.value.weekEvPickSwings[picksStore.user.name] ?? { nfelo: [], espn: [] }
+	)
 
 	return {
 		// State
@@ -213,7 +225,8 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 		gamesImportanceScores,
 		numPossibleOutcomes,
 		liveStatsComputed,
-		weekEv
+		weekEv,
+		userWeekEvPickSwings
 	}
 })
 

@@ -5,6 +5,7 @@ const nfeloStore = useNfeloStore()
 const espnAnalyticsStore = useEspnAnalyticsStore()
 
 const weekOutcomesStore = useWeekOutcomesStore()
+const tableStore = useTableStore()
 
 // Styling
 function getWeekImportanceColor(index: number) {
@@ -15,6 +16,17 @@ function getWeekImportanceColor(index: number) {
 
 	return `bg-purple-lighten-${level}`
 }
+const { calculatePercentile, getStyleClass } = useTableStyles()
+function getWeekEvSwingColor(swing: number) {
+	const shownSwing = round(swing, 2)
+	if (!shownSwing) return ''
+	const shownSwings = weekOutcomesStore.userWeekEvPickSwings.espn
+		.map(v => round(v, 2))
+		.filter(v => v)
+	return getStyleClass(shownSwing, calculatePercentile(shownSwing, shownSwings), 'purple')
+}
+const formatSwing = (swing?: number) =>
+	swing === undefined || Number.isNaN(swing) ? '-' : round(swing, 2).toFixed(2)
 function evDiffColor(evDiff: number) {
 	// lighten as percentile of all ev diffs
 	const allValues = Object.values(picksStore.userGameEvRanges).filter(v => v !== 0)
@@ -108,21 +120,44 @@ const numHeadersNeeded = computed(() => {
 		<th class="text-center font-weight-bold border-e cursor-help text-no-wrap" :colspan="2">
 			Week Importance
 			<v-tooltip activator="parent" location="top">
-				Percentage of winning outcomes needing this game
+				<template v-if="tableStore.settings.weekImportanceAsWinningOutcomes">
+					Percentage of winning outcomes needing this game
+				</template>
+				<template v-else>
+					Expected weekly prize if your pick wins minus if it loses, based on ESPN
+					predictions ($)
+				</template>
 			</v-tooltip>
 		</th>
-		<th
-			v-for="(game, index) in gamesStore.gameData"
-			class="text-center border-e"
-			:class="[game.state == 'finished' ? 'dimmed' : '', getWeekImportanceColor(index)]"
-		>
-			<!-- {{
-				game.state == 'finished'
-					? '-'
-					: round(weekOutcomesStore.gamesImportanceScores[index], 2)
-			}} -->
-			{{ round(weekOutcomesStore.gamesImportanceScores[index], 2) }}
-		</th>
+		<template v-if="tableStore.settings.weekImportanceAsWinningOutcomes">
+			<th
+				v-for="(game, index) in gamesStore.gameData"
+				class="text-center border-e"
+				:class="[game.state == 'finished' ? 'dimmed' : '', getWeekImportanceColor(index)]"
+			>
+				<!-- {{
+					game.state == 'finished'
+						? '-'
+						: round(weekOutcomesStore.gamesImportanceScores[index], 2)
+				}} -->
+				{{ round(weekOutcomesStore.gamesImportanceScores[index], 2) }}
+			</th>
+		</template>
+		<template v-else>
+			<th
+				v-for="(game, index) in gamesStore.gameData"
+				class="text-center border-e"
+				:class="[
+					game.state == 'finished' ? 'dimmed' : '',
+					getWeekEvSwingColor(weekOutcomesStore.userWeekEvPickSwings.espn[index])
+				]"
+			>
+				{{ formatSwing(weekOutcomesStore.userWeekEvPickSwings.espn[index]) }}
+				<v-tooltip activator="parent" location="top">
+					nfelo: {{ formatSwing(weekOutcomesStore.userWeekEvPickSwings.nfelo[index]) }}
+				</v-tooltip>
+			</th>
+		</template>
 		<th :colspan="numHeadersNeeded" class="px-1"></th>
 	</tr>
 	<tr ref="headerRow">

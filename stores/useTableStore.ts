@@ -101,7 +101,10 @@ const optionalHeadersItems: Header[] = [
 ]
 const headers = baseHeaders.concat(optionalHeadersItems)
 
-type SettingsValue = 'highlightTiedRows' | 'lockFinishedGames'
+type SettingsValue =
+	| 'highlightTiedRows'
+	| 'lockFinishedGames'
+	| 'weekImportanceAsWinningOutcomes'
 const settingsItems = [
 	{
 		title: 'Highlight tied rows',
@@ -112,6 +115,11 @@ const settingsItems = [
 		title: 'Lock finished games',
 		subtitle: 'Disable editing of games that have already finished',
 		value: 'lockFinishedGames' as SettingsValue
+	},
+	{
+		title: 'Week importance as winning outcomes %',
+		subtitle: 'Show the percentage of your winning outcomes needing each game instead of its $ value',
+		value: 'weekImportanceAsWinningOutcomes' as SettingsValue
 	}
 ]
 
