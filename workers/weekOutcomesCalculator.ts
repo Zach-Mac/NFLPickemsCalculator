@@ -1,4 +1,6 @@
 import { countBits } from '@/utils/bits'
+import { createPrizeSplitter } from '@/utils/prizes'
+import { weeklyPrizes } from '~/utils/defaults/defaultInputs'
 
 // TODO: stats output too big for many games
 
@@ -22,7 +24,8 @@ export function getAllUsersStats(
 	ignoredGamesIndexes: number[],
 	gameData: Game[],
 	nfeloTeamsWinChances: Record<string, number>,
-	espnTeamsWinChances: Record<string, number>
+	espnTeamsWinChances: Record<string, number>,
+	tiebreakerProbabilityByTotal?: ProbabilityByTotal
 ): UserStats {
 	const startTime = performance.now()
 
@@ -56,7 +59,11 @@ export function getAllUsersStats(
 
 	const firstPlace = newTally(players.length)
 	const top2 = newTally(players.length)
+	const nfeloWeekEv = new Float64Array(players.length)
+	const espnWeekEv = new Float64Array(players.length)
 	const scores = new Uint16Array(players.length)
+	const splitPrizes = createPrizeSplitter(picksData, tiebreakerProbabilityByTotal, weeklyPrizes)
+	const prizePerPlayer = new Float64Array(players.length)
 
 	for (let homeWins = 0; homeWins < totalOutcomes; homeWins++) {
 		const awayWins = ~homeWins & allOpenGames
@@ -88,6 +95,8 @@ export function getAllUsersStats(
 			else if (score > secondScore) secondScore = score
 		}
 
+		splitPrizes(scores, prizePerPlayer)
+
 		for (let p = 0; p < players.length; p++) {
 			const contenderForFirst = scores[p] === topScore
 			const contenderForTop2 =
@@ -95,6 +104,12 @@ export function getAllUsersStats(
 
 			if (contenderForFirst) addOutcome(firstPlace, p, nfeloChance, espnChance)
 			if (contenderForTop2) addOutcome(top2, p, nfeloChance, espnChance)
+
+			const prize = prizePerPlayer[p]
+			if (prize) {
+				nfeloWeekEv[p] += (nfeloChance / 100) * prize
+				espnWeekEv[p] += (espnChance / 100) * prize
+			}
 		}
 	}
 
@@ -113,5 +128,9 @@ export function getAllUsersStats(
 
 	console.log('Week outcomes calculator time:', performance.now() - startTime, 'ms')
 
-	return { firstPlace: toPositionStats(firstPlace), top2: toPositionStats(top2) }
+	const weekEv = Object.fromEntries(
+		picksData.map((player, p) => [player.name, { nfelo: nfeloWeekEv[p], espn: espnWeekEv[p] }])
+	)
+
+	return { firstPlace: toPositionStats(firstPlace), top2: toPositionStats(top2), weekEv }
 }

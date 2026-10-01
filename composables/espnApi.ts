@@ -40,7 +40,14 @@ async function getPredictor(eventId: string, competitionId: string) {
 	return response.data as EspnPredictor
 }
 
+async function getOverUnder(eventId: string, competitionId: string) {
+	const url = `https://sports.core.api.espn.com/v2/sports/football/leagues/nfl/events/${eventId}/competitions/${competitionId}/odds`
+	const response = await api.get(url)
+	return (response.data as EspnOdds).items[0]?.overUnder
+}
+
 export const espnApi = {
 	getScoreboard,
-	getPredictor
+	getPredictor,
+	getOverUnder
 }

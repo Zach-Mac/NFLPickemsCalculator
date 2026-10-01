@@ -16,14 +16,20 @@ export const useTableStyles = () => {
 		return values.filter(v => (value > 0 ? v <= value : v >= value)).length / values.length
 	}
 
+	// success and error get a lighten-6 from the theme, Vuetify's purple palette stops at lighten-5
+	const lightestShade = { success: 6, error: 6, purple: 5 }
+
 	const getStyleClass = (
 		value: number,
 		percentile: number,
-		type: 'success' | 'error'
+		type: 'success' | 'error' | 'purple'
 	): string => {
 		const brightnessAdjustment =
 			STYLE_CONFIG.BASE_BRIGHTNESS + (1 - percentile) * STYLE_CONFIG.BRIGHTNESS_MULTIPLIER
-		const brightnessLevel = Math.abs(Math.round(brightnessAdjustment))
+		const brightnessLevel = Math.min(
+			Math.abs(Math.round(brightnessAdjustment)),
+			lightestShade[type]
+		)
 		const boldClass =
 			percentile > STYLE_CONFIG.HIGH_PERCENTILE_THRESHOLD ? 'font-weight-bold' : ''
 		return `bg-${type}-lighten-${brightnessLevel} ${boldClass}`

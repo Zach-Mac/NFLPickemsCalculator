@@ -1,3 +1,5 @@
+import { seasonPrizes } from '~/utils/defaults/defaultInputs'
+
 interface PlayerStats {
 	prob: number
 	money: number
@@ -7,11 +9,10 @@ interface SimOutput {
 	[player: string]: PlayerStats
 }
 
-const prizeMoney = [800, 500, 350, 200, 100]
-const totalPrizeMoney = prizeMoney.reduce((sum, prize) => sum + prize, 0)
+const totalPrizeMoney = seasonPrizes.reduce((sum, prize) => sum + prize, 0)
 
 class SeasonSimulator {
-	private readonly prizeMoneyArray = new Float32Array(prizeMoney)
+	private readonly prizeMoneyArray = new Float32Array(seasonPrizes)
 	private readonly players: string[]
 	private readonly currentScores: Float32Array
 	private readonly numPlayers: number

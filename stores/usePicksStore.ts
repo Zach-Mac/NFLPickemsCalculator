@@ -1,11 +1,14 @@
 import * as cheerio from 'cheerio'
 import { defaultPicksTablePasteWeekInputs } from '~/utils/defaults/defaultPicksTablesWeeks/defaultPicksTablesWeekInputs'
 
+const LATE_PICKS_TIEBREAKER = 1
+
 const blankUser = {
 	name: '',
 	picks: [] as string[],
 	originalSeasonTotal: 0,
-	tieBreaker: 0
+	tieBreaker: 0,
+	eligibleForWeeklyPrize: true
 }
 export type PlayerPicks = typeof blankUser
 
@@ -48,12 +51,14 @@ export const usePicksStore = defineStore('picks', () => {
 
 				const weekTotal = Number(tds.eq(-3).text())
 				const seasonTotal = Number(tds.eq(-2).text())
+				const tieBreaker = Number(tds.eq(-1).text())
 
 				return {
 					name: tds.eq(2).text().trim(),
 					picks,
 					originalSeasonTotal: seasonTotal - weekTotal,
-					tieBreaker: Number(tds.eq(-1).text())
+					tieBreaker,
+					eligibleForWeeklyPrize: tieBreaker !== LATE_PICKS_TIEBREAKER
 				} as PlayerPicks
 			})
 	})
@@ -73,6 +78,17 @@ export const usePicksStore = defineStore('picks', () => {
 				const abbreviation = home as PoolhostTeamAbbreviation
 				return POOLHOST_TO_ESPN_ABBREVIATION[abbreviation] ?? abbreviation
 			})
+	})
+	const tiebreakerTeams = computed(() => {
+		const $ = cheerio.load(picksTablePasteInput.value)
+		const [matchup = ''] = ($('thead th').last().html() ?? '').split(/<br\s*\/?>/)
+		const teams = $(`<p>${matchup}</p>`).text().trim().split('/')
+		if (teams.length !== 2) return []
+
+		return teams.map(team => {
+			const abbreviation = team as PoolhostTeamAbbreviation
+			return POOLHOST_TO_ESPN_ABBREVIATION[abbreviation] ?? abbreviation
+		})
 	})
 	const picksData = computed(() => {
 		if (!picksTablePasteInput.value) {
@@ -299,6 +315,7 @@ export const usePicksStore = defineStore('picks', () => {
 		picksData,
 		picksTablePasteInputIsDefault,
 		poolhostGameOrder,
+		tiebreakerTeams,
 		picksDataValidated,
 		seasonEvs,
 		seasonEvsChange,

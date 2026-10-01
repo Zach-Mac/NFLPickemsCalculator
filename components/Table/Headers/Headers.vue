@@ -3,7 +3,42 @@ import { VDataTable } from 'vuetify/components'
 
 const gamesStore = useGamesStore()
 const tableStore = useTableStore()
+const tiebreakerStore = useTiebreakerStore()
 const { smAndDown, mdAndDown } = useDisplay()
+
+const weekEvColumns: HeaderKey[] = ['nfeloWeekEv', 'espnWeekEv']
+const showsEvenSplit = (columnKey: HeaderKey) =>
+	weekEvColumns.includes(columnKey) && Boolean(tiebreakerStore.evenSplitReason)
+
+const LIKELY_RANGE_COVERAGE = 0.8
+const tiebreakerTotal = computed(() => {
+	const { game, probabilityByTotal } = tiebreakerStore
+	if (!game || !probabilityByTotal) return undefined
+
+	return {
+		game,
+		known: game.state === 'finished',
+		expected: expectedTotal(probabilityByTotal),
+		likelyRange: likelyTotalRange(probabilityByTotal, LIKELY_RANGE_COVERAGE)
+	}
+})
+const tiebreakerTooltipLines = computed(() => {
+	if (!tiebreakerTotal.value) return []
+	const { game, known, likelyRange } = tiebreakerTotal.value
+
+	const score = `${game.away} ${game.scoreAway}, ${game.home} ${game.scoreHome}`
+	const lines = [`${game.away} @ ${game.home} total points`]
+	if (game.state === 'finished') lines.push(`Final: ${score}`)
+	if (game.state === 'active')
+		lines.push(`Now: ${score} (${getGameQuarterText(game)} ${game.timeLeft})`)
+	if (!known) {
+		lines.push(`Over/under: ${tiebreakerStore.overUnder}`)
+		lines.push(
+			`${LIKELY_RANGE_COVERAGE * 100}% likely between ${likelyRange[0]} and ${likelyRange[1]}`
+		)
+	}
+	return lines
+})
 
 const quarters = ['1st', '2nd', '3rd', '4th']
 
@@ -183,6 +218,15 @@ provide('numHeaders', numHeaders)
 		</RotatedTableHeader>
 		<RotatedTableHeader>
 			{{ tieBreakerText }}
+			<template v-if="tiebreakerTotal">
+				{{ tiebreakerTotal.known ? '=' : '~' }} {{ round(tiebreakerTotal.expected, 1) }}
+				<v-tooltip activator="parent" location="top">
+					<template v-for="(line, i) in tiebreakerTooltipLines" :key="i">
+						<br v-if="i" />
+						{{ line }}
+					</template>
+				</v-tooltip>
+			</template>
 		</RotatedTableHeader>
 		<template v-for="(value, columnKey) in tableStore.optionalColumns" :key="columnKey">
 			<RotatedTableHeader
@@ -190,9 +234,19 @@ provide('numHeaders', numHeaders)
 				@click="tableStore.sortBy = tableStore.sortByOptions[columnKey]"
 			>
 				{{ tableStore.getHeaderTitle(columnKey) }}
+				<v-icon
+					v-if="showsEvenSplit(columnKey)"
+					icon="mdi-information-outline"
+					size="x-small"
+				/>
 				<SortIcon :columns="columns" :isSorted="isSorted" :keyToSortBy="columnKey" />
 				<v-tooltip activator="parent" location="top">
 					{{ tableStore.getHeaderSubtitle(columnKey) }}
+					<template v-if="showsEvenSplit(columnKey)">
+						<br />
+						{{ tiebreakerStore.evenSplitReason }}, so tied players split prizes
+						evenly
+					</template>
 				</v-tooltip>
 			</RotatedTableHeader>
 		</template>

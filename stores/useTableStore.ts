@@ -10,6 +10,8 @@ export interface PlayerItem {
 	nfeloWinChance: number
 	espnWinChance: number
 	winningOutcomesPercent: number
+	nfeloWeekEv: number
+	espnWeekEv: number
 	seasonPrizeChance: number
 	chanceMake100: number
 	seasonEv: number
@@ -52,6 +54,20 @@ const optionalHeadersItems: Header[] = [
 		value: 'winningOutcomesPercent',
 		title: 'Win Outcomes %',
 		subtitle: 'Percentage of winning outcomes with selected game winners',
+		sortable: true
+	},
+	{
+		key: 'nfeloWeekEv',
+		value: 'nfeloWeekEv',
+		title: 'nfelo Week EV',
+		subtitle: 'Expected weekly winnings based on nfelo predictions (in $)',
+		sortable: true
+	},
+	{
+		key: 'espnWeekEv',
+		value: 'espnWeekEv',
+		title: 'ESPN Week EV',
+		subtitle: 'Expected weekly winnings based on ESPN predictions (in $)',
 		sortable: true
 	},
 	{
@@ -109,6 +125,8 @@ export const useTableStore = defineStore('table', () => {
 		'nfeloWinChance',
 		'espnWinChance',
 		'winningOutcomesPercent',
+		'nfeloWeekEv',
+		'espnWeekEv',
 		'seasonPrizeChance',
 		'chanceMake100',
 		'seasonEv',
@@ -158,6 +176,8 @@ export const useTableStore = defineStore('table', () => {
 		nfeloWinChance: [{ key: 'nfeloWinChance', order: 'desc' }],
 		espnWinChance: [{ key: 'espnWinChance', order: 'desc' }],
 		winningOutcomesPercent: [{ key: 'winningOutcomesPercent', order: 'desc' }],
+		nfeloWeekEv: [{ key: 'nfeloWeekEv', order: 'desc' }],
+		espnWeekEv: [{ key: 'espnWeekEv', order: 'desc' }],
 		seasonPrizeChance: [{ key: 'seasonPrizeChance', order: 'desc' }],
 		chanceMake100: [{ key: 'chanceMake100', order: 'desc' }],
 		seasonEv: [{ key: 'seasonEv', order: 'desc' }],
@@ -183,6 +203,8 @@ export const useTableStore = defineStore('table', () => {
 				winningOutcomesPercent:
 					weekOutcomesStore.liveStatsComputed[playerPicks.name]?.winningOutcomesPercent ||
 					0,
+				nfeloWeekEv: weekOutcomesStore.weekEv[playerPicks.name]?.nfelo || 0,
+				espnWeekEv: weekOutcomesStore.weekEv[playerPicks.name]?.espn || 0,
 				seasonPrizeChance: picksStore.seasonEvs?.[playerPicks.name]?.chance || 0,
 				chanceMake100: picksStore.seasonEvs?.[playerPicks.name]?.chanceOver100 || 0,
 				seasonEv: picksStore.seasonEvs?.[playerPicks.name]?.money || 0,

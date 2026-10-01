@@ -38,6 +38,10 @@ interface EspnPredictorTeam {
 	statistics: { name: string; value: number }[]
 }
 
+export interface EspnOdds {
+	items: { overUnder?: number }[]
+}
+
 interface SeasonDetails extends Season {
 	slug: string
 }

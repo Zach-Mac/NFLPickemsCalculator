@@ -1,10 +1,24 @@
 HIGHEST:
 
+    TODO: per-game weekEv
+
+    Better tiebreaker model
+
+    Better tiebreaker LIVE model
+
 HIGH:
 
-    TODO: weekEv
+    Clear game winners should not clear locked games
 
     TODO: store stats for each player so don't need to recalculate all the time (and for each filteroption)
+
+    TODO: automatically fetch nfelo data
+
+    Remove weekly inelligbles (submitted late) from all weekly calculations
+
+    Make future weeks look good
+
+    Go back in time better than just rewind week. Rewind to literally day + time for all odds + Tie break over under etc...
 
 LOW:
 
@@ -12,8 +26,6 @@ LOW:
 
     BUG: game time at 12:30pm shows 0:30pm
     BUG: first open site error gotta click load espn
-
-    TODO: automatically fetch nfelo data button
 
     TODO: highlight alternate rows such that user is always grey
 

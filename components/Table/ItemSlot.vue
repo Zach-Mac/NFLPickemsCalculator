@@ -41,6 +41,15 @@ function getEvChangeTdStyle(name: string): string {
 
 	return getStyleClass(value, percentile, value > 0 ? 'success' : 'error')
 }
+function getWeekEvTdStyle(key: 'nfeloWeekEv' | 'espnWeekEv'): string {
+	const value = props.playerPicks[key]
+	if (!value) return ''
+
+	const allValues = tableStore.items.map(item => item[key]).filter(v => v)
+	const percentile = calculatePercentile(value, allValues)
+
+	return getStyleClass(value, percentile, 'purple')
+}
 
 function getTeamNameTdStyle(pick: string, gameNumber: number) {
 	const game = gamesStore.gameData[gameNumber]
@@ -67,6 +76,11 @@ function formatPercent(
 	const formattedValue = clampedValue.toFixed(defaultOptions.precision)
 
 	return `${formattedValue}%`
+}
+
+function formatMoney(value: number): string {
+	if (!value) return '-'
+	return value.toFixed(2)
 }
 </script>
 
@@ -113,6 +127,26 @@ function formatPercent(
 			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
 			<template v-else>
 				{{ formatPercent(playerPicks.winningOutcomesPercent, { hideZero: true }) }}
+			</template>
+		</td>
+		<td
+			class="border-e text-center"
+			:class="getWeekEvTdStyle('nfeloWeekEv')"
+			v-if="tableStore.optionalColumns.nfeloWeekEv"
+		>
+			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
+			<template v-else>
+				{{ formatMoney(playerPicks.nfeloWeekEv) }}
+			</template>
+		</td>
+		<td
+			class="border-e text-center"
+			:class="getWeekEvTdStyle('espnWeekEv')"
+			v-if="tableStore.optionalColumns.espnWeekEv"
+		>
+			<TableSkeletonLoader v-if="weekOutcomesStore.loadingCalculations" />
+			<template v-else>
+				{{ formatMoney(playerPicks.espnWeekEv) }}
 			</template>
 		</td>
 		<td
