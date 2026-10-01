@@ -105,6 +105,17 @@ const numHeadersNeeded = computed(() => {
 						</v-btn>
 					</template>
 				</v-tooltip>
+				<v-tooltip text="Rewind week to before kickoff" location="bottom">
+					<template v-slot:activator="{ props }">
+						<v-btn
+							:size="iconButtonSize"
+							v-bind="props"
+							icon="mdi-rewind"
+							@click="gamesStore.rewindWeek"
+						>
+						</v-btn>
+					</template>
+				</v-tooltip>
 				<!-- <v-tooltip text="Lock finished games" location="bottom">
 					<template v-slot:activator="{ props }">
 						<ToggleButton

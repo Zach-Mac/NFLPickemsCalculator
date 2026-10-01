@@ -70,6 +70,9 @@ const getGameState = (state: string): GameState => {
 	}
 }
 
+const getScoreboardWeek = (scoreboard: Scoreboard) =>
+	scoreboard.week.number + (scoreboard.season.type == 3 ? 18 : 0)
+
 export const useGamesStore = defineStore('games', () => {
 	// State
 	const scoreboardCache = useLocalStorage('scoreboardCache', {} as Record<number, Scoreboard>)
@@ -108,9 +111,7 @@ export const useGamesStore = defineStore('games', () => {
 	function setMetadata(scoreboard: Scoreboard) {
 		currentSeason.value = scoreboard.season.year
 		currentSeasonType.value = scoreboard.season.type
-		currentWeek.value = scoreboard.week.number
-
-		if (currentSeasonType.value == 3) currentWeek.value += 18
+		currentWeek.value = getScoreboardWeek(scoreboard)
 	}
 
 	const setGameData = (events: EspnEvent[]) => {
@@ -197,12 +198,19 @@ export const useGamesStore = defineStore('games', () => {
 		apiLoading.value = true
 		loadingScoreboard.value = true
 		try {
-			if (!forceReload && scoreboardCache.value[week]) {
-				espnScoreboard.value = scoreboardCache.value[week]
+			const cachedScoreboard = scoreboardCache.value[week]
+			if (!forceReload && cachedScoreboard && getScoreboardWeek(cachedScoreboard) === week) {
+				espnScoreboard.value = cachedScoreboard
 			} else {
-				espnScoreboard.value = await espnApi.getScoreboard(week)
-				scoreboardCache.value[week] = espnScoreboard.value
+				const scoreboard = await espnApi.getScoreboard(week)
+				if (getScoreboardWeek(scoreboard) !== week)
+					throw Error(
+						`ESPN returned week ${getScoreboardWeek(scoreboard)} for week ${week}`
+					)
+				scoreboardCache.value[week] = scoreboard
 				lastEspnUpdate.value = Date.now()
+				if (week !== selectedWeek.value) return
+				espnScoreboard.value = scoreboard
 			}
 
 			setMetadata(espnScoreboard.value)
@@ -242,7 +250,9 @@ export const useGamesStore = defineStore('games', () => {
 		}
 	}
 
-	watch(selectedWeek, () => loadEspnScoreboard(), { immediate: true })
+	watch(selectedWeek, () => loadEspnScoreboard())
+	// Deferred because setGameData reads the picks store, which reads this store before its setup has finished
+	nextTick(() => loadEspnScoreboard())
 
 	const reloadScoreboard = () => loadEspnScoreboard(true)
 
@@ -277,6 +287,20 @@ export const useGamesStore = defineStore('games', () => {
 		gameData.value.forEach(game => {
 			if (game) game.winner = ''
 		})
+	}
+	const rewindWeek = () => {
+		gameData.value.forEach(game => {
+			game.state = 'upcoming'
+			game.winner = ''
+			game.scoreHome = 0
+			game.scoreAway = 0
+			game.timeLeft = '0:00'
+			game.quarter = '0'
+			game.possession = ''
+			game.ot = false
+			game.espn.situation = undefined
+		})
+		useEspnAnalyticsStore().getEspnWinChances()
 	}
 
 	const getGameWithTeam = (team: string): Game | undefined => {
@@ -322,6 +346,7 @@ export const useGamesStore = defineStore('games', () => {
 		setAllGameWinners,
 		setCertainGameWinners,
 		clearGameWinners,
+		rewindWeek,
 		getGameWithTeam,
 		teamWon,
 		teamLost,

@@ -19,6 +19,7 @@ async function getScoreboard(week?: number) {
 
 	if (week) {
 		let week_ = week
+		seasontypeParam = `&seasontype=2`
 
 		if (week > 18) {
 			week_ = week % 18

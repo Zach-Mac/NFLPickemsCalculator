@@ -49,19 +49,17 @@ export const useEspnAnalyticsStore = defineStore('espnAnalytics', () => {
 	async function getEspnWinChances(includeUpcomingGames = true) {
 		const weekIndex = gamesStore.selectedWeek - 1
 
-		for (let i = 0; i < gamesStore.gameData.length; i++) {
-			const game = gamesStore.gameData[i]
-			if (game.espn.situation?.lastPlay?.probability) {
-				espnWinChancesWeekData.value[weekIndex][i] =
-					game.espn.situation.lastPlay.probability
-			} else if (game.state === 'finished') {
-				espnWinChancesWeekData.value[weekIndex][i] = getProbabilityOfFinished(game)
-			} else if (game.state === 'upcoming' && includeUpcomingGames) {
-				espnWinChancesWeekData.value[weekIndex][i] = await getEspnWinChance(game)
-			} else {
+		espnWinChancesWeekData.value[weekIndex] = await Promise.all(
+			gamesStore.gameData.map((game, i) => {
+				if (game.espn.situation?.lastPlay?.probability)
+					return game.espn.situation.lastPlay.probability
+				if (game.state === 'finished') return getProbabilityOfFinished(game)
+				if (game.state === 'upcoming' && includeUpcomingGames) return getEspnWinChance(game)
+
 				console.warn("Couldn't get win chance for game:", game)
-			}
-		}
+				return espnWinChancesWeekData.value[weekIndex][i]
+			})
+		)
 	}
 	watch(
 		() => gamesStore.gameData,
