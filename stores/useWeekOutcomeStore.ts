@@ -69,7 +69,7 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 	)
 
 	// Getters
-	const userStats = ref({
+	const userStats = shallowRef({
 		numWinningOutcomes: 0,
 		winningOutcomesPercent: 0,
 		nfeloChance: 0,

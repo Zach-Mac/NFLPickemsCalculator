@@ -7,9 +7,12 @@ const itemsPerPage = 5
 const page = ref(1)
 const tab = ref(userStats.value.winningOutcomes.length - 1)
 
-watch(userStats.value.winningOutcomes, () => {
-	tab.value = userStats.value.winningOutcomes.length - 1
-})
+watch(
+	() => userStats.value.winningOutcomes,
+	() => {
+		tab.value = userStats.value.winningOutcomes.length - 1
+	}
+)
 watch(tab, () => {
 	page.value = 1
 })
