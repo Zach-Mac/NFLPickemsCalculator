@@ -5,8 +5,6 @@ HIGHEST:
 
 HIGH:
 
-    TODO: fix things really slow when pick game winner
-
     TODO: weekEv
 
     TODO: store stats for each player so don't need to recalculate all the time (and for each filteroption)

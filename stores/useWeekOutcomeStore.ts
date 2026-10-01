@@ -161,22 +161,31 @@ export const useWeekOutcomesStore = defineStore('weekOutcomeCombos', () => {
 		// const numGamesToSim = gamesStore.gameData.length - pickedGames.length
 		// if (numGamesToSim > maxGamesToSimLive.value) return liveStats
 
-		loadingCalculations.value = true
-		const stats = await getAllUsersStats(
+		return getAllUsersStats(
 			deepToRaw(picksStore.picksData),
 			deepToRaw(pickedGames),
 			deepToRaw(gamesStore.gameData),
 			deepToRaw(nfeloStore.nfeloTeamsWinChance),
 			deepToRaw(espnAnalyticsStore.espnTeamsWinChances)
 		)
-		loadingCalculations.value = false
-
-		return stats
 	}
 	watch(
-		() => [gamesStore.gameData, picksStore.picksData, nfeloStore.nfeloTeamsWinChance],
-		async () => {
-			liveStats.value = await calcLiveStats()
+		() => [
+			gamesStore.gameData,
+			picksStore.picksData,
+			nfeloStore.nfeloTeamsWinChance,
+			espnAnalyticsStore.espnTeamsWinChances
+		],
+		async (_sources, _oldSources, onCleanup) => {
+			let superseded = false
+			onCleanup(() => (superseded = true))
+
+			loadingCalculations.value = true
+			const stats = await calcLiveStats()
+			if (superseded) return
+
+			liveStats.value = stats
+			loadingCalculations.value = false
 		},
 		{ deep: true, immediate: true }
 	)

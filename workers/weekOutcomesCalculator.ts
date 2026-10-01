@@ -1,55 +1,24 @@
-import { getUserOutcomeInputData, getUserOutcome } from '@/utils/weekOutcomesCalculatorUtils'
-
-const blankPositionStats = {
-	numWinningOutcomes: 0,
-	winningOutcomesPercent: 0,
-	nfeloChance: 0,
-	espnChance: 0
-}
-
 // TODO: stats output too big for many games
 
-function mapBoolToTeamNames(
-	gameData: Game[],
-	ignoredGamesIndexes: number[],
-	boolWeekOutcome: boolean[]
-): string[] {
-	let j = 0
-
-	return gameData.map((game, i) => {
-		if (ignoredGamesIndexes.includes(i)) return game.winner
-		return boolWeekOutcome[j++] ? game.home : game.away
-	})
+function countBits(bits: number) {
+	bits = bits - ((bits >>> 1) & 0x55555555)
+	bits = (bits & 0x33333333) + ((bits >>> 2) & 0x33333333)
+	return Math.imul((bits + (bits >>> 4)) & 0x0f0f0f0f, 0x01010101) >>> 24
 }
 
-function getUserOutcomesForAllUsers(
-	picksData: any[],
-	ignoredGamesIndexes: number[],
-	nfeloTeamsWinChances: Record<string, number>,
-	espnTeamsWinChances: Record<string, number>,
-	weekOutcome: string[]
-): Record<string, UserOutcome> {
-	const userOutcomes: Record<string, UserOutcome> = {}
+function newTally(numPlayers: number) {
+	return {
+		numWinningOutcomes: new Uint32Array(numPlayers),
+		nfeloChance: new Float64Array(numPlayers),
+		espnChance: new Float64Array(numPlayers)
+	}
+}
+type Tally = ReturnType<typeof newTally>
 
-	const { playerRankings, topScore, numTiedForFirst, numPlayersAtEachScore } =
-		getUserOutcomeInputData(picksData, weekOutcome)
-
-	// Calculate outcomes for each player
-	picksData.forEach(player => {
-		userOutcomes[player.name] = getUserOutcome(
-			ignoredGamesIndexes,
-			player,
-			weekOutcome,
-			playerRankings,
-			topScore,
-			numTiedForFirst,
-			numPlayersAtEachScore,
-			nfeloTeamsWinChances,
-			espnTeamsWinChances
-		)
-	})
-
-	return userOutcomes
+function addOutcome(tally: Tally, player: number, nfeloChance: number, espnChance: number) {
+	tally.numWinningOutcomes[player]++
+	tally.nfeloChance[player] += nfeloChance
+	tally.espnChance[player] += espnChance
 }
 
 export function getAllUsersStats(
@@ -59,61 +28,94 @@ export function getAllUsersStats(
 	nfeloTeamsWinChances: Record<string, number>,
 	espnTeamsWinChances: Record<string, number>
 ): UserStats {
-	const numGames = gameData.length - ignoredGamesIndexes.length
+	const startTime = performance.now()
 
-	let startTime = performance.now()
-	const totalOutcomes = Math.pow(2, numGames)
+	const openGameIndexes = gameData
+		.map((_, i) => i)
+		.filter(i => !ignoredGamesIndexes.includes(i))
+	const totalOutcomes = Math.pow(2, openGameIndexes.length)
+	const allOpenGames = totalOutcomes - 1
 
-	const stats: UserStats = {
-		firstPlace: {},
-		top2: {}
-	}
+	const players = picksData.map(player => {
+		let pickedHome = 0
+		let pickedAway = 0
+		openGameIndexes.forEach((gameIndex, bit) => {
+			const { home, away } = gameData[gameIndex]
+			if (player.picks[gameIndex] === home) pickedHome |= 1 << bit
+			else if (player.picks[gameIndex] === away) pickedAway |= 1 << bit
+		})
+		const ignoredGamesScore = ignoredGamesIndexes.filter(
+			i => player.picks[i] === gameData[i].winner
+		).length
+		return { ignoredGamesScore, pickedHome, pickedAway }
+	})
 
-	// Process all possible outcomes
-	for (let i = 0; i < totalOutcomes; i++) {
-		if (i % 10000 === 0) {
-			console.log(`${i} of ${totalOutcomes} (${((i / totalOutcomes) * 100).toFixed(2)}%)`)
+	const winOdds = (teamsWinChances: Record<string, number>) =>
+		openGameIndexes.map(i => ({
+			home: teamsWinChances[gameData[i].home] / 100,
+			away: teamsWinChances[gameData[i].away] / 100
+		}))
+	const nfeloOdds = winOdds(nfeloTeamsWinChances)
+	const espnOdds = winOdds(espnTeamsWinChances)
+
+	const firstPlace = newTally(players.length)
+	const top2 = newTally(players.length)
+	const scores = new Uint16Array(players.length)
+
+	for (let homeWins = 0; homeWins < totalOutcomes; homeWins++) {
+		const awayWins = ~homeWins & allOpenGames
+
+		let nfeloChance = 100
+		let espnChance = 100
+		for (let bit = 0; bit < openGameIndexes.length; bit++) {
+			const homeWon = homeWins & (1 << bit)
+			nfeloChance *= homeWon ? nfeloOdds[bit].home : nfeloOdds[bit].away
+			espnChance *= homeWon ? espnOdds[bit].home : espnOdds[bit].away
 		}
 
-		const binaryStr = i.toString(2).padStart(numGames, '0')
-		const boolWeekOutcome = binaryStr.split('').map(bit => bit === '1')
-		const weekOutcome = mapBoolToTeamNames(gameData, ignoredGamesIndexes, boolWeekOutcome)
-		const userOutcomes = getUserOutcomesForAllUsers(
-			picksData,
-			ignoredGamesIndexes,
-			nfeloTeamsWinChances,
-			espnTeamsWinChances,
-			weekOutcome
+		let topScore = -1
+		let numAtTopScore = 0
+		let secondScore = -1
+		for (let p = 0; p < players.length; p++) {
+			const { ignoredGamesScore, pickedHome, pickedAway } = players[p]
+			const score =
+				ignoredGamesScore +
+				countBits(pickedHome & homeWins) +
+				countBits(pickedAway & awayWins)
+			scores[p] = score
+
+			if (score > topScore) {
+				secondScore = topScore
+				topScore = score
+				numAtTopScore = 1
+			} else if (score === topScore) numAtTopScore++
+			else if (score > secondScore) secondScore = score
+		}
+
+		for (let p = 0; p < players.length; p++) {
+			const contenderForFirst = scores[p] === topScore
+			const contenderForTop2 =
+				contenderForFirst || (numAtTopScore === 1 && scores[p] === secondScore)
+
+			if (contenderForFirst) addOutcome(firstPlace, p, nfeloChance, espnChance)
+			if (contenderForTop2) addOutcome(top2, p, nfeloChance, espnChance)
+		}
+	}
+
+	const toPositionStats = (tally: Tally) =>
+		Object.fromEntries(
+			picksData.map((player, p) => [
+				player.name,
+				{
+					numWinningOutcomes: tally.numWinningOutcomes[p],
+					winningOutcomesPercent: (tally.numWinningOutcomes[p] / totalOutcomes) * 100,
+					nfeloChance: tally.nfeloChance[p],
+					espnChance: tally.espnChance[p]
+				}
+			])
 		)
 
-		for (const [name, userOutcome] of Object.entries(userOutcomes)) {
-			if (!stats.firstPlace[name]) {
-				stats.firstPlace[name] = { ...blankPositionStats }
-				stats.top2[name] = { ...blankPositionStats }
-			}
+	console.log('Week outcomes calculator time:', performance.now() - startTime, 'ms')
 
-			if (userOutcome.contenderForFirst) {
-				stats.firstPlace[name].numWinningOutcomes++
-				stats.firstPlace[name].nfeloChance += userOutcome.nfeloChance
-				stats.firstPlace[name].espnChance += userOutcome.espnChance
-			}
-			if (userOutcome.contenderForTop2) {
-				stats.top2[name].numWinningOutcomes++
-				stats.top2[name].nfeloChance += userOutcome.nfeloChance
-				stats.top2[name].espnChance += userOutcome.espnChance
-			}
-		}
-	}
-
-	for (const name of Object.keys(stats.firstPlace)) {
-		stats.firstPlace[name].winningOutcomesPercent =
-			(stats.firstPlace[name].numWinningOutcomes / totalOutcomes) * 100
-		stats.top2[name].winningOutcomesPercent =
-			(stats.top2[name].numWinningOutcomes / totalOutcomes) * 100
-	}
-
-	const endTime = performance.now()
-	console.log('Week outcomes calculator time:', endTime - startTime, 'ms')
-
-	return stats
+	return { firstPlace: toPositionStats(firstPlace), top2: toPositionStats(top2) }
 }
